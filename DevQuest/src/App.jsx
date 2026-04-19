@@ -1,121 +1,106 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+const pages = [
+  {
+    key: "fundamentos",
+    label: "Fundamentos de Ciência de Dados e Python",
+    description:
+      "Página com conteúdo semelhante, pronta para ser usada como uma introdução aos fundamentos de ciência de dados e Python.",
+  },
+  {
+    key: "pandas",
+    label: "Python para Ciência de Dados (Pandas)",
+    description:
+      "Página com conteúdo semelhante, voltada para análise de dados com Pandas em Python.",
+  },
+  {
+    key: "exploracao",
+    label: "Exploração de Dados e Estatística",
+    description:
+      "Página com conteúdo semelhante, focada em exploração de dados e estatística para tomada de decisões.",
+  },
+  {
+    key: "visualizacao",
+    label: "Visualização de Dados",
+    description:
+      "Página com conteúdo semelhante, dedicada à visualização de dados de maneira clara e efetiva.",
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activePage, setActivePage] = useState(pages[0]);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="app-shell">
+      <header className="app-header">
+        <button
+          type="button"
+          className="menu-toggle btn btn-link p-2"
+          aria-label="Abrir menu"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="3" y="6" width="18" height="2" rx="1" fill="#1B3AB3" />
+            <rect x="3" y="11" width="18" height="2" rx="1" fill="#1B3AB3" />
+            <rect x="3" y="16" width="18" height="2" rx="1" fill="#1B3AB3" />
+          </svg>
+        </button>
+      </header>
+
+      <div
+        className={`menu-backdrop ${menuOpen ? "show" : ""}`}
+        onClick={() => setMenuOpen(false)}
+      />
+
+      <nav
+        className={`side-menu ${menuOpen ? "open" : ""}`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="side-menu-inner">
+          <div className="menu-heading">Navegação</div>
+          <ul className="nav flex-column gap-2">
+            {pages.map((page) => (
+              <li className="nav-item" key={page.key}>
+                <button
+                  type="button"
+                  className={`nav-link btn btn-link text-start w-100 ${
+                    activePage.key === page.key ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setActivePage(page);
+                    setMenuOpen(false);
+                  }}
+                >
+                  {page.label}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div>
-          <h1>Get started</h1>
+      </nav>
+
+      <main className="app-main">
+        <div className="content-placeholder">
+          <h1>{activePage.label}</h1>
+          <p>{activePage.description}</p>
           <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+            Esta é uma página semelhante para a opção selecionada. O foco
+            principal é o menu retrátil azul com o botão de menu sanduíche no
+            canto superior esquerdo.
           </p>
         </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
