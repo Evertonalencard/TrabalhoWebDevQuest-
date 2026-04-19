@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Fundamentos from "./pages/Fundamentos";
+import Pandas from "./pages/Pandas";
+import Exploracao from "./pages/Exploracao";
+import Visualizacao from "./pages/Visualizacao";
 
 const pages = [
   {
@@ -29,9 +33,17 @@ const pages = [
   },
 ];
 
+const pageComponents = {
+  fundamentos: Fundamentos,
+  pandas: Pandas,
+  exploracao: Exploracao,
+  visualizacao: Visualizacao,
+};
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState(pages[0]);
+  const ActivePageComponent = pageComponents[activePage.key] || null;
 
   return (
     <div className="app-shell">
@@ -90,13 +102,7 @@ function App() {
 
       <main className="app-main">
         <div className="content-placeholder">
-          <h1>{activePage.label}</h1>
-          <p>{activePage.description}</p>
-          <p>
-            Esta é uma página semelhante para a opção selecionada. O foco
-            principal é o menu retrátil azul com o botão de menu sanduíche no
-            canto superior esquerdo.
-          </p>
+          {ActivePageComponent ? <ActivePageComponent /> : null}
         </div>
       </main>
     </div>
