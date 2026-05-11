@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "./css/App.css";
 import { XPProvider } from "./Context/XPContext";
 import XPBar from "./components/XPBar";
 import Hamburger from "./components/Hamburger";
@@ -10,10 +10,22 @@ import Exploracao from "./pages/Exploracao";
 import Visualizacao from "./pages/Visualizacao";
 
 const pages = [
-  { key: "fundamentos", label: "Fundamentos de Ciência de Dados e Python", emoji: "🐍" },
-  { key: "pandas",      label: "Python para Ciência de Dados (Pandas)",    emoji: "🐼" },
-  { key: "exploracao",  label: "Exploração de Dados e Estatística",        emoji: "🔍" },
-  { key: "visualizacao",label: "Visualização de Dados",                    emoji: "📊" },
+  {
+    key: "fundamentos",
+    label: "Fundamentos de Ciência de Dados e Python",
+    emoji: "🐍",
+  },
+  {
+    key: "pandas",
+    label: "Python para Ciência de Dados (Pandas)",
+    emoji: "🐼",
+  },
+  {
+    key: "exploracao",
+    label: "Exploração de Dados e Estatística",
+    emoji: "🔍",
+  },
+  { key: "visualizacao", label: "Visualização de Dados", emoji: "📊" },
 ];
 
 const pageComponents = {
@@ -41,18 +53,27 @@ function App() {
 
         <XPBar />
 
-        <div className={`menu-backdrop ${menuOpen ? "show" : ""}`} onClick={() => setMenuOpen(false)} />
+        <div
+          className={`menu-backdrop ${menuOpen ? "show" : ""}`}
+          onClick={() => setMenuOpen(false)}
+        />
 
-        <nav className={`side-menu ${menuOpen ? "open" : ""}`} aria-hidden={!menuOpen}>
+        <nav
+          className={`side-menu ${menuOpen ? "open" : ""}`}
+          aria-hidden={!menuOpen}
+        >
           <div className="side-menu-inner">
             <div className="menu-heading">Módulos</div>
             <ul className="nav flex-column gap-2">
-              {pages.map(page => (
+              {pages.map((page) => (
                 <li className="nav-item" key={page.key}>
                   <button
                     type="button"
                     className={`nav-link btn btn-link text-start w-100 ${activePage.key === page.key ? "active" : ""}`}
-                    onClick={() => { setActivePage(page); setMenuOpen(false); }}
+                    onClick={() => {
+                      setActivePage(page);
+                      setMenuOpen(false);
+                    }}
                   >
                     <span className="nav-link__emoji">{page.emoji}</span>
                     {page.label}
