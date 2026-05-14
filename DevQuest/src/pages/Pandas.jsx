@@ -78,7 +78,7 @@ function Pandas() {
       </ul>
       <VideoPlayer videoId="vmEHCJofvqE" title="Aula: Python para Ciência de Dados com Pandas" code={PANDAS_CODE} language="python" />
       <PDFModule pdfs={PDFS} />
-      <QuestionsModule questions={QUESTIONS} />
+      <QuestionsModule questions={QUESTIONS} moduleKey="pandas" />
       <RatingModule pageKey="pandas" pageTitle="Python para Ciência de Dados (Pandas)" />
     </section>
   );

@@ -80,7 +80,7 @@ function Fundamentos() {
       </ul>
       <VideoPlayer videoId="yhp6rgrCjQ0" title="Aula: Fundamentos de Ciência de Dados e Python" code={FUNDAMENTOS_CODE} language="python" />
       <PDFModule pdfs={PDFS} />
-      <QuestionsModule questions={QUESTIONS} />
+      <QuestionsModule questions={QUESTIONS} moduleKey="fundamentos" />
       <RatingModule pageKey="fundamentos" pageTitle="Fundamentos de Ciência de Dados e Python" />
     </section>
   );
