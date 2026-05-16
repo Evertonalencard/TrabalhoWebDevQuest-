@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { db } from "../firebase";
 import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
+import { useAuth } from "./AuthContext";
 
 const XPContext = createContext(null);
 
@@ -12,16 +13,26 @@ function calculateLevel(totalXP) {
 }
 
 export function XPProvider({ children }) {
+  const { user } = useAuth();
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
   const [modules, setModules] = useState({});
-  const [userId] = useState("user_default"); // Simplificado sem auth
   const [loading, setLoading] = useState(true);
 
+  // Recarrega XP sempre que o usuário mudar (login/logout)
   useEffect(() => {
+    if (!user) {
+      setXp(0);
+      setLevel(1);
+      setModules({});
+      setLoading(false);
+      return;
+    }
+
     async function loadXP() {
+      setLoading(true);
       try {
-        const ref = doc(db, "users", userId);
+        const ref = doc(db, "users", user.uid);
         const snap = await getDoc(ref);
         if (snap.exists()) {
           const data = snap.data();
@@ -37,28 +48,27 @@ export function XPProvider({ children }) {
         setLoading(false);
       }
     }
+
     loadXP();
-  }, [userId]);
+  }, [user]);
 
   async function addXP(amount) {
     const newXp = xp + amount;
     const newLevel = calculateLevel(newXp);
     setXp(newXp);
     setLevel(newLevel);
+    if (!user) return newLevel > level;
     try {
-      const ref = doc(db, "users", userId);
+      const ref = doc(db, "users", user.uid);
       await updateDoc(ref, { xp: increment(amount), level: newLevel });
     } catch (e) {
       console.warn("Firebase offline, XP salvo apenas localmente");
     }
-    return newLevel > level; // retorna true se subiu de nível
+    return newLevel > level; // true se subiu de nível
   }
 
   async function completeModule(moduleKey, score, gainedXP) {
-    if (modules[moduleKey]?.completed) {
-      return false;
-    }
-
+    if (modules[moduleKey]?.completed) return false;
     const updatedModules = {
       ...modules,
       [moduleKey]: {
@@ -68,19 +78,14 @@ export function XPProvider({ children }) {
         completedAt: new Date().toISOString(),
       },
     };
-
     setModules(updatedModules);
-
+    if (!user) return true;
     try {
-      const ref = doc(db, "users", userId);
-
-      await updateDoc(ref, {
-        modules: updatedModules,
-      });
+      const ref = doc(db, "users", user.uid);
+      await updateDoc(ref, { modules: updatedModules });
     } catch (e) {
       console.warn("Erro ao salvar progresso do módulo", e);
     }
-
     return true;
   }
 
