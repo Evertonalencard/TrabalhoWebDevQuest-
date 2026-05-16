@@ -2,18 +2,19 @@ import { useState } from "react";
 import { useXP } from "../Context/XPContext";
 import "../css/QuestionsModule.css";
 
-function QuestionsModule({ questions = [] }) {
-  const { addXP, XP_PER_CORRECT } = useXP();
+function QuestionsModule({ questions = [], moduleKey }) {
+  const { addXP, XP_PER_CORRECT, modules, completeModule } = useXP();
   const [answers, setAnswers] = useState({});
   const [checked, setChecked] = useState(false);
   const [levelUp, setLevelUp] = useState(false);
   const [gainedXP, setGainedXP] = useState(0);
+  const [xpAlreadyCounted, setXpAlreadyCounted] = useState(false);
 
   if (!questions.length) return null;
 
   function selectAnswer(qIndex, optIndex) {
     if (checked) return;
-    setAnswers(prev => ({ ...prev, [qIndex]: optIndex }));
+    setAnswers((prev) => ({ ...prev, [qIndex]: optIndex }));
   }
 
   async function handleCheck() {
@@ -25,12 +26,29 @@ function QuestionsModule({ questions = [] }) {
     questions.forEach((q, i) => {
       if (answers[i] === q.correct) correct++;
     });
+
     const totalXP = correct * XP_PER_CORRECT;
-    setGainedXP(totalXP);
+
     setChecked(true);
+
+    const alreadyCompleted = modules[moduleKey]?.completed;
+
+    if (alreadyCompleted) {
+      setGainedXP(0);
+      setXpAlreadyCounted(true);
+      return;
+    }
+
+    setGainedXP(totalXP);
+
     if (totalXP > 0) {
       const leveled = await addXP(totalXP);
-      if (leveled) setLevelUp(true);
+
+      await completeModule(moduleKey, correct, totalXP);
+
+      if (leveled) {
+        setLevelUp(true);
+      }
     }
   }
 
@@ -39,27 +57,64 @@ function QuestionsModule({ questions = [] }) {
     setChecked(false);
     setLevelUp(false);
     setGainedXP(0);
+    setXpAlreadyCounted(false);
   }
 
-  const score = checked ? questions.filter((q, i) => answers[i] === q.correct).length : null;
+  const score = checked
+    ? questions.filter((q, i) => answers[i] === q.correct).length
+    : null;
 
   return (
     <div className="questions-module">
       <h4 className="questions-module__title">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
         </svg>
         Questões da Aula
       </h4>
 
       {checked && (
-        <div className={`questions-module__result ${score === questions.length ? "perfect" : score > 0 ? "partial" : "none"}`}>
-          {levelUp && <span className="questions-module__levelup">🎉 Subiu de nível!</span>}
-          <span className="questions-module__score">{score}/{questions.length} corretas</span>
-          {gainedXP > 0 && <span className="questions-module__xp-gained">+{gainedXP} XP</span>}
-        </div>
+        <>
+          <div
+            className={`questions-module__result ${
+              score === questions.length
+                ? "perfect"
+                : score > 0
+                  ? "partial"
+                  : "none"
+            }`}
+          >
+            {levelUp && (
+              <span className="questions-module__levelup">Subiu de nível!</span>
+            )}
+
+            <span className="questions-module__score">
+              {score}/{questions.length} corretas
+            </span>
+
+            {gainedXP > 0 && (
+              <span className="questions-module__xp-gained">
+                +{gainedXP} XP
+              </span>
+            )}
+          </div>
+
+          {xpAlreadyCounted && (
+            <div className="alert alert-info mt-2">
+              XP deste módulo já foi contabilizado.
+            </div>
+          )}
+        </>
       )}
 
       <div className="questions-module__list">
@@ -69,19 +124,30 @@ function QuestionsModule({ questions = [] }) {
           const isWrong = checked && answers[qi] !== q.correct;
 
           return (
-            <div key={qi} className={`question-card ${checked ? (isCorrect ? "correct" : "wrong") : ""}`}>
+            <div
+              key={qi}
+              className={`question-card ${
+                checked ? (isCorrect ? "correct" : "wrong") : ""
+              }`}
+            >
               <p className="question-card__text">
                 <span className="question-card__num">Q{qi + 1}.</span> {q.text}
               </p>
+
               <ul className="question-card__options">
                 {q.options.map((opt, oi) => {
                   let state = "";
+
                   if (checked) {
-                    if (oi === q.correct) state = "correct-opt";
-                    else if (oi === answers[qi] && oi !== q.correct) state = "wrong-opt";
+                    if (oi === q.correct) {
+                      state = "correct-opt";
+                    } else if (oi === answers[qi] && oi !== q.correct) {
+                      state = "wrong-opt";
+                    }
                   } else if (answers[qi] === oi) {
                     state = "selected";
                   }
+
                   return (
                     <li key={oi}>
                       <button
@@ -91,7 +157,10 @@ function QuestionsModule({ questions = [] }) {
                         disabled={checked}
                         aria-pressed={answers[qi] === oi}
                       >
-                        <span className="question-card__opt-letter">{String.fromCharCode(65 + oi)}</span>
+                        <span className="question-card__opt-letter">
+                          {String.fromCharCode(65 + oi)}
+                        </span>
+
                         {opt}
                       </button>
                     </li>
@@ -102,8 +171,13 @@ function QuestionsModule({ questions = [] }) {
               {checked && (
                 <div className="question-card__explanation">
                   <span className="question-card__explanation-label">
-                    {isCorrect ? "✅ Correto!" : `❌ Incorreto — a resposta certa é ${String.fromCharCode(65 + q.correct)}`}
+                    {isCorrect
+                      ? "✅ Correto!"
+                      : `❌ Incorreto — a resposta certa é ${String.fromCharCode(
+                          65 + q.correct,
+                        )}`}
                   </span>
+
                   <p>{q.explanation}</p>
                 </div>
               )}
@@ -123,7 +197,11 @@ function QuestionsModule({ questions = [] }) {
             Corrigir Questões
           </button>
         ) : (
-          <button type="button" className="questions-module__reset-btn" onClick={handleReset}>
+          <button
+            type="button"
+            className="questions-module__reset-btn"
+            onClick={handleReset}
+          >
             Tentar Novamente
           </button>
         )}

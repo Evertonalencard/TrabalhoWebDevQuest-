@@ -7,9 +7,14 @@ const XPContext = createContext(null);
 const XP_PER_CORRECT = 20;
 const XP_PER_LEVEL = 100;
 
+function calculateLevel(totalXP) {
+  return Math.floor(totalXP / XP_PER_LEVEL) + 1;
+}
+
 export function XPProvider({ children }) {
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
+  const [modules, setModules] = useState({});
   const [userId] = useState("user_default"); // Simplificado sem auth
   const [loading, setLoading] = useState(true);
 
@@ -21,9 +26,10 @@ export function XPProvider({ children }) {
         if (snap.exists()) {
           const data = snap.data();
           setXp(data.xp || 0);
-          setLevel(Math.floor((data.xp || 0) / XP_PER_LEVEL) + 1);
+          setLevel(calculateLevel(data.xp || 0));
+          setModules(data.modules || {});
         } else {
-          await setDoc(ref, { xp: 0, level: 1 });
+          await setDoc(ref, { xp: 0, level: 1, modules: {} });
         }
       } catch (e) {
         console.warn("Firebase offline, usando estado local", e);
@@ -36,7 +42,7 @@ export function XPProvider({ children }) {
 
   async function addXP(amount) {
     const newXp = xp + amount;
-    const newLevel = Math.floor(newXp / XP_PER_LEVEL) + 1;
+    const newLevel = calculateLevel(newXp);
     setXp(newXp);
     setLevel(newLevel);
     try {
@@ -48,11 +54,54 @@ export function XPProvider({ children }) {
     return newLevel > level; // retorna true se subiu de nível
   }
 
+  async function completeModule(moduleKey, score, gainedXP) {
+    if (modules[moduleKey]?.completed) {
+      return false;
+    }
+
+    const updatedModules = {
+      ...modules,
+      [moduleKey]: {
+        completed: true,
+        score,
+        gainedXP,
+        completedAt: new Date().toISOString(),
+      },
+    };
+
+    setModules(updatedModules);
+
+    try {
+      const ref = doc(db, "users", userId);
+
+      await updateDoc(ref, {
+        modules: updatedModules,
+      });
+    } catch (e) {
+      console.warn("Erro ao salvar progresso do módulo", e);
+    }
+
+    return true;
+  }
+
   const xpInCurrentLevel = xp % XP_PER_LEVEL;
   const xpPercent = (xpInCurrentLevel / XP_PER_LEVEL) * 100;
 
   return (
-    <XPContext.Provider value={{ xp, level, xpPercent, xpInCurrentLevel, XP_PER_LEVEL, XP_PER_CORRECT, addXP, loading }}>
+    <XPContext.Provider
+      value={{
+        xp,
+        level,
+        xpPercent,
+        xpInCurrentLevel,
+        XP_PER_LEVEL,
+        XP_PER_CORRECT,
+        addXP,
+        loading,
+        modules,
+        completeModule,
+      }}
+    >
       {children}
     </XPContext.Provider>
   );

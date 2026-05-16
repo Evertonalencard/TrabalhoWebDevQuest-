@@ -8,8 +8,10 @@ import Fundamentos from "./pages/Fundamentos";
 import Pandas from "./pages/Pandas";
 import Exploracao from "./pages/Exploracao";
 import Visualizacao from "./pages/Visualizacao";
+import Progresso from "./pages/Progresso";
 
 const pages = [
+  { key: "progresso",   label: "Meu progresso",                             emoji: "🏁" },
   { key: "fundamentos", label: "Fundamentos de Ciência de Dados e Python", emoji: "🐍" },
   { key: "pandas",      label: "Python para Ciência de Dados (Pandas)",    emoji: "🐼" },
   { key: "exploracao",  label: "Exploração de Dados e Estatística",        emoji: "🔍" },
@@ -17,6 +19,7 @@ const pages = [
 ];
 
 const pageComponents = {
+  progresso: Progresso,
   fundamentos: Fundamentos,
   pandas: Pandas,
   exploracao: Exploracao,
