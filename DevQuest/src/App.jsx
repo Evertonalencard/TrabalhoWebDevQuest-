@@ -1,56 +1,22 @@
-import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./Context/AuthContext";
 import { XPProvider } from "./Context/XPContext";
 
-import XPBar from "./components/XPBar";
-import Hamburger from "./components/Hamburger";
-import UserMenu from "./components/UserMenu";
+import AppLayout from "./components/AppLayout";
 import AuthPage from "./pages/AuthPage";
-
+import Progresso from "./pages/Progresso";
 import Fundamentos from "./pages/Fundamentos";
 import Pandas from "./pages/Pandas";
 import Exploracao from "./pages/Exploracao";
 import Visualizacao from "./pages/Visualizacao";
-import Progresso from "./pages/Progresso";
 
-const pages = [
-  { key: "progresso", label: "Meu progresso", emoji: "🏆" },
-  {
-    key: "fundamentos",
-    label: "Fundamentos de Ciência de Dados e Python",
-    emoji: "📊",
-  },
-  {
-    key: "pandas",
-    label: "Python para Ciência de Dados — Pandas",
-    emoji: "🐼",
-  },
-  {
-    key: "exploracao",
-    label: "Exploração de Dados e Estatística",
-    emoji: "🔍",
-  },
-  { key: "visualizacao", label: "Visualização de Dados", emoji: "📈" },
-];
-
-const pageComponents = {
-  progresso: Progresso,
-  fundamentos: Fundamentos,
-  pandas: Pandas,
-  exploracao: Exploracao,
-  visualizacao: Visualizacao,
-};
-
-// Shell principal — só renderiza se o usuário estiver autenticado
-function AppShell() {
+// Rota protegida — redireciona para /login se não autenticado
+function PrivateRoute({ children }) {
   const { user, authLoading } = useAuth();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activePage, setActivePage] = useState(pages[0]);
 
-  // Tela de carregamento inicial enquanto o Firebase verifica a sessão
   if (authLoading) {
     return (
       <div className="auth-loading-screen">
@@ -60,75 +26,62 @@ function AppShell() {
     );
   }
 
-  // Sem usuário → exibe tela de login/cadastro
-  if (!user) {
-    return <AuthPage />;
-  }
-
-  const ActivePageComponent = pageComponents[activePage.key] || null;
-
-  return (
-    <XPProvider>
-      <div className="app-shell">
-        <header className="app-header">
-          <Hamburger open={menuOpen} onClick={() => setMenuOpen(!menuOpen)} />
-          <span className="app-header__title">
-            <span className="app-header__emoji">📊</span> DataSci Academy
-          </span>
-          {/* Avatar com menu de usuário */}
-          <UserMenu />
-        </header>
-
-        <XPBar />
-
-        <div
-          className={`menu-backdrop${menuOpen ? " show" : ""}`}
-          onClick={() => setMenuOpen(false)}
-        />
-
-        <nav
-          className={`side-menu${menuOpen ? " open" : ""}`}
-          aria-hidden={!menuOpen}
-        >
-          <div className="side-menu-inner">
-            <div className="menu-heading">Módulos</div>
-            <ul className="nav flex-column gap-2">
-              {pages.map((page) => (
-                <li className="nav-item" key={page.key}>
-                  <button
-                    type="button"
-                    className={`nav-link btn btn-link text-start w-100${
-                      activePage.key === page.key ? " active" : ""
-                    }`}
-                    onClick={() => {
-                      setActivePage(page);
-                      setMenuOpen(false);
-                    }}
-                  >
-                    <span className="nav-link__emoji">{page.emoji}</span>
-                    {page.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-
-        <main className="app-main">
-          <div className="content-placeholder">
-            {ActivePageComponent ? <ActivePageComponent /> : null}
-          </div>
-        </main>
-      </div>
-    </XPProvider>
-  );
+  return user ? children : <Navigate to="/login" replace />;
 }
 
-// Raiz do app — AuthProvider engloba tudo
+// Rota pública — redireciona para /progresso se já estiver logado
+function PublicRoute({ children }) {
+  const { user, authLoading } = useAuth();
+
+  if (authLoading) {
+    return (
+      <div className="auth-loading-screen">
+        <span className="auth-loading-emoji">📊</span>
+        <p>Carregando...</p>
+      </div>
+    );
+  }
+
+  return !user ? children : <Navigate to="/progresso" replace />;
+}
+
 export default function App() {
   return (
     <AuthProvider>
-      <AppShell />
+      <BrowserRouter>
+        <Routes>
+          {/* Rota pública: login/cadastro */}
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <AuthPage />
+              </PublicRoute>
+            }
+          />
+
+          {/* Rotas privadas: todas dentro do AppLayout (header + menu) */}
+          <Route
+            element={
+              <PrivateRoute>
+                <XPProvider>
+                  <AppLayout />
+                </XPProvider>
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<Navigate to="/progresso" replace />} />
+            <Route path="/progresso"    element={<Progresso />} />
+            <Route path="/fundamentos"  element={<Fundamentos />} />
+            <Route path="/pandas"       element={<Pandas />} />
+            <Route path="/exploracao"   element={<Exploracao />} />
+            <Route path="/visualizacao" element={<Visualizacao />} />
+          </Route>
+
+          {/* Qualquer rota desconhecida → redireciona */}
+          <Route path="*" element={<Navigate to="/progresso" replace />} />
+        </Routes>
+      </BrowserRouter>
     </AuthProvider>
   );
 }
