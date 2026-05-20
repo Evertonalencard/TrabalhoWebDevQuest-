@@ -22,6 +22,11 @@ const pages = [
     emoji: "🔍",
   },
   { path: "/visualizacao", label: "Visualização de Dados", emoji: "📈" },
+  {
+    path: "/preprocessamento",
+    label: "Pré-Processamento de Dados",
+    emoji: "⚙️",
+  },
 ];
 
 export default function AppLayout() {

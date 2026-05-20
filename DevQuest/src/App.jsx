@@ -12,6 +12,7 @@ import Fundamentos from "./pages/Fundamentos";
 import Pandas from "./pages/Pandas";
 import Exploracao from "./pages/Exploracao";
 import Visualizacao from "./pages/Visualizacao";
+import PreProcessamento from "./pages/PreProcessamento";
 
 // Rota protegida — redireciona para /login se não autenticado
 function PrivateRoute({ children }) {
@@ -71,11 +72,12 @@ export default function App() {
             }
           >
             <Route index element={<Navigate to="/progresso" replace />} />
-            <Route path="/progresso"    element={<Progresso />} />
-            <Route path="/fundamentos"  element={<Fundamentos />} />
-            <Route path="/pandas"       element={<Pandas />} />
-            <Route path="/exploracao"   element={<Exploracao />} />
+            <Route path="/progresso" element={<Progresso />} />
+            <Route path="/fundamentos" element={<Fundamentos />} />
+            <Route path="/pandas" element={<Pandas />} />
+            <Route path="/exploracao" element={<Exploracao />} />
             <Route path="/visualizacao" element={<Visualizacao />} />
+            <Route path="/preprocessamento" element={<PreProcessamento />} />
           </Route>
 
           {/* Qualquer rota desconhecida → redireciona */}
