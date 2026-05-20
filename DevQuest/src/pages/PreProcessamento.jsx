@@ -3,8 +3,6 @@ import PDFModule from "../components/PDFModule";
 import QuestionsModule from "../components/QuestionsModule";
 import RatingModule from "../components/RatingModule";
 
-//mudar esta parte
-
 const PANDAS_CODE = `# Manipulação de Dados com Pandas
 import pandas as pd
 
@@ -76,18 +74,27 @@ const QUESTIONS = [
   },
 ];
 
-function Pandas() {
+function PreProcessamento() {
   return (
     <section className="page-content">
-      <h2>Python para Ciência de Dados (Pandas)</h2>
+      <h2>Pré-Processamento de Dados</h2>
       <p>
-        Exemplos práticos de manipulação de dados com Pandas: filtros,
-        agrupamentos e exportação.
+        este modulo abrange desde conceitos introdutórios até problemas práticos
+        comuns encontrados em datasets reais, com foco em resolução utilizando
+        Python e Pandas.
       </p>
       <ul>
-        <li>Estruturas DataFrame e Series</li>
-        <li>Operações de filtro e transformações</li>
-        <li>Exportação de dados para CSV</li>
+        <li>Introdução</li>
+        <li>Delimitador Não Padrão</li>
+        <li>Espaços em Branco Invisíveis</li>
+        <li>Conversão de Tipos de Dados</li>
+        <li>Mistura de Tipos na Mesma Coluna</li>
+        <li>Duplicatas</li>
+        <li>Dados Agrupados em uma Coluna</li>
+        <li>Datas em Formatos Diferentes</li>
+        <li>Inconsistência de Representação</li>
+        <li>Outliers (Valores Atípicos)</li>
+        <li>Unidades de Medida Inconsistentes</li>
       </ul>
       <VideoPlayer
         videoId="vmEHCJofvqE"
@@ -98,11 +105,11 @@ function Pandas() {
       <PDFModule pdfs={PDFS} />
       <QuestionsModule questions={QUESTIONS} moduleKey="pandas" />
       <RatingModule
-        pageKey="pandas"
-        pageTitle="Python para Ciência de Dados (Pandas)"
+        pageKey="PreProcessamento"
+        pageTitle="Pré-Processamento de Dados"
       />
     </section>
   );
 }
 
-export default Pandas;
+export default PreProcessamento;
