@@ -2,7 +2,7 @@ import VideoPlayer from "../components/VideoPlayer";
 import PDFModule from "../components/PDFModule";
 import QuestionsModule from "../components/QuestionsModule";
 import RatingModule from "../components/RatingModule";
-
+import "../css/VideoModulo.css";
 const PANDAS_CODE = `# Manipulação de Dados com Pandas
 import pandas as pd
 
@@ -79,7 +79,7 @@ function PreProcessamento() {
     <section className="page-content">
       <h2>Pré-Processamento de Dados</h2>
       <p>
-        este modulo abrange desde conceitos introdutórios até problemas práticos
+        Este módulo abrange desde conceitos introdutórios até problemas práticos
         comuns encontrados em datasets reais, com foco em resolução utilizando
         Python e Pandas.
       </p>
@@ -96,12 +96,41 @@ function PreProcessamento() {
         <li>Outliers (Valores Atípicos)</li>
         <li>Unidades de Medida Inconsistentes</li>
       </ul>
-      <VideoPlayer
-        videoId="vmEHCJofvqE"
-        title="Aula: Python para Ciência de Dados com Pandas"
-        code={PANDAS_CODE}
-        language="python"
-      />
+
+      {/*
+        type="drive" → usa embed do Google Drive
+        videoId      → cole aqui o ID do arquivo ou a URL pública completa
+        Exemplos aceitos:
+          videoId="1A2B3C4D5E6F7G8H9I0J"
+          videoId="https://drive.google.com/file/d/1A2B3C4D5E6F7G8H9I0J/view?usp=sharing"
+      */}
+      <div className="video-grid video-grid--4">
+        <VideoPlayer
+          driveFileId="1lFBTyQIKwuadr-t0A1dTt63ueYlwjhhP"
+          title="aula_00_introdução"
+        />
+        <VideoPlayer
+          driveFileId="1GnpaF4B7UR84ee1Fi9FQW6QQr0IyD5Ry"
+          title="aula_00_overview"
+        />
+        <VideoPlayer
+          driveFileId="1K6ZNYpIMZED8vWr7YsphGopY8yisdmLo"
+          title="Aula 1"
+        />
+        <VideoPlayer
+          driveFileId="1R7AtbHn1jSZ01ZqZXBGUODqDxctBseVk"
+          title="Aula 2"
+        />
+        <VideoPlayer
+          driveFileId="1X9cuOROeBQ82eLRWMxA_0jcMia1XWGyY"
+          title="Aula 3"
+        />
+        <VideoPlayer
+          driveFileId="16rWhS_MobJkvXzBc98kzuTjp-ApU8g6F"
+          title="Aula 4"
+        />
+      </div>
+
       <PDFModule pdfs={PDFS} />
       <QuestionsModule questions={QUESTIONS} moduleKey="pandas" />
       <RatingModule
