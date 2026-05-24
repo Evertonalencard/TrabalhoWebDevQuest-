@@ -1,47 +1,33 @@
-import { useState } from "react";
-import "../css/VideoModulo.css";
-
-function VideoPlayer({ videoId, title, code, language = "python" }) {
-  const [showCode, setShowCode] = useState(false);
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
+/**
+ * VideoPlayer — Google Drive
+ *
+ * Props:
+ *  - driveFileId  : string  — ID do arquivo no Google Drive
+ *                             Ex: "1A2B3C4D5E6F..." (da URL pública do Drive)
+ *  - title        : string  — Legenda exibida abaixo do vídeo (opcional)
+ *
+ * Como obter o driveFileId:
+ *  1. Abra o vídeo no Google Drive
+ *  2. Clique em "Compartilhar" → "Copiar link"
+ *  3. O link será: https://drive.google.com/file/d/AQUI_ESTA_O_ID/view
+ *  4. Copie apenas a parte entre /d/ e /view
+ */
+function VideoPlayer({ driveFileId, title }) {
+  // URL de embed do Google Drive
+  const embedUrl = `https://drive.google.com/file/d/${driveFileId}/preview`;
 
   return (
-    <div className="video-module">
-      {title && <h3 className="video-module__title">{title}</h3>}
-      <div className="video-module__embed-wrapper">
+    <div className="video-player">
+      <div className="video-player__wrapper">
         <iframe
-          className="video-module__iframe"
-          src={`https://www.youtube.com/embed/${videoId}`}
+          className="video-player__iframe"
+          src={embedUrl}
           title={title || "Vídeo da aula"}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="autoplay"
           allowFullScreen
         />
       </div>
-      {code && (
-        <div className="video-module__code-section">
-          <div className="video-module__code-header">
-            <span className="video-module__lang-badge">{language}</span>
-            <button type="button" className="video-module__toggle-btn" onClick={() => setShowCode(v => !v)}>
-              {showCode ? "▲ Ocultar código" : "▼ Ver código-fonte"}
-            </button>
-            {showCode && (
-              <button type="button" className={`video-module__copy-btn ${copied ? "copied" : ""}`} onClick={handleCopy}>
-                {copied ? "✓ Copiado!" : "Copiar"}
-              </button>
-            )}
-          </div>
-          {showCode && (
-            <pre className="video-module__code-block"><code>{code}</code></pre>
-          )}
-        </div>
-      )}
+      {title && <p className="video-player__title">{title}</p>}
     </div>
   );
 }
