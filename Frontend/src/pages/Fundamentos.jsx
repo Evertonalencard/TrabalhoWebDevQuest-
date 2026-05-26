@@ -44,6 +44,47 @@ const PDFS = [
 
 const QUESTIONS = [
   {
+    text: "Qual biblioteca Python é mais usada para manipulação de dados tabulares e por quê?",
+    expectedAnswer: "Pandas é a biblioteca padrão para manipulação de DataFrames e Series, oferecendo funções de filtro, agrupamento, leitura de CSV/Excel, entre muitas outras.",
+  },
+  {
+    text: "Cite as principais etapas do ciclo de vida dos dados em ordem.",
+    expectedAnswer: "As etapas corretas são: Coleta, Limpeza, Exploração, Modelagem, Visualização e Implantação.",
+  },
+  {
+    text: "O que a função describe() do Pandas retorna quando aplicada a um DataFrame?",
+    expectedAnswer: "Retorna um resumo estatístico com count, mean, std, min, 25%, 50%, 75% e max para colunas numéricas — ideal para uma visão geral rápida dos dados.",
+  },
+];
+
+function Fundamentos() {
+  return (
+    <section className="page-content">
+      <h2>Fundamentos de Ciência de Dados e Python</h2>
+      <p>Introdução ao ciclo de vida dos dados, tipos de variáveis e os primeiros passos com Python para análise.</p>
+      <ul>
+        <li>Introdução ao ciclo de vida dos dados</li>
+        <li>Tipos de dados e variáveis</li>
+        <li>Primeiros passos com Python</li>
+      </ul>
+      <VideoPlayer videoId="yhp6rgrCjQ0" title="Aula: Fundamentos de Ciência de Dados e Python" code={FUNDAMENTOS_CODE} language="python" />
+      <PDFModule pdfs={PDFS} />
+      <QuestionsModule questions={QUESTIONS} moduleKey="fundamentos" />
+      <RatingModule pageKey="fundamentos" pageTitle="Fundamentos de Ciência de Dados e Python" />
+    </section>
+  );
+}
+
+export default Fundamentos;    id: "fund-2",
+    name: "Resumo: Python para Ciência de Dados",
+    description: "Guia rápido de sintaxe e bibliotecas",
+    url: "/assets/python-resumo.pdf",
+    filename: "python-resumo.pdf",
+  },
+];
+
+const QUESTIONS = [
+  {
     text: "Qual biblioteca Python é mais usada para manipulação de dados tabulares?",
     options: ["NumPy", "Matplotlib", "Pandas", "Scikit-learn"],
     correct: 2,
