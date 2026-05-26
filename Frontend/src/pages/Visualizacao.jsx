@@ -14,27 +14,16 @@ const PDFS = [
 
 const QUESTIONS = [
   {
-    text: "Qual tipo de gráfico é mais adequado para mostrar a distribuição de uma variável contínua?",
-    options: ["Gráfico de pizza", "Histograma", "Gráfico de barras", "Scatter plot"],
-    correct: 1,
-    explanation: "O histograma divide os dados em faixas (bins) e mostra a frequência de cada intervalo, sendo ideal para visualizar a distribuição de variáveis contínuas como renda ou idade.",
+    text: "Qual tipo de gráfico é mais adequado para mostrar a distribuição de uma variável contínua? Explique o porquê.",
+    expectedAnswer: "O histograma. Ele divide os dados em faixas (bins) e mostra a frequência de cada intervalo, sendo ideal para visualizar a distribuição de variáveis contínuas como renda ou idade.",
   },
   {
-    text: "Para comparar a relação entre duas variáveis numéricas, o melhor gráfico é:",
-    options: ["Histograma", "Gráfico de linhas", "Scatter plot (dispersão)", "Gráfico de barras"],
-    correct: 2,
-    explanation: "O scatter plot plota pares (x, y) de duas variáveis numéricas, permitindo visualizar correlações, clusters e outliers entre elas.",
+    text: "Qual é o melhor gráfico para comparar a relação entre duas variáveis numéricas e o que ele permite visualizar?",
+    expectedAnswer: "O scatter plot (gráfico de dispersão). Ele plota pares (x, y) de duas variáveis numéricas, permitindo visualizar correlações, clusters e outliers entre elas.",
   },
   {
-    text: "O que é uma boa prática ao criar visualizações?",
-    options: [
-      "Usar o máximo de cores possível",
-      "Omitir legendas para simplificar",
-      "Garantir que os eixos comecem em zero quando relevante",
-      "Sempre usar gráficos 3D para mais impacto visual",
-    ],
-    correct: 2,
-    explanation: "Quando o zero é o ponto de referência natural (ex: barras), iniciar o eixo Y em zero evita distorções visuais e interpretações enganosas dos dados.",
+    text: "Explique por que é uma boa prática garantir que o eixo Y comece em zero em gráficos de barras.",
+    expectedAnswer: "Quando o zero é o ponto de referência natural (como em gráficos de barras, que medem magnitude), iniciar o eixo Y em zero evita distorções visuais e interpretações enganosas das diferenças entre os dados.",
   },
 ];
 
