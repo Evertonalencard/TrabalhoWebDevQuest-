@@ -49,7 +49,7 @@ function Visualizacao() {
         <li>Interpretando visualizações com propósito</li>
       </ul>
       <PDFModule pdfs={PDFS} />
-      <QuestionsModule questions={QUESTIONS} />
+      <QuestionsModule questions={QUESTIONS} moduleKey="visualizacao" />
       <RatingModule pageKey="visualizacao" pageTitle="Visualização de Dados" />
     </section>
   );

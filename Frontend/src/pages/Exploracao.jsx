@@ -79,7 +79,7 @@ function Exploracao() {
       </ul>
       <VideoPlayer videoId="ZW-V3_TbKrI" title="Aula: Exploração de Dados e Estatística" code={EXPLORACAO_CODE} language="python" />
       <PDFModule pdfs={PDFS} />
-      <QuestionsModule questions={QUESTIONS} />
+      <QuestionsModule questions={QUESTIONS} moduleKey="exploracao" />
       <RatingModule pageKey="exploracao" pageTitle="Exploração de Dados e Estatística" />
     </section>
   );

@@ -1,0 +1,52 @@
+/* =============================================
+   ADIÇÕES AO App.css EXISTENTE
+   Adicione estas regras ao seu App.css atual
+   ============================================= */
+
+/* Loading screen inicial (verificação de sessão Firebase) */
+.auth-loading-screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: #f7f6f2;
+  color: #374151;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.auth-loading-emoji {
+  font-size: 3rem;
+  animation: auth-loading-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes auth-loading-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.75;
+  }
+}
+
+/* Ajuste do header para acomodar o UserMenu à direita */
+.app-header {
+  display: flex;
+  align-items: center;
+  /* O título centralizado com flex-grow */
+}
+
+.app-header__title {
+  flex: 1;
+}
+
+/* Garante que o UserMenu fique no canto direito */
+.app-header .user-menu {
+  margin-left: auto;
+  flex-shrink: 0;
+}
