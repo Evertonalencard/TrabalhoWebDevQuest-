@@ -3,6 +3,7 @@ import PDFModule from "../components/PDFModule";
 import QuestionsModule from "../components/QuestionsModule";
 import RatingModule from "../components/RatingModule";
 import "../css/VideoModulo.css";
+
 const PANDAS_CODE = `# Manipulação de Dados com Pandas
 import pandas as pd
 
@@ -37,40 +38,19 @@ const PDFS = [
 
 const QUESTIONS = [
   {
-    text: "Como filtrar registros em um DataFrame onde a coluna 'idade' seja maior que 30?",
-    options: [
-      "df.filter(df['idade'] > 30)",
-      "df[df['idade'] > 30]",
-      "df.where(idade > 30)",
-      "df.select(age > 30)",
-    ],
-    correct: 1,
-    explanation:
-      "A filtragem booleana df[condição] é a forma idiomática no Pandas. A condição df['idade'] > 30 retorna uma Series de booleanos, usada como máscara no DataFrame.",
+    text: "Como filtrar registros em um DataFrame onde a coluna 'idade' seja maior que 30? Descreva a sintaxe e como ela funciona.",
+    expectedAnswer:
+      "A sintaxe correta é df[df['idade'] > 30]. A filtragem booleana é a forma idiomática no Pandas. A condição interna df['idade'] > 30 retorna uma Series de booleanos (Verdadeiro ou Falso), que é usada como máscara para filtrar as linhas do DataFrame.",
   },
   {
-    text: "O que o método groupby('cidade')['salario'].mean() faz?",
-    options: [
-      "Ordena salários por cidade",
-      "Calcula a média de salário agrupada por cidade",
-      "Filtra funcionários de uma cidade específica",
-      "Conta o número de funcionários por cidade",
-    ],
-    correct: 1,
-    explanation:
-      "groupby() agrupa linhas por valor de coluna e, combinado com mean(), calcula a média da coluna 'salario' para cada grupo (cidade).",
+    text: "Explique o que o método groupby('cidade')['salario'].mean() faz.",
+    expectedAnswer:
+      "O método groupby() agrupa as linhas do DataFrame baseando-se nos valores únicos da coluna 'cidade'. Em seguida, ele seleciona a coluna 'salario' e, com o método mean(), calcula a média salarial para cada um desses grupos (cidades).",
   },
   {
-    text: "Qual método exporta um DataFrame para CSV?",
-    options: [
-      "df.export_csv()",
-      "df.save('file.csv')",
-      "df.to_csv('file.csv')",
-      "df.write_csv('file.csv')",
-    ],
-    correct: 2,
-    explanation:
-      "df.to_csv('nome.csv') é o método padrão para salvar um DataFrame em arquivo CSV. Use index=False para não incluir o índice numérico como coluna extra.",
+    text: "Qual método é utilizado para exportar um DataFrame para um arquivo CSV? Cite um parâmetro importante ao usá-lo.",
+    expectedAnswer:
+      "O método é df.to_csv('nome_do_arquivo.csv'). É altamente recomendável usar o parâmetro index=False para evitar que o índice numérico do DataFrame seja incluído como uma coluna extra no arquivo exportado.",
   },
 ];
 
