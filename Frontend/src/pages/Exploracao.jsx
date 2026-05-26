@@ -38,32 +38,16 @@ const PDFS = [
 
 const QUESTIONS = [
   {
-    text: "O que é IQR (Intervalo Interquartil)?",
-    options: [
-      "A média dos dados",
-      "A diferença entre o 3º e o 1º quartil (Q3 - Q1)",
-      "O desvio padrão da amostra",
-      "A diferença entre o máximo e o mínimo",
-    ],
-    correct: 1,
-    explanation: "O IQR é Q3 - Q1 e mede a dispersão central dos dados. Valores fora do intervalo [Q1 - 1.5×IQR, Q3 + 1.5×IQR] são considerados outliers pelo método de Tukey.",
+    text: "O que é IQR (Intervalo Interquartil) e como ele é utilizado para encontrar outliers?",
+    expectedAnswer: "O IQR é a diferença entre o 3º e o 1º quartil (Q3 - Q1) e mede a dispersão central dos dados. Valores que caem fora do limite inferior (Q1 - 1.5×IQR) ou superior (Q3 + 1.5×IQR) são frequentemente considerados outliers (Método de Tukey).",
   },
   {
-    text: "Qual função do Pandas retorna a correlação entre todas as colunas numéricas?",
-    options: ["df.describe()", "df.info()", "df.corr()", "df.cov()"],
-    correct: 2,
-    explanation: "df.corr() retorna a matriz de correlação de Pearson entre todas as colunas numéricas. Valores próximos de 1 indicam correlação positiva forte, próximos de -1, negativa forte.",
+    text: "Qual função do Pandas retorna a correlação entre todas as colunas numéricas e como interpretamos esses valores?",
+    expectedAnswer: "A função df.corr() retorna a matriz de correlação de Pearson. Valores próximos de 1 indicam uma forte correlação positiva, enquanto valores próximos de -1 indicam uma forte correlação negativa.",
   },
   {
-    text: "Para que serve o parâmetro bins em value_counts(bins=5)?",
-    options: [
-      "Limita o resultado a 5 valores",
-      "Agrupa os dados em 5 intervalos contínuos",
-      "Arredonda os valores para 5 casas decimais",
-      "Filtra os 5 valores mais frequentes",
-    ],
-    correct: 1,
-    explanation: "Com bins=5, o value_counts() divide o intervalo dos dados em 5 faixas iguais e conta quantos valores caem em cada faixa — útil para visualizar distribuições de variáveis contínuas.",
+    text: "Para que serve o parâmetro 'bins' (ex: bins=5) na função value_counts()?",
+    expectedAnswer: "Com bins=5, o value_counts() agrupa os dados dividindo o intervalo contínuo em 5 faixas (ou blocos) de tamanhos iguais e conta quantos valores caem em cada faixa. É útil para visualizar ou tabular distribuições de variáveis contínuas.",
   },
 ];
 
