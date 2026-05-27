@@ -2,30 +2,8 @@ import VideoPlayer from "../components/VideoPlayer";
 import PDFModule from "../components/PDFModule";
 import QuestionsModule from "../components/QuestionsModule";
 import RatingModule from "../components/RatingModule";
-
+import "../css/VideoModulo.css";
 //mudar esta parte
-
-const PANDAS_CODE = `# Manipulação de Dados com Pandas
-import pandas as pd
-
-dados = {
-    "nome":    ["Ana", "Bruno", "Carla", "Diego"],
-    "idade":   [25, 30, 22, 35],
-    "salario": [4500, 7200, 3800, 9100],
-    "cidade":  ["SP", "RJ", "MG", "SP"],
-}
-df = pd.DataFrame(dados)
-print(df)
-
-resultado = df[(df["cidade"] == "SP") & (df["salario"] > 5000)]
-print(resultado)
-
-agrupado = df.groupby("cidade")["salario"].mean()
-print(agrupado)
-
-df.to_csv("funcionarios.csv", index=False)
-print("Exportado com sucesso!")
-`;
 
 const PDFS = [
   {
@@ -75,26 +53,59 @@ const QUESTIONS = [
       "df.to_csv('nome.csv') é o método padrão para salvar um DataFrame em arquivo CSV. Use index=False para não incluir o índice numérico como coluna extra.",
   },
 ];
-
+//fazer para videos no youtube
 function Pandas() {
   return (
     <section className="page-content">
-      <h2>Python para Ciência de Dados (Pandas)</h2>
+      <h2>Curso Introdutório de Python para Ciência de Dados (pandas) </h2>
       <p>
-        Exemplos práticos de manipulação de dados com Pandas: filtros,
-        agrupamentos e exportação.
+        O objetivo é oferecer um curso introdutório de Python com foco em
+        Ciência de Dados para a comunidade externa, democratizando o acesso ao
+        conhecimento em tecnologia e análise de dados.
       </p>
+      <ul>
+        <li>Introdução ao Pandas e Dados Tabulares</li>
+        <li>Manipulação de DataFrames e Series</li>
+        <li>Estrutura Principal: DataFrame</li>
+        <li>Leitura de Arquivos (CSV e Excel)</li>
+        <li>Tipos de Dados no Pandas</li>
+        <li>Seleção de Linhas e Colunas</li>
+        <li>Filtros e Consultas</li>
+        <li>Operações de Agregação</li>
+        <li>Renomeação e Organização de Dados</li>
+      </ul>
+      <div className="video-grid video-grid--4">
+        <VideoPlayer
+          driveFileId="1XvE3btfYfydZDy0gxswe8HuuVuBeNVWU"
+          title="aula_01"
+        />
+        <VideoPlayer
+          driveFileId="1EYNxgP9egeeO4BiWUcRUYe2NSIEcvUYG"
+          title="aula_02"
+        />
+        <VideoPlayer
+          driveFileId="1K6ZNYpIMZED8vWr7YsphGopY8yisdmLo"
+          title="Aula 1"
+        />
+        <VideoPlayer
+          driveFileId="1R7AtbHn1jSZ01ZqZXBGUODqDxctBseVk"
+          title="Aula 2"
+        />
+        <VideoPlayer
+          driveFileId="1X9cuOROeBQ82eLRWMxA_0jcMia1XWGyY"
+          title="Aula 3"
+        />
+        <VideoPlayer
+          driveFileId="16rWhS_MobJkvXzBc98kzuTjp-ApU8g6F"
+          title="Aula 4"
+        />
+      </div>
       <ul>
         <li>Estruturas DataFrame e Series</li>
         <li>Operações de filtro e transformações</li>
         <li>Exportação de dados para CSV</li>
       </ul>
-      <VideoPlayer
-        videoId="vmEHCJofvqE"
-        title="Aula: Python para Ciência de Dados com Pandas"
-        code={PANDAS_CODE}
-        language="python"
-      />
+
       <PDFModule pdfs={PDFS} />
       <QuestionsModule questions={QUESTIONS} moduleKey="pandas" />
       <RatingModule

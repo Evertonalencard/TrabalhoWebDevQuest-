@@ -3,27 +3,6 @@ import PDFModule from "../components/PDFModule";
 import QuestionsModule from "../components/QuestionsModule";
 import RatingModule from "../components/RatingModule";
 import "../css/VideoModulo.css";
-const PANDAS_CODE = `# Manipulação de Dados com Pandas
-import pandas as pd
-
-dados = {
-    "nome":    ["Ana", "Bruno", "Carla", "Diego"],
-    "idade":   [25, 30, 22, 35],
-    "salario": [4500, 7200, 3800, 9100],
-    "cidade":  ["SP", "RJ", "MG", "SP"],
-}
-df = pd.DataFrame(dados)
-print(df)
-
-resultado = df[(df["cidade"] == "SP") & (df["salario"] > 5000)]
-print(resultado)
-
-agrupado = df.groupby("cidade")["salario"].mean()
-print(agrupado)
-
-df.to_csv("funcionarios.csv", index=False)
-print("Exportado com sucesso!")
-`;
 
 const PDFS = [
   {
@@ -96,14 +75,6 @@ function PreProcessamento() {
         <li>Outliers (Valores Atípicos)</li>
         <li>Unidades de Medida Inconsistentes</li>
       </ul>
-
-      {/*
-        type="drive" → usa embed do Google Drive
-        videoId      → cole aqui o ID do arquivo ou a URL pública completa
-        Exemplos aceitos:
-          videoId="1A2B3C4D5E6F7G8H9I0J"
-          videoId="https://drive.google.com/file/d/1A2B3C4D5E6F7G8H9I0J/view?usp=sharing"
-      */}
       <div className="video-grid video-grid--4">
         <VideoPlayer
           driveFileId="1lFBTyQIKwuadr-t0A1dTt63ueYlwjhhP"
