@@ -62,9 +62,11 @@ function Visualizacao() {
         até gráficos de dispersão.
       </p>
       <ul>
-        <li>Boas práticas para dashboards</li>
-        <li>Escolha de cores e legendas</li>
-        <li>Interpretando visualizações com propósito</li>
+        <li>Fundamentos e Percepção Visual</li>
+        <li>Visualização com Matplotlib</li>
+        <li>Os 5 Gráficos Essenciais</li>
+        <li>Visualizações Avançadas com Matplotlib e Seaborn</li>
+        <li>Boas Práticas e Storytelling Visual</li>
       </ul>
       <div className="video-grid video-grid--4">
         <VideoPlayer

@@ -1,4 +1,4 @@
-import VideoPlayer from "../components/VideoPlayer";
+import VideoPlayerYT from "../components/VideoPlayerYT";
 import PDFModule from "../components/PDFModule";
 import QuestionsModule from "../components/QuestionsModule";
 import RatingModule from "../components/RatingModule";
@@ -75,36 +75,43 @@ function Pandas() {
         <li>Renomeação e Organização de Dados</li>
       </ul>
       <div className="video-grid video-grid--4">
-        <VideoPlayer
-          driveFileId="1XvE3btfYfydZDy0gxswe8HuuVuBeNVWU"
-          title="aula_01"
+        <VideoPlayerYT
+          video="https://www.youtube.com/watch?v=XBxXgJcd5nU&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr"
+          title="aula_01 -  Introdução ao Pandas e Dados Tabulares"
         />
-        <VideoPlayer
-          driveFileId="1EYNxgP9egeeO4BiWUcRUYe2NSIEcvUYG"
-          title="aula_02"
+        <VideoPlayerYT
+          video="https://youtu.be/i4CsKbhW12k?si=weUYN1-mtJ7A3xNC"
+          title="aula_02 - Estruturas Fundamentais: Series"
         />
-        <VideoPlayer
-          driveFileId="1K6ZNYpIMZED8vWr7YsphGopY8yisdmLo"
-          title="Aula 1"
+        <VideoPlayerYT
+          video="https://www.youtube.com/watch?v=1K6ZNYpIMZED8vWr7YsphGopY8yisdmLo&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr" //mudar este link
+          title="Aula_03 - Estrutura Principal: DataFrame"
         />
-        <VideoPlayer
-          driveFileId="1R7AtbHn1jSZ01ZqZXBGUODqDxctBseVk"
-          title="Aula 2"
+        <VideoPlayerYT
+          video="https://youtu.be/ft5XwV2zkUo"
+          title="Aula_04 - Leitura de Arquivos (CSV e Excel)"
         />
-        <VideoPlayer
-          driveFileId="1X9cuOROeBQ82eLRWMxA_0jcMia1XWGyY"
-          title="Aula 3"
+        <VideoPlayerYT
+          video="https://youtu.be/ft5XwV2zkUo"
+          title="Aula_05 - Tipos de Dados no Pandas"
         />
-        <VideoPlayer
-          driveFileId="16rWhS_MobJkvXzBc98kzuTjp-ApU8g6F"
-          title="Aula 4"
+        <VideoPlayerYT
+          video="https://studio.youtube.com/video/7srOGuyglAg/edit"
+          title="Aula_06 - Seleção de Linhas e Colunas"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/RPkUx27KAiM?si=lJD5MLSetCEaynDL"
+          title="Aula_07 - Filtros e Consultas"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/BytfizH37TA?si=5OsTNlY-dewG1ZpV"
+          title="Aula_08 - Operação de Agregação"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/NF0Jh1wHkOU?si=hsic82ZmGCefJ8xz"
+          title="Aula_09 - Renomeação e Organização de Dados"
         />
       </div>
-      <ul>
-        <li>Estruturas DataFrame e Series</li>
-        <li>Operações de filtro e transformações</li>
-        <li>Exportação de dados para CSV</li>
-      </ul>
 
       <PDFModule pdfs={PDFS} />
       <QuestionsModule questions={QUESTIONS} moduleKey="pandas" />

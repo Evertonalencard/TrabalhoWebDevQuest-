@@ -70,7 +70,7 @@ function Fundamentos() {
         <li>Coleções</li>
         <li>Funções</li>
       </ul>
-      <div className="video-grid video-grid--4">
+      <div className="video-grid video-grid--1">
         <VideoPlayer
           driveFileId="1x3I3U8t0PV_rd-uAT2PDlGc-biU1dla6"
           title="aula_01 - Variaveis e operadores"
