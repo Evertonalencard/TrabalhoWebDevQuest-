@@ -1,0 +1,113 @@
+.pdf-module {
+  margin-top: 1.5rem;
+  border: 1px solid rgba(27,58,179,0.14);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.pdf-module__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1b3ab3;
+  padding: 0.85rem 1.25rem;
+  margin: 0;
+  background: rgba(27,58,179,0.04);
+  border-bottom: 1px solid rgba(27,58,179,0.1);
+}
+
+.pdf-module__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pdf-module__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid rgba(22,27,51,0.06);
+  transition: background 200ms ease;
+}
+
+.pdf-module__item:last-child {
+  border-bottom: none;
+}
+
+.pdf-module__item:hover {
+  background: rgba(27,58,179,0.03);
+}
+
+.pdf-module__item-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.pdf-module__item-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.pdf-module__item-name {
+  display: block;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #12121d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdf-module__item-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: #7a7974;
+  margin-top: 1px;
+}
+
+.pdf-module__download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 7px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1b3ab3;
+  background: rgba(27,58,179,0.08);
+  border: 1px solid rgba(27,58,179,0.22);
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+.pdf-module__download-btn:hover:not(:disabled) {
+  background: rgba(27,58,179,0.15);
+  border-color: rgba(27,58,179,0.4);
+}
+
+.pdf-module__download-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.pdf-module__spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(27,58,179,0.3);
+  border-top-color: #1b3ab3;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
