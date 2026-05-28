@@ -1,31 +1,9 @@
-import VideoPlayer from "../components/VideoPlayer";
+import VideoPlayerYT from "../components/VideoPlayerYT";
 import PDFModule from "../components/PDFModule";
 import QuestionsModule from "../components/QuestionsModule";
 import RatingModule from "../components/RatingModule";
-
+import "../css/VideoModulo.css";
 //mudar esta parte
-
-const PANDAS_CODE = `# Manipulação de Dados com Pandas
-import pandas as pd
-
-dados = {
-    "nome":    ["Ana", "Bruno", "Carla", "Diego"],
-    "idade":   [25, 30, 22, 35],
-    "salario": [4500, 7200, 3800, 9100],
-    "cidade":  ["SP", "RJ", "MG", "SP"],
-}
-df = pd.DataFrame(dados)
-print(df)
-
-resultado = df[(df["cidade"] == "SP") & (df["salario"] > 5000)]
-print(resultado)
-
-agrupado = df.groupby("cidade")["salario"].mean()
-print(agrupado)
-
-df.to_csv("funcionarios.csv", index=False)
-print("Exportado com sucesso!")
-`;
 
 const PDFS = [
   {
@@ -75,26 +53,66 @@ const QUESTIONS = [
       "df.to_csv('nome.csv') é o método padrão para salvar um DataFrame em arquivo CSV. Use index=False para não incluir o índice numérico como coluna extra.",
   },
 ];
-
+//fazer para videos no youtube
 function Pandas() {
   return (
     <section className="page-content">
-      <h2>Python para Ciência de Dados (Pandas)</h2>
+      <h2>Curso Introdutório de Python para Ciência de Dados (pandas) </h2>
       <p>
-        Exemplos práticos de manipulação de dados com Pandas: filtros,
-        agrupamentos e exportação.
+        O objetivo é oferecer um curso introdutório de Python com foco em
+        Ciência de Dados para a comunidade externa, democratizando o acesso ao
+        conhecimento em tecnologia e análise de dados.
       </p>
       <ul>
-        <li>Estruturas DataFrame e Series</li>
-        <li>Operações de filtro e transformações</li>
-        <li>Exportação de dados para CSV</li>
+        <li>Introdução ao Pandas e Dados Tabulares</li>
+        <li>Manipulação de DataFrames e Series</li>
+        <li>Estrutura Principal: DataFrame</li>
+        <li>Leitura de Arquivos (CSV e Excel)</li>
+        <li>Tipos de Dados no Pandas</li>
+        <li>Seleção de Linhas e Colunas</li>
+        <li>Filtros e Consultas</li>
+        <li>Operações de Agregação</li>
+        <li>Renomeação e Organização de Dados</li>
       </ul>
-      <VideoPlayer
-        videoId="vmEHCJofvqE"
-        title="Aula: Python para Ciência de Dados com Pandas"
-        code={PANDAS_CODE}
-        language="python"
-      />
+      <div className="video-grid video-grid--4">
+        <VideoPlayerYT
+          video="https://www.youtube.com/watch?v=XBxXgJcd5nU&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr"
+          title="aula_01 -  Introdução ao Pandas e Dados Tabulares"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/i4CsKbhW12k?si=weUYN1-mtJ7A3xNC"
+          title="aula_02 - Estruturas Fundamentais: Series"
+        />
+        <VideoPlayerYT
+          video="https://www.youtube.com/watch?v=1K6ZNYpIMZED8vWr7YsphGopY8yisdmLo&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr" //mudar este link
+          title="Aula_03 - Estrutura Principal: DataFrame"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/ft5XwV2zkUo"
+          title="Aula_04 - Leitura de Arquivos (CSV e Excel)"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/ft5XwV2zkUo"
+          title="Aula_05 - Tipos de Dados no Pandas"
+        />
+        <VideoPlayerYT
+          video="https://studio.youtube.com/video/7srOGuyglAg/edit"
+          title="Aula_06 - Seleção de Linhas e Colunas"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/RPkUx27KAiM?si=lJD5MLSetCEaynDL"
+          title="Aula_07 - Filtros e Consultas"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/BytfizH37TA?si=5OsTNlY-dewG1ZpV"
+          title="Aula_08 - Operação de Agregação"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/NF0Jh1wHkOU?si=hsic82ZmGCefJ8xz"
+          title="Aula_09 - Renomeação e Organização de Dados"
+        />
+      </div>
+
       <PDFModule pdfs={PDFS} />
       <QuestionsModule questions={QUESTIONS} moduleKey="pandas" />
       <RatingModule

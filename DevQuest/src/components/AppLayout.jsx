@@ -13,7 +13,7 @@ const pages = [
   },
   {
     path: "/pandas",
-    label: "Python para Ciência de Dados — Pandas",
+    label: "Curso Introdutório de Python para Ciência de Dados (pandas)",
     emoji: "🐼",
   },
   {
