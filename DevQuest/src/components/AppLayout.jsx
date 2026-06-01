@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import XPBar from "./XPBar";
 import Hamburger from "./Hamburger";
 import UserMenu from "./UserMenu";

@@ -5,8 +5,7 @@ import "../css/AuthPage.css";
 const VIEWS = { LOGIN: "login", REGISTER: "register", RESET: "reset" };
 
 export default function AuthPage() {
-  const { login, register, loginWithGoogle, resetPassword, setAuthError } =
-    useAuth();
+  const { login, register, resetPassword } = useAuth();
 
   const [view, setView] = useState(VIEWS.LOGIN);
   const [name, setName] = useState("");

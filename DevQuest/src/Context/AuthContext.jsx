@@ -1,22 +1,7 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  updateProfile,
-  sendPasswordResetEmail,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase";
+import { createContext, useContext, useEffect, useState } from "react";
+import * as authService from "../services/authService";
 
 const AuthContext = createContext(null);
-
-const auth = getAuth();
-const googleProvider = new GoogleAuthProvider();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -24,61 +9,69 @@ export function AuthProvider({ children }) {
   const [authError, setAuthError] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setUser(firebaseUser);
-      setAuthLoading(false);
-    });
-    return unsubscribe;
+    async function loadUser() {
+      try {
+        const token = authService.getToken();
+
+        if (!token) {
+          setAuthLoading(false);
+          return;
+        }
+
+        const me = await authService.getMe();
+        setUser(me);
+      } catch {
+        authService.logout();
+        setUser(null);
+      } finally {
+        setAuthLoading(false);
+      }
+    }
+
+    loadUser();
   }, []);
 
-  async function ensureUserDoc(firebaseUser) {
-    const ref = doc(db, "users", firebaseUser.uid);
-    const snap = await getDoc(ref);
-    if (!snap.exists()) {
-      await setDoc(ref, {
-        xp: 0,
-        level: 1,
-        modules: {},
-        createdAt: serverTimestamp(),
-        displayName: firebaseUser.displayName || "",
-        email: firebaseUser.email,
-      });
+  async function login(email, password) {
+    try {
+      setAuthError(null);
+
+      const user = await authService.login(email, password);
+
+      setUser(user);
+    } catch (err) {
+      setAuthError(err.message);
+      throw err;
     }
   }
 
-  async function register(name, email, password) {
-    setAuthError(null);
-    const credential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-    await updateProfile(credential.user, { displayName: name });
-    await ensureUserDoc({ ...credential.user, displayName: name });
-    return credential.user;
+  async function register(email, displayName, password) {
+    try {
+      setAuthError(null);
+
+      const user = await authService.register(email, displayName, password);
+
+      setUser(user);
+    } catch (err) {
+      setAuthError(err.message);
+      throw err;
+    }
   }
 
-  async function login(email, password) {
-    setAuthError(null);
-    const credential = await signInWithEmailAndPassword(auth, email, password);
-    await ensureUserDoc(credential.user);
-    return credential.user;
+  function logout() {
+    authService.logout();
+    setUser(null);
   }
 
   async function loginWithGoogle() {
-    setAuthError(null);
-    const credential = await signInWithPopup(auth, googleProvider);
-    await ensureUserDoc(credential.user);
-    return credential.user;
+    const err = new Error("Login com Google não está disponível.");
+    err.code = "auth/unsupported-operation";
+    throw err;
   }
 
-  async function logout() {
-    await signOut(auth);
-  }
-
-  async function resetPassword(email) {
-    setAuthError(null);
-    await sendPasswordResetEmail(auth, email);
+  async function resetPassword() {
+    const err = new Error("Recuperação de senha não está disponível.");
+    err.code = "auth/unsupported-operation";
+    throw err;
   }
 
   return (
@@ -88,10 +81,10 @@ export function AuthProvider({ children }) {
         authLoading,
         authError,
         setAuthError,
-        register,
         login,
-        loginWithGoogle,
+        register,
         logout,
+        loginWithGoogle,
         resetPassword,
       }}
     >
@@ -100,6 +93,7 @@ export function AuthProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   return useContext(AuthContext);
 }

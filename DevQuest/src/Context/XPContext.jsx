@@ -1,92 +1,150 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { db } from "../firebase";
-import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+
 import { useAuth } from "./AuthContext";
+import { getProgress } from "../services/userService";
+import { completeModule as completeModuleRequest } from "../services/progressService";
+import { addXP as addXPRequest } from "../services/xpService";
 
 const XPContext = createContext(null);
-
-const XP_PER_CORRECT = 20;
 const XP_PER_LEVEL = 100;
 
-function calculateLevel(totalXP) {
-  return Math.floor(totalXP / XP_PER_LEVEL) + 1;
+function toModuleItem(item) {
+  return {
+    id: item.moduleId,
+    key: item.moduleSlug,
+    slug: item.moduleSlug,
+    title: item.moduleTitle,
+    completed: item.completed ?? false,
+    score: item.score ?? 0,
+    gainedXP: item.gainedXP ?? 0,
+    attempts: item.attempts ?? 0,
+  };
+}
+
+function mapModules(moduleProgress = []) {
+  return moduleProgress.reduce((acc, item) => {
+    acc[item.moduleSlug] = toModuleItem(item);
+    return acc;
+  }, {});
+}
+
+function mapModuleList(moduleProgress = []) {
+  return moduleProgress.map(toModuleItem);
 }
 
 export function XPProvider({ children }) {
   const { user } = useAuth();
+
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
   const [modules, setModules] = useState({});
+  const [moduleList, setModuleList] = useState([]);
+  const [completedModules, setCompletedModules] = useState(0);
+  const [totalModules, setTotalModules] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Recarrega XP sempre que o usuário mudar (login/logout)
-  useEffect(() => {
-    if (!user) {
-      setXp(0);
-      setLevel(1);
-      setModules({});
-      setLoading(false);
-      return;
-    }
+  function applyProgress(data) {
+    const progress = data.moduleProgress ?? [];
 
-    async function loadXP() {
+    setXp(data.totalXP ?? 0);
+    setLevel(data.level ?? 1);
+    setModules(mapModules(progress));
+    setModuleList(mapModuleList(progress));
+    setCompletedModules(data.completedModules ?? 0);
+    setTotalModules(data.totalModules ?? progress.length);
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadProgress() {
       setLoading(true);
-      try {
-        const ref = doc(db, "users", user.uid);
-        const snap = await getDoc(ref);
-        if (snap.exists()) {
-          const data = snap.data();
-          setXp(data.xp || 0);
-          setLevel(calculateLevel(data.xp || 0));
-          setModules(data.modules || {});
-        } else {
-          await setDoc(ref, { xp: 0, level: 1, modules: {} });
-        }
-      } catch (e) {
-        console.warn("Firebase offline, usando estado local", e);
-      } finally {
+
+      if (!user) {
+        setXp(0);
+        setLevel(1);
+        setModules({});
+        setModuleList([]);
+        setCompletedModules(0);
+        setTotalModules(0);
         setLoading(false);
+        return;
+      }
+
+      try {
+        const data = await getProgress();
+        if (!cancelled) {
+          applyProgress(data);
+        }
+      } catch (err) {
+        console.warn("Erro ao carregar progresso:", err.message);
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     }
 
-    loadXP();
+    loadProgress();
+
+    return () => {
+      cancelled = true;
+    };
   }, [user]);
 
   async function addXP(amount) {
-    const newXp = xp + amount;
-    const newLevel = calculateLevel(newXp);
-    setXp(newXp);
-    setLevel(newLevel);
-    if (!user) return newLevel > level;
-    try {
-      const ref = doc(db, "users", user.uid);
-      await updateDoc(ref, { xp: increment(amount), level: newLevel });
-    } catch (e) {
-      console.warn("Firebase offline, XP salvo apenas localmente");
+    if (!user) {
+      return false;
     }
-    return newLevel > level; // true se subiu de nível
+
+    try {
+      const data = await addXPRequest(amount, "bonus");
+
+      setXp(data.user?.xp ?? xp);
+      setLevel(data.user?.level ?? level);
+
+      return data.leveledUp ?? false;
+    } catch (err) {
+      console.warn("Falha ao adicionar XP:", err.message);
+      return false;
+    }
   }
 
-  async function completeModule(moduleKey, score, gainedXP) {
-    if (modules[moduleKey]?.completed) return false;
-    const updatedModules = {
-      ...modules,
-      [moduleKey]: {
-        completed: true,
-        score,
-        gainedXP,
-        completedAt: new Date().toISOString(),
-      },
-    };
-    setModules(updatedModules);
-    if (!user) return true;
-    try {
-      const ref = doc(db, "users", user.uid);
-      await updateDoc(ref, { modules: updatedModules });
-    } catch (e) {
-      console.warn("Erro ao salvar progresso do módulo", e);
+  async function completeModule(moduleSlug, score, totalQuestions) {
+    if (!user) {
+      return {
+        leveledUp: false,
+        gainedXP: 0,
+      };
     }
-    return true;
+
+    try {
+      const result = await completeModuleRequest(
+        moduleSlug,
+        score,
+        totalQuestions,
+      );
+
+      const progress = await getProgress();
+      applyProgress(progress);
+
+      return {
+        leveledUp: result.leveledUp ?? false,
+        gainedXP: result.gainedXP ?? 0,
+      };
+    } catch (err) {
+      console.warn("Falha ao completar modulo:", err.message);
+
+      return {
+        leveledUp: false,
+        gainedXP: 0,
+      };
+    }
   }
 
   const xpInCurrentLevel = xp % XP_PER_LEVEL;
@@ -100,10 +158,12 @@ export function XPProvider({ children }) {
         xpPercent,
         xpInCurrentLevel,
         XP_PER_LEVEL,
-        XP_PER_CORRECT,
         addXP,
         loading,
         modules,
+        moduleList,
+        completedModules,
+        totalModules,
         completeModule,
       }}
     >
@@ -112,6 +172,7 @@ export function XPProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useXP() {
   return useContext(XPContext);
 }
