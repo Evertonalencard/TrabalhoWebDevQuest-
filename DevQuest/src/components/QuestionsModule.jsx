@@ -1,54 +1,83 @@
 import { useState } from "react";
 import { useXP } from "../Context/XPContext";
+import { answerQuestion } from "../services/questionService";
 import "../css/QuestionsModule.css";
 
 function QuestionsModule({ questions = [], moduleKey }) {
-  const { addXP, XP_PER_CORRECT, modules, completeModule } = useXP();
+  const { modules, completeModule } = useXP();
   const [answers, setAnswers] = useState({});
   const [checked, setChecked] = useState(false);
   const [levelUp, setLevelUp] = useState(false);
   const [gainedXP, setGainedXP] = useState(0);
   const [xpAlreadyCounted, setXpAlreadyCounted] = useState(false);
+  const [error, setError] = useState(null);
+  const [results, setResults] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
   if (!questions.length) return null;
 
   function selectAnswer(qIndex, optIndex) {
-    if (checked) return;
+    if (checked || submitting) return;
     setAnswers((prev) => ({ ...prev, [qIndex]: optIndex }));
+  }
+
+  async function resolveQuestion(question, index) {
+    if (!question.id) {
+      const correctIndex = question.correct;
+      return {
+        isCorrect: answers[index] === correctIndex,
+        correctIndex,
+        explanation: question.explanation,
+        selectedIndex: answers[index],
+      };
+    }
+
+    return answerQuestion(question.id, answers[index]);
   }
 
   async function handleCheck() {
     if (Object.keys(answers).length < questions.length) {
-      alert("Responda todas as questões antes de corrigir.");
+      alert("Responda todas as questoes antes de corrigir.");
       return;
     }
-    let correct = 0;
-    questions.forEach((q, i) => {
-      if (answers[i] === q.correct) correct++;
-    });
 
-    const totalXP = correct * XP_PER_CORRECT;
-
-    setChecked(true);
+    setError(null);
+    setSubmitting(true);
 
     const alreadyCompleted = modules[moduleKey]?.completed;
 
-    if (alreadyCompleted) {
-      setGainedXP(0);
-      setXpAlreadyCounted(true);
-      return;
-    }
+    try {
+      const resolvedResults = await Promise.all(
+        questions.map((question, index) => resolveQuestion(question, index)),
+      );
 
-    setGainedXP(totalXP);
+      const nextResults = resolvedResults.reduce((acc, result, index) => {
+        acc[index] = result;
+        return acc;
+      }, {});
 
-    if (totalXP > 0) {
-      const leveled = await addXP(totalXP);
+      const correct = resolvedResults.filter((result) => result.isCorrect).length;
+      const progressResult = await completeModule(
+        moduleKey,
+        correct,
+        questions.length,
+      );
 
-      await completeModule(moduleKey, correct, totalXP);
+      setResults(nextResults);
+      setChecked(true);
+      setGainedXP(progressResult.gainedXP ?? 0);
+      setXpAlreadyCounted(alreadyCompleted);
 
-      if (leveled) {
+      if (progressResult.leveledUp) {
         setLevelUp(true);
       }
+    } catch (e) {
+      console.warn("Erro ao enviar progresso do modulo", e);
+      setError(
+        "Nao foi possivel salvar seu progresso no servidor. Tente novamente.",
+      );
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -58,10 +87,12 @@ function QuestionsModule({ questions = [], moduleKey }) {
     setLevelUp(false);
     setGainedXP(0);
     setXpAlreadyCounted(false);
+    setError(null);
+    setResults({});
   }
 
   const score = checked
-    ? questions.filter((q, i) => answers[i] === q.correct).length
+    ? Object.values(results).filter((result) => result.isCorrect).length
     : null;
 
   return (
@@ -80,8 +111,14 @@ function QuestionsModule({ questions = [], moduleKey }) {
           <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
           <line x1="12" y1="17" x2="12.01" y2="17" />
         </svg>
-        Questões da Aula
+        Questoes da Aula
       </h4>
+
+      {error && (
+        <div className="alert alert-danger mt-2" role="alert">
+          {error}
+        </div>
+      )}
 
       {checked && (
         <>
@@ -95,7 +132,7 @@ function QuestionsModule({ questions = [], moduleKey }) {
             }`}
           >
             {levelUp && (
-              <span className="questions-module__levelup">Subiu de nível!</span>
+              <span className="questions-module__levelup">Subiu de nivel!</span>
             )}
 
             <span className="questions-module__score">
@@ -111,37 +148,38 @@ function QuestionsModule({ questions = [], moduleKey }) {
 
           {xpAlreadyCounted && (
             <div className="alert alert-info mt-2">
-              XP deste módulo já foi contabilizado.
+              XP deste modulo ja foi contabilizado.
             </div>
           )}
         </>
       )}
 
       <div className="questions-module__list">
-        {questions.map((q, qi) => {
-          const isAnswered = answers[qi] !== undefined;
-          const isCorrect = checked && answers[qi] === q.correct;
-          const isWrong = checked && answers[qi] !== q.correct;
+        {questions.map((question, qi) => {
+          const result = results[qi];
+          const correctIndex = result?.correctIndex ?? question.correct;
+          const isCorrect = checked && result?.isCorrect;
 
           return (
             <div
-              key={qi}
+              key={question.id ?? qi}
               className={`question-card ${
                 checked ? (isCorrect ? "correct" : "wrong") : ""
               }`}
             >
               <p className="question-card__text">
-                <span className="question-card__num">Q{qi + 1}.</span> {q.text}
+                <span className="question-card__num">Q{qi + 1}.</span>{" "}
+                {question.text}
               </p>
 
               <ul className="question-card__options">
-                {q.options.map((opt, oi) => {
+                {question.options.map((option, oi) => {
                   let state = "";
 
                   if (checked) {
-                    if (oi === q.correct) {
+                    if (oi === correctIndex) {
                       state = "correct-opt";
-                    } else if (oi === answers[qi] && oi !== q.correct) {
+                    } else if (oi === answers[qi] && oi !== correctIndex) {
                       state = "wrong-opt";
                     }
                   } else if (answers[qi] === oi) {
@@ -149,19 +187,19 @@ function QuestionsModule({ questions = [], moduleKey }) {
                   }
 
                   return (
-                    <li key={oi}>
+                    <li key={option}>
                       <button
                         type="button"
                         className={`question-card__opt-btn ${state}`}
                         onClick={() => selectAnswer(qi, oi)}
-                        disabled={checked}
+                        disabled={checked || submitting}
                         aria-pressed={answers[qi] === oi}
                       >
                         <span className="question-card__opt-letter">
                           {String.fromCharCode(65 + oi)}
                         </span>
 
-                        {opt}
+                        {option}
                       </button>
                     </li>
                   );
@@ -172,13 +210,13 @@ function QuestionsModule({ questions = [], moduleKey }) {
                 <div className="question-card__explanation">
                   <span className="question-card__explanation-label">
                     {isCorrect
-                      ? "✅ Correto!"
-                      : `❌ Incorreto — a resposta certa é ${String.fromCharCode(
-                          65 + q.correct,
+                      ? "Correto!"
+                      : `Incorreto - a resposta certa e ${String.fromCharCode(
+                          65 + correctIndex,
                         )}`}
                   </span>
 
-                  <p>{q.explanation}</p>
+                  <p>{result?.explanation ?? question.explanation}</p>
                 </div>
               )}
             </div>
@@ -192,9 +230,12 @@ function QuestionsModule({ questions = [], moduleKey }) {
             type="button"
             className="questions-module__check-btn"
             onClick={handleCheck}
-            disabled={Object.keys(answers).length < questions.length}
+            disabled={
+              submitting ||
+              Object.keys(answers).length < questions.length
+            }
           >
-            Corrigir Questões
+            {submitting ? "Corrigindo..." : "Corrigir Questoes"}
           </button>
         ) : (
           <button

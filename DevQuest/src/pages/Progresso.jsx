@@ -1,10 +1,15 @@
 import { useXP } from "../Context/XPContext";
 import "../css/Progresso.css";
+
+const DEFAULT_TOTAL_QUESTIONS = 3;
+
 function Progresso() {
   const {
     xp,
     level,
-    modules,
+    moduleList,
+    completedModules,
+    totalModules,
     xpPercent,
     xpInCurrentLevel,
     XP_PER_LEVEL,
@@ -21,35 +26,10 @@ function Progresso() {
   }
 
   const xpToNextLevel = XP_PER_LEVEL - xpInCurrentLevel;
-
-  const moduleList = [
-    {
-      key: "fundamentos",
-      title: "Fundamentos",
-      totalQuestions: 3,
-    },
-    {
-      key: "pandas",
-      title: "Pandas",
-      totalQuestions: 3,
-    },
-    {
-      key: "exploracao",
-      title: "Exploração de Dados",
-      totalQuestions: 3,
-    },
-    {
-      key: "visualizacao",
-      title: "Visualização de Dados",
-      totalQuestions: 3,
-    },
-  ];
-
-  const completedModules = Object.values(modules).filter(
-    (module) => module.completed,
-  ).length;
-
-  const progressPercent = (completedModules / moduleList.length) * 100;
+  const moduleTotal = totalModules || moduleList.length;
+  const progressPercent = moduleTotal
+    ? (completedModules / moduleTotal) * 100
+    : 0;
 
   return (
     <section className="page-content">
@@ -58,10 +38,10 @@ function Progresso() {
       <div className="card mb-3 progress-overview-card">
         <div className="card-body">
           <div className="d-flex flex-wrap align-items-center gap-2">
-            <span className="badge text-bg-primary">Nível {level}</span>
+            <span className="badge text-bg-primary">Nivel {level}</span>
             <span className="fw-semibold">Total: {xp} XP</span>
             <span className="text-muted">
-              {xpInCurrentLevel} / {XP_PER_LEVEL} XP neste nível • faltam{" "}
+              {xpInCurrentLevel} / {XP_PER_LEVEL} XP neste nivel - faltam{" "}
               {xpToNextLevel} XP para subir
             </span>
           </div>
@@ -69,7 +49,7 @@ function Progresso() {
           <div
             className="progress mt-3"
             role="progressbar"
-            aria-label="Progresso de XP no nível atual"
+            aria-label="Progresso de XP no nivel atual"
           >
             <div
               className="progress-bar"
@@ -79,9 +59,10 @@ function Progresso() {
               aria-valuemax={XP_PER_LEVEL}
             />
           </div>
+
           <div className="mt-3">
             <small className="text-muted">
-              Você concluiu {completedModules} de {moduleList.length} módulos (
+              Voce concluiu {completedModules} de {moduleTotal} modulos (
               {Math.round(progressPercent)}%)
             </small>
           </div>
@@ -89,18 +70,18 @@ function Progresso() {
       </div>
 
       <div className="alert alert-info mb-0" role="note">
-        Este painel mostra seu XP total e seu progresso no nível atual.
+        Este painel mostra seu XP total e seu progresso no nivel atual.
       </div>
 
       <div className="card mt-4">
         <div className="card-body">
-          <h4 className="mb-3">Progresso dos Módulos</h4>
+          <h4 className="mb-3">Progresso dos Modulos</h4>
 
           <div className="table-responsive">
             <table className="table align-middle progress-table">
               <thead>
                 <tr>
-                  <th>Módulo</th>
+                  <th>Modulo</th>
                   <th>Status</th>
                   <th>XP</th>
                   <th>Nota</th>
@@ -108,39 +89,35 @@ function Progresso() {
               </thead>
 
               <tbody>
-                {moduleList.map((module) => {
-                  const data = modules[module.key];
+                {moduleList.map((module) => (
+                  <tr key={module.id ?? module.key}>
+                    <td className="fw-semibold">{module.title}</td>
 
-                  return (
-                    <tr key={module.key}>
-                      <td className="fw-semibold">{module.title}</td>
-
-                      <td>
-                        {data?.completed ? (
-                          <span className="badge text-bg-success">
-                            Concluído
-                          </span>
-                        ) : (
-                          <span className="badge text-bg-secondary">
-                            Pendente
-                          </span>
-                        )}
-                      </td>
-
-                      <td>
-                        <span className="module-xp-badge">
-                          {data?.gainedXP ? `+${data.gainedXP} XP` : "0 XP"}
+                    <td>
+                      {module.completed ? (
+                        <span className="badge text-bg-success">
+                          Concluido
                         </span>
-                      </td>
+                      ) : (
+                        <span className="badge text-bg-secondary">
+                          Pendente
+                        </span>
+                      )}
+                    </td>
 
-                      <td>
-                        {data?.score !== undefined
-                          ? `${data.score}/${module.totalQuestions}`
-                          : "-"}
-                      </td>
-                    </tr>
-                  );
-                })}
+                    <td>
+                      <span className="module-xp-badge">
+                        {module.gainedXP ? `+${module.gainedXP} XP` : "0 XP"}
+                      </span>
+                    </td>
+
+                    <td>
+                      {module.score !== undefined
+                        ? `${module.score}/${DEFAULT_TOTAL_QUESTIONS}`
+                        : "-"}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
