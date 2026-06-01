@@ -1,11 +1,13 @@
-import { apiRequest } from "./api";
+import { api } from "./api";
 
 export async function getModules() {
-  const res = await apiRequest("/modules");
-  return res.data;
+  const { data } = await api.get("/modules");
+  return data.data;
 }
 
-export async function getModuleById(slug) {
-  const res = await apiRequest(`/modules/${slug}`);
-  return res.data;
+export async function getModuleBySlug(slug) {
+  const { data } = await api.get(`/modules/${slug}`);
+  return data.data;
 }
+
+export const getModuleById = getModuleBySlug;

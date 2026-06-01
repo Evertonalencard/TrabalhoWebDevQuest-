@@ -5,14 +5,19 @@ export async function addXP(
   reason,
   moduleId,
 ) {
+  const payload = {
+    amount,
+    reason,
+  };
+
+  if (moduleId) {
+    payload.moduleId = moduleId;
+  }
+
   const { data } =
     await api.post(
       "/xp/add",
-      {
-        amount,
-        reason,
-        moduleId,
-      },
+      payload,
     );
 
   return data.data;

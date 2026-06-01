@@ -1,155 +1,121 @@
 import {
   createContext,
   useContext,
-  useState,
   useEffect,
+  useState,
 } from "react";
 
 import { useAuth } from "./AuthContext";
-
-import {
-  getProgress,
-} from "../services/userService";
-
-import {
-  completeModule as completeModuleRequest,
-} from "../services/progressService";
-
-import {
-  addXP as addXPRequest,
-} from "../services/xpService";
+import { getProgress } from "../services/userService";
+import { completeModule as completeModuleRequest } from "../services/progressService";
+import { addXP as addXPRequest } from "../services/xpService";
 
 const XPContext = createContext(null);
-
 const XP_PER_LEVEL = 100;
 
-function mapModules(
-  moduleProgress = [],
-) {
-  return moduleProgress.reduce(
-    (acc, item) => {
-      acc[item.moduleSlug] = {
-        completed:
-          item.completed ?? false,
-
-        score:
-          item.score ?? 0,
-
-        gainedXP:
-          item.gainedXP ?? 0,
-
-        attempts:
-          item.attempts ?? 0,
-      };
-
-      return acc;
-    },
-    {},
-  );
+function toModuleItem(item) {
+  return {
+    id: item.moduleId,
+    key: item.moduleSlug,
+    slug: item.moduleSlug,
+    title: item.moduleTitle,
+    completed: item.completed ?? false,
+    score: item.score ?? 0,
+    gainedXP: item.gainedXP ?? 0,
+    attempts: item.attempts ?? 0,
+  };
 }
 
-export function XPProvider({
-  children,
-}) {
+function mapModules(moduleProgress = []) {
+  return moduleProgress.reduce((acc, item) => {
+    acc[item.moduleSlug] = toModuleItem(item);
+    return acc;
+  }, {});
+}
+
+function mapModuleList(moduleProgress = []) {
+  return moduleProgress.map(toModuleItem);
+}
+
+export function XPProvider({ children }) {
   const { user } = useAuth();
 
-  const [xp, setXp] =
-    useState(0);
+  const [xp, setXp] = useState(0);
+  const [level, setLevel] = useState(1);
+  const [modules, setModules] = useState({});
+  const [moduleList, setModuleList] = useState([]);
+  const [completedModules, setCompletedModules] = useState(0);
+  const [totalModules, setTotalModules] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  const [level, setLevel] =
-    useState(1);
+  function applyProgress(data) {
+    const progress = data.moduleProgress ?? [];
 
-  const [modules, setModules] =
-    useState({});
-
-  const [loading, setLoading] =
-    useState(true);
+    setXp(data.totalXP ?? 0);
+    setLevel(data.level ?? 1);
+    setModules(mapModules(progress));
+    setModuleList(mapModuleList(progress));
+    setCompletedModules(data.completedModules ?? 0);
+    setTotalModules(data.totalModules ?? progress.length);
+  }
 
   useEffect(() => {
-    if (!user) {
-      setXp(0);
-      setLevel(1);
-      setModules({});
-      setLoading(false);
-      return;
-    }
+    let cancelled = false;
 
     async function loadProgress() {
       setLoading(true);
 
-      try {
-        const data =
-          await getProgress();
-
-        setXp(
-          data.totalXP ?? 0,
-        );
-
-        setLevel(
-          data.level ?? 1,
-        );
-
-        setModules(
-          mapModules(
-            data.moduleProgress,
-          ),
-        );
-      } catch (err) {
-        console.warn(
-          "Erro ao carregar progresso:",
-          err.message,
-        );
-      } finally {
+      if (!user) {
+        setXp(0);
+        setLevel(1);
+        setModules({});
+        setModuleList([]);
+        setCompletedModules(0);
+        setTotalModules(0);
         setLoading(false);
+        return;
+      }
+
+      try {
+        const data = await getProgress();
+        if (!cancelled) {
+          applyProgress(data);
+        }
+      } catch (err) {
+        console.warn("Erro ao carregar progresso:", err.message);
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     }
 
     loadProgress();
+
+    return () => {
+      cancelled = true;
+    };
   }, [user]);
 
-  async function addXP(
-    amount,
-  ) {
+  async function addXP(amount) {
     if (!user) {
       return false;
     }
 
     try {
-      const data =
-        await addXPRequest(
-          amount,
-          "bonus",
-          null,
-        );
+      const data = await addXPRequest(amount, "bonus");
 
-      setXp(
-        data.user?.xp ?? xp,
-      );
+      setXp(data.user?.xp ?? xp);
+      setLevel(data.user?.level ?? level);
 
-      setLevel(
-        data.user?.level ??
-          level,
-      );
-
-      return (
-        data.leveledUp ??
-        false
-      );
+      return data.leveledUp ?? false;
     } catch (err) {
-      console.warn(
-        "Falha ao adicionar XP:",
-        err.message,
-      );
-
+      console.warn("Falha ao adicionar XP:", err.message);
       return false;
     }
   }
 
-  async function completeModule(
-    moduleSlug,
-    score,
-    totalQuestions,
-  ) {
+  async function completeModule(moduleSlug, score, totalQuestions) {
     if (!user) {
       return {
         leveledUp: false,
@@ -158,46 +124,21 @@ export function XPProvider({
     }
 
     try {
-      const result =
-        await completeModuleRequest(
-          moduleSlug,
-          score,
-          totalQuestions,
-        );
-
-      const progress =
-        await getProgress();
-
-      setXp(
-        progress.totalXP ??
-          0,
+      const result = await completeModuleRequest(
+        moduleSlug,
+        score,
+        totalQuestions,
       );
 
-      setLevel(
-        progress.level ??
-          1,
-      );
-
-      setModules(
-        mapModules(
-          progress.moduleProgress,
-        ),
-      );
+      const progress = await getProgress();
+      applyProgress(progress);
 
       return {
-        leveledUp:
-          result.leveledUp ??
-          false,
-
-        gainedXP:
-          result.gainedXP ??
-          0,
+        leveledUp: result.leveledUp ?? false,
+        gainedXP: result.gainedXP ?? 0,
       };
     } catch (err) {
-      console.warn(
-        "Falha ao completar módulo:",
-        err.message,
-      );
+      console.warn("Falha ao completar modulo:", err.message);
 
       return {
         leveledUp: false,
@@ -206,13 +147,8 @@ export function XPProvider({
     }
   }
 
-  const xpInCurrentLevel =
-    xp % XP_PER_LEVEL;
-
-  const xpPercent =
-    (xpInCurrentLevel /
-      XP_PER_LEVEL) *
-    100;
+  const xpInCurrentLevel = xp % XP_PER_LEVEL;
+  const xpPercent = (xpInCurrentLevel / XP_PER_LEVEL) * 100;
 
   return (
     <XPContext.Provider
@@ -225,6 +161,9 @@ export function XPProvider({
         addXP,
         loading,
         modules,
+        moduleList,
+        completedModules,
+        totalModules,
         completeModule,
       }}
     >
@@ -233,8 +172,7 @@ export function XPProvider({
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useXP() {
-  return useContext(
-    XPContext,
-  );
+  return useContext(XPContext);
 }

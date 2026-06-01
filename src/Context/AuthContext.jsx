@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
 
         const me = await authService.getMe();
         setUser(me);
-      } catch (err) {
+      } catch {
         authService.logout();
         setUser(null);
       } finally {
@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
     throw err;
   }
 
-  async function resetPassword(email) {
+  async function resetPassword() {
     const err = new Error("Recuperação de senha não está disponível.");
     err.code = "auth/unsupported-operation";
     throw err;
@@ -93,6 +93,7 @@ export function AuthProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   return useContext(AuthContext);
 }
