@@ -5,7 +5,8 @@ import "../css/AuthPage.css";
 const VIEWS = { LOGIN: "login", REGISTER: "register", RESET: "reset" };
 
 export default function AuthPage() {
-  const { login, register, resetPassword } = useAuth();
+  const { login, register, loginWithGoogle, resetPassword, setAuthError } =
+    useAuth();
 
   const [view, setView] = useState(VIEWS.LOGIN);
   const [name, setName] = useState("");
@@ -32,25 +33,19 @@ export default function AuthPage() {
     setView(v);
   }
 
-  function parseError(err) {
-    if (!err) return "Ocorreu um erro. Tente novamente.";
-    // Prefer explicit message from backend or thrown Error
-    if (err.message) return err.message;
-    if (err.code) {
-      const map = {
-        "auth/user-not-found": "Nenhuma conta encontrada com este e-mail.",
-        "auth/wrong-password": "Senha incorreta. Tente novamente.",
-        "auth/invalid-credential": "E-mail ou senha incorretos.",
-        "auth/email-already-in-use": "Este e-mail já está cadastrado.",
-        "auth/weak-password": "A senha deve ter pelo menos 6 caracteres.",
-        "auth/invalid-email": "Formato de e-mail inválido.",
-        "auth/too-many-requests": "Muitas tentativas. Aguarde alguns minutos.",
-        "auth/popup-closed-by-user": "Login com Google cancelado.",
-        "auth/network-request-failed": "Sem conexão. Verifique sua internet.",
-      };
-      return map[err.code] || "Ocorreu um erro. Tente novamente.";
-    }
-    return String(err);
+  function parseFirebaseError(code) {
+    const map = {
+      "auth/user-not-found": "Nenhuma conta encontrada com este e-mail.",
+      "auth/wrong-password": "Senha incorreta. Tente novamente.",
+      "auth/invalid-credential": "E-mail ou senha incorretos.",
+      "auth/email-already-in-use": "Este e-mail já está cadastrado.",
+      "auth/weak-password": "A senha deve ter pelo menos 6 caracteres.",
+      "auth/invalid-email": "Formato de e-mail inválido.",
+      "auth/too-many-requests": "Muitas tentativas. Aguarde alguns minutos.",
+      "auth/popup-closed-by-user": "Login com Google cancelado.",
+      "auth/network-request-failed": "Sem conexão. Verifique sua internet.",
+    };
+    return map[code] || "Ocorreu um erro. Tente novamente.";
   }
 
   async function handleSubmit(e) {
@@ -70,29 +65,29 @@ export default function AuthPage() {
       if (view === VIEWS.LOGIN) {
         await login(email, password);
       } else if (view === VIEWS.REGISTER) {
-        await register(email, name.trim(), password);
+        await register(name.trim(), email, password);
       } else if (view === VIEWS.RESET) {
         await resetPassword(email);
         setResetSent(true);
       }
     } catch (err) {
-      setError(parseError(err));
+      setError(parseFirebaseError(err.code));
     } finally {
       setLoading(false);
     }
   }
 
-  // async function handleGoogle() {
-  //   setError(null);
-  //   setLoading(true);
-  //   try {
-  //     await loginWithGoogle();
-  //   } catch (err) {
-  //     setError(parseError(err));
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+  async function handleGoogle() {
+    setError(null);
+    setLoading(true);
+    try {
+      await loginWithGoogle();
+    } catch (err) {
+      setError(parseFirebaseError(err.code));
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="auth-page">
@@ -100,7 +95,7 @@ export default function AuthPage() {
         {/* Logo / Branding */}
         <div className="auth-brand">
           <span className="auth-brand-emoji">📊</span>
-          <span className="auth-brand-name">DevQuest</span>
+          <span className="auth-brand-name">DataSci Academy</span>
         </div>
 
         {/* Título dinâmico */}

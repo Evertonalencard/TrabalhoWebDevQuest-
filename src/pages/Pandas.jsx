@@ -1,8 +1,23 @@
-import ModuleContent from "../components/ModuleContent";
+import VideoPlayerYT from "../components/VideoPlayerYT";
+import PDFModule from "../components/PDFModule";
+import QuestionsModule from "../components/QuestionsModule";
+import RatingModule from "../components/RatingModule";
+import "../css/VideoModulo.css";
+//mudar esta parte
+
+const PDFS = [
+  {
+    id: "pandas-1",
+    name: "Cheatsheet: Pandas",
+    description: "Principais métodos e funções do Pandas em uma página",
+    url: "/assets/pandas-cheatsheet.pdf",
+    filename: "pandas-cheatsheet.pdf",
+  },
+];
 
 const QUESTIONS = [
   {
-    text: "Como filtrar registros em um DataFrame onde a coluna idade seja maior que 30?",
+    text: "Como filtrar registros em um DataFrame onde a coluna 'idade' seja maior que 30?",
     options: [
       "df.filter(df['idade'] > 30)",
       "df[df['idade'] > 30]",
@@ -11,22 +26,22 @@ const QUESTIONS = [
     ],
     correct: 1,
     explanation:
-      "A filtragem booleana df[condicao] e a forma idiomatica no Pandas.",
+      "A filtragem booleana df[condição] é a forma idiomática no Pandas. A condição df['idade'] > 30 retorna uma Series de booleanos, usada como máscara no DataFrame.",
   },
   {
-    text: "O que groupby('cidade')['salario'].mean() faz?",
+    text: "O que o método groupby('cidade')['salario'].mean() faz?",
     options: [
-      "Ordena salarios por cidade",
-      "Calcula a media de salario agrupada por cidade",
-      "Filtra funcionarios de uma cidade",
-      "Conta funcionarios por cidade",
+      "Ordena salários por cidade",
+      "Calcula a média de salário agrupada por cidade",
+      "Filtra funcionários de uma cidade específica",
+      "Conta o número de funcionários por cidade",
     ],
     correct: 1,
     explanation:
-      "groupby agrupa linhas por valor de coluna e mean calcula a media por grupo.",
+      "groupby() agrupa linhas por valor de coluna e, combinado com mean(), calcula a média da coluna 'salario' para cada grupo (cidade).",
   },
   {
-    text: "Qual metodo exporta um DataFrame para CSV?",
+    text: "Qual método exporta um DataFrame para CSV?",
     options: [
       "df.export_csv()",
       "df.save('file.csv')",
@@ -34,43 +49,77 @@ const QUESTIONS = [
       "df.write_csv('file.csv')",
     ],
     correct: 2,
-    explanation: "df.to_csv('nome.csv') salva um DataFrame em arquivo CSV.",
+    explanation:
+      "df.to_csv('nome.csv') é o método padrão para salvar um DataFrame em arquivo CSV. Use index=False para não incluir o índice numérico como coluna extra.",
   },
 ];
-
-const PDFS = [
-  {
-    id: "pandas-1",
-    name: "Cheatsheet: Pandas",
-    description: "Principais metodos e funcoes do Pandas em uma pagina",
-    url: "/assets/pandas-cheatsheet.pdf",
-    filename: "pandas-cheatsheet.pdf",
-  },
-];
-
+//fazer para videos no youtube
 function Pandas() {
   return (
-    <ModuleContent
-      slug="pandas"
-      fallback={{
-        title: "Python para Ciencia de Dados (Pandas)",
-        description:
-          "Exemplos praticos de manipulacao de dados com Pandas: filtros, agrupamentos e exportacao.",
-        topics: [
-          "Estruturas DataFrame e Series",
-          "Operacoes de filtro e transformacoes",
-          "Exportacao de dados para CSV",
-        ],
-        videos: [
-          {
-            videoId: "vmEHCJofvqE",
-            title: "Aula: Python para Ciencia de Dados com Pandas",
-          },
-        ],
-        pdfs: PDFS,
-        questions: QUESTIONS,
-      }}
-    />
+    <section className="page-content">
+      <h2>Curso Introdutório de Python para Ciência de Dados (pandas) </h2>
+      <p>
+        O objetivo é oferecer um curso introdutório de Python com foco em
+        Ciência de Dados para a comunidade externa, democratizando o acesso ao
+        conhecimento em tecnologia e análise de dados.
+      </p>
+      <ul>
+        <li>Introdução ao Pandas e Dados Tabulares</li>
+        <li>Manipulação de DataFrames e Series</li>
+        <li>Estrutura Principal: DataFrame</li>
+        <li>Leitura de Arquivos (CSV e Excel)</li>
+        <li>Tipos de Dados no Pandas</li>
+        <li>Seleção de Linhas e Colunas</li>
+        <li>Filtros e Consultas</li>
+        <li>Operações de Agregação</li>
+        <li>Renomeação e Organização de Dados</li>
+      </ul>
+      <div className="video-grid video-grid--4">
+        <VideoPlayerYT
+          video="https://www.youtube.com/watch?v=XBxXgJcd5nU&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr"
+          title="aula_01 -  Introdução ao Pandas e Dados Tabulares"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/i4CsKbhW12k?si=weUYN1-mtJ7A3xNC"
+          title="aula_02 - Estruturas Fundamentais: Series"
+        />
+        <VideoPlayerYT
+          video="https://www.youtube.com/watch?v=1K6ZNYpIMZED8vWr7YsphGopY8yisdmLo&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr" //mudar este link
+          title="Aula_03 - Estrutura Principal: DataFrame"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/ft5XwV2zkUo"
+          title="Aula_04 - Leitura de Arquivos (CSV e Excel)"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/ft5XwV2zkUo"
+          title="Aula_05 - Tipos de Dados no Pandas"
+        />
+        <VideoPlayerYT
+          video="https://studio.youtube.com/video/7srOGuyglAg/edit"
+          title="Aula_06 - Seleção de Linhas e Colunas"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/RPkUx27KAiM?si=lJD5MLSetCEaynDL"
+          title="Aula_07 - Filtros e Consultas"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/BytfizH37TA?si=5OsTNlY-dewG1ZpV"
+          title="Aula_08 - Operação de Agregação"
+        />
+        <VideoPlayerYT
+          video="https://youtu.be/NF0Jh1wHkOU?si=hsic82ZmGCefJ8xz"
+          title="Aula_09 - Renomeação e Organização de Dados"
+        />
+      </div>
+
+      <PDFModule pdfs={PDFS} />
+      <QuestionsModule questions={QUESTIONS} moduleKey="pandas" />
+      <RatingModule
+        pageKey="pandas"
+        pageTitle="Python para Ciência de Dados (Pandas)"
+      />
+    </section>
   );
 }
 
