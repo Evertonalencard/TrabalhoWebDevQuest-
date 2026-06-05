@@ -50,28 +50,33 @@ function ModuleContent({ slug, fallback }) {
   const videos = moduleData?.videos ?? fallback.videos ?? [];
   const pdfs = moduleData?.pdfMaterials ?? fallback.pdfs ?? [];
   const questions = moduleData?.questions ?? fallback.questions ?? [];
+  const topics = fallback.topics ?? [];
   const hasHiddenVideos = videos.length > VIDEO_PREVIEW_LIMIT;
   const visibleVideos = showAllVideos ? videos : videos.slice(0, VIDEO_PREVIEW_LIMIT);
 
   return (
-    <section className="page-content">
-      <h2>{content.title}</h2>
-      <p>{content.description}</p>
+    <section className="page-content module-page">
+      <div className="module-hero">
+        <div className="module-hero__eyebrow">Módulo de aprendizagem</div>
+        <h2 className="module-hero__title">{content.title}</h2>
+        <p className="module-hero__description">{content.description}</p>
 
-      {fallback.topics?.length > 0 && (
-        <ul>
-          {fallback.topics.map((topic) => (
-            <li key={topic}>{topic}</li>
-          ))}
-        </ul>
-      )}
+        {topics.length > 0 && (
+          <ul className="module-topics" aria-label="Tópicos do módulo">
+            {topics.map((topic) => (
+              <li key={topic} className="module-topics__item">
+                {topic}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
-      {loading && <p>Carregando modulo...</p>}
+      {loading && <p className="module-status">Carregando módulo...</p>}
 
       {error && (
         <div className="alert alert-warning" role="alert">
-          Nao foi possivel carregar os dados do servidor. Exibindo conteudo
-          local.
+          Não foi possível carregar os dados do servidor. Exibindo conteúdo local.
         </div>
       )}
 
@@ -89,7 +94,11 @@ function ModuleContent({ slug, fallback }) {
             </span>
           </div>
 
-          <div className={`video-grid ${visibleVideos.length === 1 ? "video-grid--1" : "video-grid--4"}`}>
+          <div
+            className={`video-grid ${
+              visibleVideos.length === 1 ? "video-grid--1" : "video-grid--4"
+            }`}
+          >
             {visibleVideos.map((video) => (
               <VideoPlayer
                 key={video.id ?? video.videoId ?? video.driveFileId}
