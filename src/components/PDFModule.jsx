@@ -1,8 +1,11 @@
 import { useState } from "react";
 import "../css/PDFModule.css";
 
+const PDF_PREVIEW_LIMIT = 5;
+
 function PDFModule({ pdfs = [] }) {
   const [downloading, setDownloading] = useState({});
+  const [showAllPdfs, setShowAllPdfs] = useState(false);
 
   async function handleDownload(pdf) {
     setDownloading((prev) => ({ ...prev, [pdf.id]: true }));
@@ -25,6 +28,9 @@ function PDFModule({ pdfs = [] }) {
 
   if (!pdfs.length) return null;
 
+  const hasHiddenPdfs = pdfs.length > PDF_PREVIEW_LIMIT;
+  const visiblePdfs = showAllPdfs ? pdfs : pdfs.slice(0, PDF_PREVIEW_LIMIT);
+
   return (
     <div className="pdf-module">
       <div className="pdf-module__header">
@@ -40,7 +46,7 @@ function PDFModule({ pdfs = [] }) {
       </div>
 
       <ul className="pdf-module__list">
-        {pdfs.map((pdf) => (
+        {visiblePdfs.map((pdf) => (
           <li key={pdf.id} className="pdf-module__item">
             <div className="pdf-module__item-info">
               <span className="pdf-module__item-icon" aria-hidden="true">
@@ -94,6 +100,18 @@ function PDFModule({ pdfs = [] }) {
           </li>
         ))}
       </ul>
+
+      {hasHiddenPdfs && (
+        <div className="pdf-module__footer">
+          <button
+            type="button"
+            className="pdf-module__toggle"
+            onClick={() => setShowAllPdfs((current) => !current)}
+          >
+            {showAllPdfs ? "Mostrar menos PDFs" : `Ver todos os ${pdfs.length} PDFs`}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
