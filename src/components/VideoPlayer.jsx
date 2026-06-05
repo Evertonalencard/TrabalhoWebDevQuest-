@@ -1,6 +1,3 @@
-/**
- * VideoPlayer accepts Google Drive ids, YouTube ids, and full video URLs.
- */
 function extractYouTubeId(videoId) {
   if (!videoId) return null;
 

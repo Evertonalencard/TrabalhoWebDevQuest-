@@ -42,8 +42,9 @@ const QUESTIONS = [
 const PDFS = [
   {
     id: "pandas-1",
-    name: "Aula 1",
-    description: "PDF unico informado para o modulo 2",
+    name: "Renomeação e Organização de Dados",
+    description:
+      "Slides sobre ajuste de nomes, organização de colunas e estruturação de DataFrames.",
     url: "/assets/modulo-2/01-aula-1.pdf",
     filename: "01-aula-1.pdf",
   },
@@ -65,39 +66,39 @@ function Pandas() {
         videos: [
           {
             videoId: "https://www.youtube.com/watch?v=XBxXgJcd5nU&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr",
-            title: "aula_01 - Introducao ao Pandas e Dados Tabulares",
+            title: "Aula 01 - Introdução ao Pandas e Dados Tabulares",
           },
           {
             videoId: "https://youtu.be/i4CsKbhW12k?si=weUYN1-mtJ7A3xNC",
-            title: "aula_02 - Estruturas Fundamentais: Series",
+            title: "Aula 02 - Estruturas Fundamentais: Series",
           },
           {
             videoId: "https://www.youtube.com/watch?v=1K6ZNYpIMZED8vWr7YsphGopY8yisdmLo&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr",
-            title: "Aula_03 - Estrutura Principal: DataFrame",
+            title: "Aula 03 - Estrutura Principal: DataFrame",
           },
           {
             videoId: "https://youtu.be/ft5XwV2zkUo",
-            title: "Aula_04 - Leitura de Arquivos (CSV e Excel)",
+            title: "Aula 04 - Leitura de Arquivos CSV e Excel",
           },
           {
             videoId: "https://youtu.be/ft5XwV2zkUo",
-            title: "Aula_05 - Tipos de Dados no Pandas",
+            title: "Aula 05 - Tipos de Dados no Pandas",
           },
           {
             videoId: "https://studio.youtube.com/video/7srOGuyglAg/edit",
-            title: "Aula_06 - Selecao de Linhas e Colunas",
+            title: "Aula 06 - Seleção de Linhas e Colunas",
           },
           {
             videoId: "https://youtu.be/RPkUx27KAiM?si=lJD5MLSetCEaynDL",
-            title: "Aula_07 - Filtros e Consultas",
+            title: "Aula 07 - Filtros e Consultas",
           },
           {
             videoId: "https://youtu.be/BytfizH37TA?si=5OsTNlY-dewG1ZpV",
-            title: "Aula_08 - Operacao de Agregacao",
+            title: "Aula 08 - Operações de Agregação",
           },
           {
             videoId: "https://youtu.be/NF0Jh1wHkOU?si=hsic82ZmGCefJ8xz",
-            title: "Aula_09 - Renomeacao e Organizacao de Dados",
+            title: "Aula 09 - Renomeação e Organização de Dados",
           },
         ],
         pdfs: PDFS,

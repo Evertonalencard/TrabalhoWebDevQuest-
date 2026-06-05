@@ -1,81 +1,73 @@
-/* =============================================
-   VIDEO PLAYER — Google Drive embed
-   ============================================= */
-
-/* Container individual de cada vídeo */
 .video-player {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  min-width: 0; /* essencial para funcionar dentro de grid/flex */
+  gap: 0.7rem;
+  min-width: 0;
 }
 
-/* Wrapper com aspect-ratio 16:9 responsivo */
 .video-player__wrapper {
-  position: relative;
-  width: 100%;
   aspect-ratio: 16 / 9;
   background: #0f0f0f;
-  border-radius: 0.625rem;
+  border-radius: 0.85rem;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16);
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  width: 100%;
 }
 
 .video-player__iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
   border: none;
   display: block;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
 }
 
-/* Legenda abaixo do vídeo */
 .video-player__title {
-  font-size: 0.875rem;
-  color: #4b5563;
-  font-weight: 500;
-  text-align: center;
-  line-height: 1.4;
+  align-items: center;
+  align-self: center;
+  background: rgba(17, 24, 39, 0.04);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 999px;
+  color: #374151;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.35;
   margin: 0;
-  max-width: none;
+  max-width: 100%;
+  min-height: 2rem;
+  padding: 0.42rem 0.78rem;
+  text-align: center;
 }
-
-/* =============================================
-   GRADE DE VÍDEOS
-   Use .video-grid para envolver vários VideoPlayers.
-   Suporta 1, 2, 3 ou 4 vídeos por linha.
-   ============================================= */
 
 .video-grid {
   display: grid;
-  gap: 1.25rem;
-  /* Por padrão: 1 coluna (mobile) */
+  gap: 1.35rem;
   grid-template-columns: 1fr;
+  margin-top: 1.25rem;
 }
 
-/* 2 colunas a partir de 640px */
 @media (min-width: 640px) {
   .video-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* 3 colunas a partir de 1024px — use .video-grid--3 */
 @media (min-width: 1024px) {
   .video-grid--3 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* 4 colunas a partir de 1280px — use .video-grid--4 */
 @media (min-width: 1280px) {
   .video-grid--4 {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-/* Forçar 1 coluna em qualquer tamanho — use .video-grid--1 */
 .video-grid--1 {
   grid-template-columns: 1fr;
   max-width: 720px;

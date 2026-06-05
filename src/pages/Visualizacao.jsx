@@ -29,8 +29,9 @@ const QUESTIONS = [
 const PDFS = [
   {
     id: "viz-1",
-    name: "Guia: Visualizacao de Dados",
-    description: "Exemplos de graficos e boas praticas",
+    name: "Guia de Visualização com Matplotlib e Seaborn",
+    description:
+      "Exemplos de gráficos, boas práticas e recomendações de storytelling visual.",
     url: "/assets/visualizacao-guide.pdf",
     filename: "visualizacao-guide.pdf",
   },
@@ -52,47 +53,47 @@ function Visualizacao() {
         videos: [
           {
             videoId: "drive:1eF-HIBbwo9DB0n0dhMZ9SD1f95R332Ns",
-            title: "aula_01",
+            title: "Aula 01 - Fundamentos de Visualização de Dados",
           },
           {
             videoId: "drive:16a-0reUPxvwoIpMF5sFc3_Zoq5-svIf_",
-            title: "aula_02",
+            title: "Aula 02 - Visualização com Matplotlib",
           },
           {
             videoId: "drive:1Ue49T8yIuN6RHraR0bIKb2j55qJKUCEp",
-            title: "Aula_03",
+            title: "Aula 03 - Cinco Gráficos Essenciais",
           },
           {
             videoId: "drive:12xoMJ7JxRki5lNwfCgHVA8dsc9T64P3s",
-            title: "Aula_04",
+            title: "Aula 04 - Visualizações Avançadas",
           },
           {
             videoId: "drive:1tKAvyg2awwF-eyztO2y34sasPA2ioQQm",
-            title: "Aula_05",
+            title: "Aula 05 - Boas Práticas Visuais",
           },
           {
             videoId: "drive:159P41UdNqGnVPM_fdMDxDzBJo9qez1OQ",
-            title: "Aula_06",
+            title: "Aula 06 - Storytelling com Dados",
           },
           {
             videoId: "drive:13-AvlMjB4NOl0IUD6I_XuoDba-2A0vpz",
-            title: "Aula_07",
+            title: "Aula 07 - Ajustes de Cores e Legendas",
           },
           {
             videoId: "drive:1FKf96qP8NOv2jEr8qcEPcWBgM0APL1Sn",
-            title: "Aula_08",
+            title: "Aula 08 - Comparações e Distribuições",
           },
           {
             videoId: "drive:17jAnDDcrcyZiaiC5gvmM5drEBdKL3orF",
-            title: "Aula_09",
+            title: "Aula 09 - Relações entre Variáveis",
           },
           {
             videoId: "drive:1j2rD_4V8KOLL-LWJTwtvZKywaflCZNDx",
-            title: "Aula_10",
+            title: "Aula 10 - Gráficos para Apresentação",
           },
           {
             videoId: "drive:1qzHB63G_htrFooIV_5UC3A2Oe2E2B29E",
-            title: "Aula_11",
+            title: "Aula 11 - Revisão e Projeto Visual",
           },
         ],
         pdfs: PDFS,
