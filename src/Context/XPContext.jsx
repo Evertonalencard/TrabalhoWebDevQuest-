@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { useAuth } from "./AuthContext";
 import { getProgress } from "../services/userService";
@@ -35,6 +30,24 @@ function mapModules(moduleProgress = []) {
 
 function mapModuleList(moduleProgress = []) {
   return moduleProgress.map(toModuleItem);
+}
+
+const MODULE_ORDER = [
+  "fundamentos",
+  "pandas",
+  "exploracao",
+  "visualizacao",
+  "preprocessamento",
+];
+
+function canAccessModule(moduleSlug, modules) {
+  const index = MODULE_ORDER.indexOf(moduleSlug);
+
+  if (index === -1) return true;
+  if (index === 0) return true;
+
+  const previousSlug = MODULE_ORDER[index - 1];
+  return Boolean(modules[previousSlug]?.completed);
 }
 
 export function XPProvider({ children }) {
@@ -150,6 +163,10 @@ export function XPProvider({ children }) {
   const xpInCurrentLevel = xp % XP_PER_LEVEL;
   const xpPercent = (xpInCurrentLevel / XP_PER_LEVEL) * 100;
 
+  function isModuleUnlocked(moduleSlug) {
+    return canAccessModule(moduleSlug, modules);
+  }
+
   return (
     <XPContext.Provider
       value={{
@@ -165,6 +182,7 @@ export function XPProvider({ children }) {
         completedModules,
         totalModules,
         completeModule,
+        isModuleUnlocked,
       }}
     >
       {children}

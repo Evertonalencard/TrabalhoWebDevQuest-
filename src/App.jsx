@@ -3,7 +3,7 @@ import "./App.css";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./Context/AuthContext";
-import { XPProvider } from "./Context/XPContext";
+import { XPProvider, useXP } from "./Context/XPContext";
 
 import AppLayout from "./components/AppLayout";
 import AuthPage from "./pages/AuthPage";
@@ -14,17 +14,35 @@ import Exploracao from "./pages/Exploracao";
 import Visualizacao from "./pages/Visualizacao";
 import PreProcessamento from "./pages/PreProcessamento";
 
+function LoadingScreen() {
+  return (
+    <div className="auth-loading-screen">
+      <span className="auth-loading-emoji">📊</span>
+      <p>Carregando...</p>
+    </div>
+  );
+}
+
+function ModuleRoute({ moduleSlug, children }) {
+  const { loading, isModuleUnlocked } = useXP();
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  return isModuleUnlocked(moduleSlug) ? (
+    children
+  ) : (
+    <Navigate to="/progresso" replace />
+  );
+}
+
 // Rota protegida — redireciona para /login se não autenticado
 function PrivateRoute({ children }) {
   const { user, authLoading } = useAuth();
 
   if (authLoading) {
-    return (
-      <div className="auth-loading-screen">
-        <span className="auth-loading-emoji">📊</span>
-        <p>Carregando...</p>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return user ? children : <Navigate to="/login" replace />;
@@ -35,12 +53,7 @@ function PublicRoute({ children }) {
   const { user, authLoading } = useAuth();
 
   if (authLoading) {
-    return (
-      <div className="auth-loading-screen">
-        <span className="auth-loading-emoji">📊</span>
-        <p>Carregando...</p>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return !user ? children : <Navigate to="/progresso" replace />;
@@ -73,11 +86,51 @@ export default function App() {
           >
             <Route index element={<Navigate to="/progresso" replace />} />
             <Route path="/progresso" element={<Progresso />} />
-            <Route path="/fundamentos" element={<Fundamentos />} />
-            <Route path="/pandas" element={<Pandas />} />
-            <Route path="/exploracao" element={<Exploracao />} />
-            <Route path="/visualizacao" element={<Visualizacao />} />
-            <Route path="/preprocessamento" element={<PreProcessamento />} />
+
+            <Route
+              path="/fundamentos"
+              element={
+                <ModuleRoute moduleSlug="fundamentos">
+                  <Fundamentos />
+                </ModuleRoute>
+              }
+            />
+
+            <Route
+              path="/pandas"
+              element={
+                <ModuleRoute moduleSlug="pandas">
+                  <Pandas />
+                </ModuleRoute>
+              }
+            />
+
+            <Route
+              path="/exploracao"
+              element={
+                <ModuleRoute moduleSlug="exploracao">
+                  <Exploracao />
+                </ModuleRoute>
+              }
+            />
+
+            <Route
+              path="/visualizacao"
+              element={
+                <ModuleRoute moduleSlug="visualizacao">
+                  <Visualizacao />
+                </ModuleRoute>
+              }
+            />
+
+            <Route
+              path="/preprocessamento"
+              element={
+                <ModuleRoute moduleSlug="preprocessamento">
+                  <PreProcessamento />
+                </ModuleRoute>
+              }
+            />
           </Route>
 
           {/* Qualquer rota desconhecida → redireciona */}
