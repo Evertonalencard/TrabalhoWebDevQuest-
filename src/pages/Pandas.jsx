@@ -2,16 +2,16 @@ import ModuleContent from "../components/ModuleContent";
 
 const QUESTIONS = [
   {
-    text: “Dado o DataFrame df com as colunas ‘idade’ e ‘cidade’, qual código retorna corretamente os registros com idade maior que 25 e cidade igual a ‘Fortaleza’?”,
+    text: "Dado o DataFrame df com as colunas ‘idade’ e ‘cidade’, qual código retorna corretamente os registros com idade maior que 25 e cidade igual a ‘Fortaleza’?",
     options: [
-      "df[df['idade'] > 25, df[‘cidade’] == ‘Fortaleza’]”,
-      "df[(df['idade'] > 25) & (df[‘cidade’] == ‘Fortaleza’)]”,
+      "df[df['idade'] > 25, df[‘cidade’] == ‘Fortaleza’]",
+      "df[(df['idade'] > 25) & (df[‘cidade’] == ‘Fortaleza’)]",
       "df[df['idade'] > 25 and df[‘cidade’] == ‘Fortaleza’]",
       "df[df['idade'] > 25 | df[‘cidade’] == ‘Fortaleza’]",
     ],
     correct: 2,
     explanation:
-      "Em Pandas, múltiplas condições usam & (AND) e cada condição deve estar entre parênteses.”,
+      "Em Pandas, múltiplas condições usam & (AND) e cada condição deve estar entre parênteses.",
   },
   {
     text: "O que groupby('cidade')['salario'].mean() faz?",
@@ -26,15 +26,15 @@ const QUESTIONS = [
       "groupby agrupa linhas por valor de coluna e mean calcula a media por grupo.",
   },
   {
-    text: "Qual código renomeia corretamente a coluna ’salario’ para ’Salario’ em um DataFrame df, modificando-o diretamente?”,
+    text: "Qual código renomeia corretamente a coluna ’salario’ para ’Salario’ em um DataFrame df, modificando-o diretamente?",
     options: [
-      "df.columns[’salario’] = ’Salario’”,
-      "df.rename(‘salario’, ’Salario’, inplace=True)”,
-      "df.rename(columns={’salario’: ’Salario’}, inplace=True)”,
-      "df[‘salario’].rename(’Salario’)“,
+      "df.columns[’salario’] = ’Salario’",
+      "df.rename(‘salario’, ’Salario’, inplace=True)",
+      "df.rename(columns={’salario’: ’Salario’}, inplace=True)",
+      "df[‘salario’].rename(’Salario’)",
     ],
     correct: 3,
-    explanation: “.rename() exige o argumento columns={} com o mapeamento, e inplace=True para modificar direto.”,
+    explanation: "df.rename() exige o argumento columns={} com o mapeamento, e inplace=True para modificar direto.",
   },
 ];
 

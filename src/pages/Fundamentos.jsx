@@ -2,32 +2,32 @@ import ModuleContent from "../components/ModuleContent";
 
 const QUESTIONS = [
   {
-    text: “O que é uma variável em Python?” ,
-    options: [“Um comando usado apenas para imprimir textos na tela”, 
-"Um espaço utilizado para armazenar um valor durante a execução do programa”, 
-“Um tipo de dado usado somente para números inteiros”, 
-“Uma função obrigatória em todos os programas Python”],
+    text: "O que é uma variável em Python?" ,
+    options: ["Um comando usado apenas para imprimir textos na tela", 
+"Um espaço utilizado para armazenar um valor durante a execução do programa", 
+"Um tipo de dado usado somente para números inteiros", 
+"Uma função obrigatória em todos os programas Python"],
     correct: 2,
     explanation:
-      “Uma variável é um espaço usado para armazenar valores de diferentes tipos.”,
+      "Uma variável é um espaço usado para armazenar valores de diferentes tipos.",
   },
   {
-    text: "Qual dos valores abaixo é do tipo float?”,
-    options: [“10”, “ ”10” ”, “10.5”, “True”],
+    text: "Qual dos valores abaixo é do tipo float?",
+    options: ["10", " '10' ", "10.5", "True"],
     correct: 3,
     explanation:
-      “Float é o tipo de variável usado para armazenar valores decimais.”,
+      "Float é o tipo de variável usado para armazenar valores decimais.",
   },
   {
-    text: “Qual será o resultado da expressão ? 10 + 5 * 2 ”,
+    text: "Qual será o resultado da expressão ? 10 + 5 * 2 ",
     options: [
-      “30”,
-      "20”,
-      "25”,
-      "15”,],
+      "30",
+      "20",
+      "25",
+      "15"],
     correct: 2,
     explanation:
-      “A ordem de precedência também esta presente no Python, primeiro a multiplicação depois a adição.”,
+      "A ordem de precedência também esta presente no Python, primeiro a multiplicação depois a adição.",
   },
 ];
 
