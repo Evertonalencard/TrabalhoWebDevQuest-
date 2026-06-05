@@ -1,0 +1,519 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R ] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2397 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# ?Y?? MA?dulo 3 a?? ExploraA?A?o de Dados e EstatA?stica) Tj
+T*
+(## VA?deo 7: Pipeline Completo de EDA a?? groupby, Similaridade e Pairplot) Tj
+T*
+(**ReferA?ncia:** Mendes \(2025\) a?? SeA?A?es 3.5 e 2.8) Tj
+T*
+(**DuraA?A?o estimada:** ~18 minutos) Tj
+T*
+(---) Tj
+T*
+(> ?YZ? **FALA a?? ABERTURA \(0:00 a?? 1:00\)**) Tj
+T*
+(> *Chegamos no vA?deo mais importante do mA?dulo a?? onde a gente junta tudo.*) Tj
+T*
+(> *Nos vA?deos anteriores: mA?dia, mediana, DP, IQR, describe\(\), histograma, correlaA?A?o,) Tj
+T*
+(scatter, heatmap.*) Tj
+T*
+(> *Hoje a gente vai responder quatro perguntas reais sobre o Iris com tudo isso junto a?? e) Tj
+T*
+(fechar com o pairplot, que A? o resumo visual completo de uma EDA.*) Tj
+T*
+(> *Esse vA?deo simula o que um analista de dados faz no primeiro dia com qualquer dataset.*) Tj
+T*
+( ) Tj
+T*
+(import pandas as pd) Tj
+T*
+(import seaborn as sns) Tj
+T*
+(import matplotlib.pyplot as plt) Tj
+T*
+(import numpy as np) Tj
+T*
+( ) Tj
+T*
+(iris = sns.load_dataset\('iris'\)) Tj
+T*
+(print\('a?? Pronto! Vamos responder 4 perguntas sobre o Iris.'\)) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('Perguntas:'\)) Tj
+T*
+(print\('  1. Qual espA?cie tem as pA?talas maiores e mais consistentes?'\)) Tj
+T*
+(print\('  2. Existe correlaA?A?o forte entre algum par de atributos?'\)) Tj
+T*
+(print\('  3. Qual espA?cie A? mais homogA?nea internamente?'\)) Tj
+T*
+(print\('  4. Qual espA?cie A? mais diferente das outras duas?'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 1 a?? Pergunta 1: Qual espA?cie tem as pA?talas maiores?) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(1:00 a?? 2:30\)**) Tj
+T*
+(> *`groupby\(\).agg\(\)` permite calcular mA?ltiplas estatA?sticas por grupo de uma vez. Muito) Tj
+T*
+(mais eficiente do que fazer um `groupby\(\).mean\(\)` e depois um `groupby\(\).std\(\)` separados.*) Tj
+T*
+( ) Tj
+T*
+(# AnA?lise multivariada por grupo a?? mA?dia, DP e IQR juntos) Tj
+T*
+(def iqr\(x\):) Tj
+T*
+(    return x.quantile\(0.75\) - x.quantile\(0.25\)) Tj
+T*
+( ) Tj
+T*
+(analise_grupo = iris.groupby\('species'\).agg\() Tj
+T*
+(    petal_length_media  =\('petal_length', 'mean'\),) Tj
+T*
+(    petal_length_dp     =\('petal_length', 'std'\),) Tj
+T*
+(    petal_length_iqr    =\('petal_length', iqr\),) Tj
+T*
+(    petal_width_media   =\('petal_width',  'mean'\),) Tj
+T*
+(    petal_width_dp      =\('petal_width',  'std'\),) Tj
+T*
+(\).round\(3\)) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2074 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+( ) Tj
+T*
+(print\('?Y?S PA?talas por espA?cie a?? mA?dia, DP e IQR:'\)) Tj
+T*
+(print\(analise_grupo\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Resposta 1: Virginica tem as pA?talas maiores \(mA?dia 5.55 cm\). Setosa tem as menores) Tj
+T*
+(\(1.46 cm\) e A? de longe a mais consistente a?? DP de apenas 0.17 cm.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 2 a?? Pergunta 2: Existe correlaA?A?o forte?) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(3:30 a?? 4:30\)**) Tj
+T*
+(> *RA?pido: matriz + heatmap. JA? sabemos o que esperar do VA?deo 6.*) Tj
+T*
+( ) Tj
+T*
+(# CorrelaA?A?o + heatmap) Tj
+T*
+(corr = iris.corr\(numeric_only=True\)) Tj
+T*
+( ) Tj
+T*
+(mask = np.triu\(np.ones_like\(corr, dtype=bool\)\)) Tj
+T*
+(plt.figure\(figsize=\(7, 5\)\)) Tj
+T*
+(sns.heatmap\(corr, mask=mask, annot=True, fmt='.2f',) Tj
+T*
+(            cmap='coolwarm', vmin=-1, vmax=1,) Tj
+T*
+(            linewidths=0.5, square=True\)) Tj
+T*
+(plt.title\('CorrelaA?A?o de Pearson', fontweight='bold'\)) Tj
+T*
+(plt.tight_layout\(\)) Tj
+T*
+(plt.savefig\('eda_heatmap.png', dpi=150\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+( ) Tj
+T*
+(# Par mais forte) Tj
+T*
+(mask_diag = np.ones\(corr.shape, dtype=bool\)) Tj
+T*
+(np.fill_diagonal\(mask_diag, False\)) Tj
+T*
+(par_max = corr.where\(mask_diag\).stack\(\).idxmax\(\)) Tj
+T*
+(print\(f'Par com maior correlaA?A?o: {par_max[0]} A? {par_max[1]} = {corr.loc[par_max]:.3f}'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Resposta 2: sim, petal_length A? petal_width com r = 0.963. CorrelaA?A?o fortA?ssima.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 3 a?? Pergunta 3: Qual espA?cie A? mais homogA?nea?) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(5:30 a?? 7:00\)**) Tj
+T*
+(> *O Coeficiente de VariaA?A?o \(CV = std/mean A? 100\) normaliza o desvio padrA?o em) Tj
+T*
+(relaA?A?o A? mA?dia. Isso permite comparar a variabilidade entre atributos com escalas) Tj
+T*
+(diferentes a?? ou entre grupos.*) Tj
+T*
+(> *CV baixo = grupo homogA?neo. CV alto = grupo variA?vel.*) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 2116 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# Coeficiente de VariaA?A?o por espA?cie) Tj
+T*
+(numericas = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']) Tj
+T*
+(cv_resultado = {}) Tj
+T*
+( ) Tj
+T*
+(for sp in iris['species'].unique\(\):) Tj
+T*
+(    dados = iris[iris['species'] == sp][numericas]) Tj
+T*
+(    cv = \(dados.std\(\) / dados.mean\(\) * 100\).round\(2\)) Tj
+T*
+(    cv_resultado[sp] = cv) Tj
+T*
+( ) Tj
+T*
+(cv_df = pd.DataFrame\(cv_resultado\)) Tj
+T*
+(print\('?Y?S Coeficiente de VariaA?A?o \(%\) por espA?cie:'\)) Tj
+T*
+(print\(cv_df\)) Tj
+T*
+( ) Tj
+T*
+(cv_medio = cv_df.mean\(\)) Tj
+T*
+(mais_homogenea = cv_medio.idxmin\(\)) Tj
+T*
+(print\(f'\\na?? EspA?cie mais homogA?nea: {mais_homogenea} \(CV mA?dio:) Tj
+T*
+({cv_medio[mais_homogenea]:.2f}%\)'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Resposta 3: Setosa A? a mais homogA?nea a?? especialmente em petal_length, onde tem CV) Tj
+T*
+(abaixo de 12%. As pA?talas da Setosa sA?o muito uniformes entre as flores da mesma) Tj
+T*
+(espA?cie.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 4 a?? Pergunta 4: Qual espA?cie A? mais diferente? \(Similaridade\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(8:30 a?? 10:30\)**) Tj
+T*
+(> *Para responder isso, vamos usar o conceito de distA?ncia a?? seA?A?o 2.8 do livro.*) Tj
+T*
+(> *A ideia: cada espA?cie pode ser representada por um ponto no espaA?o a?? as coordenadas) Tj
+T*
+(sA?o as mA?dias de cada atributo. A distA?ncia entre dois pontos A? a distA?ncia entre as) Tj
+T*
+(duas espA?cies.*) Tj
+T*
+(> *Usamos a distA?ncia euclidiana: raiz da soma dos quadrados das diferenA?as. A? a) Tj
+T*
+(distA?ncia em linha reta.*) Tj
+T*
+(> *Quanto maior a distA?ncia, mais diferentes as espA?cies sA?o.*) Tj
+T*
+( ) Tj
+T*
+(# DistA?ncia euclidiana entre as mA?dias das espA?cies) Tj
+T*
+(medias = iris.groupby\('species'\)[numericas].mean\(\)) Tj
+T*
+(print\('?Y?S MA?dias por espA?cie:'\)) Tj
+T*
+(print\(medias.round\(3\)\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(especies = medias.index.tolist\(\)) Tj
+T*
+(print\('?Y?? DistA?ncia euclidiana entre espA?cies:'\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 2327 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(for i in range\(len\(especies\)\):) Tj
+T*
+(    for j in range\(i + 1, len\(especies\)\):) Tj
+T*
+(        sp1, sp2 = especies[i], especies[j]) Tj
+T*
+(        dist = np.linalg.norm\(medias.loc[sp1].values - medias.loc[sp2].values\)) Tj
+T*
+(        print\(f'  {sp1:12} A? {sp2:12} a?? distA?ncia = {dist:.3f}'\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('a?? Setosa A? a mais distante das outras duas a?? a mais diferente.'\)) Tj
+T*
+(print\('   Versicolor e Virginica sA?o as mais parecidas entre si.'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO \(11:00 a?? 12:00\)**) Tj
+T*
+(> *Setosa A? a mais diferente a?? distA?ncia de ~4.9 para Virginica e ~3.9 para Versicolor.*) Tj
+T*
+(> *Versicolor e Virginica sA?o bem mais parecidas entre si \(distA?ncia ~2.0\).*) Tj
+T*
+(> *Isso A? importante para Machine Learning: se vocA? fosse construir um classificador,) Tj
+T*
+(separar Setosa seria fA?cil a?? mas distinguir Versicolor de Virginica seria o desafio.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 5 a?? Pairplot: sA?ntese visual de toda a EDA) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(12:00 a?? 13:30\)**) Tj
+T*
+(> *Agora o fechamento: o pairplot.*) Tj
+T*
+(> *Ele gera automaticamente scatter plots de todos os pares de variA?veis e histogramas na) Tj
+T*
+(diagonal.*) Tj
+T*
+(> *Cada cA?lula do pairplot representa um conceito que a gente aprendeu:*) Tj
+T*
+(> - *Diagonal = histograma \(VA?deo 4\)*) Tj
+T*
+(> - *CA?lulas fora da diagonal = scatter \(VA?deo 5\)*) Tj
+T*
+(> - *Cores = anA?lise por grupo \(essa cA?lula\)*) Tj
+T*
+(>) Tj
+T*
+(> *Esse grA?fico sozinho resume visualmente tudo que calculamos em 7 vA?deos.*) Tj
+T*
+( ) Tj
+T*
+(# Pairplot a?? sA?ntese visual completa da EDA) Tj
+T*
+(g = sns.pairplot\() Tj
+T*
+(    iris,) Tj
+T*
+(    hue='species',) Tj
+T*
+(    palette='Set2',) Tj
+T*
+(    diag_kind='kde',       # KDE na diagonal em vez de histograma) Tj
+T*
+(    plot_kws={'alpha': 0.6, 's': 40}) Tj
+T*
+(\)) Tj
+T*
+(g.fig.suptitle\('Pairplot do Dataset Iris a?? SA?ntese da EDA',) Tj
+T*
+(               y=1.02, fontsize=13, fontweight='bold'\)) Tj
+T*
+(plt.savefig\('pairplot_iris.png', dpi=150, bbox_inches='tight'\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+(print\('a?? Salvo como pairplot_iris.png'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO \(15:00 a?? 17:00\)**) Tj
+T*
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 1971 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *Olha esse grA?fico a?? cada cA?lula conta uma histA?ria.*) Tj
+T*
+(> *Na diagonal: as distribuiA?A?es de cada variA?vel por espA?cie. Setosa \(verde\) estA?) Tj
+T*
+(claramente separada das outras em petal_length e petal_width.*) Tj
+T*
+(> *No scatter petal_length A? petal_width: os pontos formam linha diagonal a?? correlaA?A?o) Tj
+T*
+(fortA?ssima que vimos no VA?deo 5.*) Tj
+T*
+(> *JA? nos scatters com sepal_width: grupos misturados a?? confirmando que sepal_width) Tj
+T*
+(correlaciona pouco.*) Tj
+T*
+(>) Tj
+T*
+(> *Esse grA?fico vocA? vai usar no inA?cio de toda anA?lise exploratA?ria. Uma imagem que) Tj
+T*
+(dA? uma visA?o completa do dataset.*) Tj
+T*
+(>) Tj
+T*
+(> *No MA?dulo 4 vocA?s vA?o aprender a construir e customizar cada um desses elementos a??) Tj
+T*
+(histograma, scatter, cores, tA?tulos, eixos, boas prA?ticas. O que a gente fez aqui foi) Tj
+T*
+(**leitura analA?tica** dos dados. LA? vocA?s vA?o aprender a **comunicaA?A?o visual**.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## a?? Resumo do VA?deo 7 a?? As 4 respostas) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ENCERRAMENTO \(17:00 a?? 18:00\)**) Tj
+T*
+( ) Tj
+T*
+(# Resumo das 4 respostas) Tj
+T*
+(print\('='*60\)) Tj
+T*
+(print\('RESPOSTAS a?? EDA DO DATASET IRIS'\)) Tj
+T*
+(print\('='*60\)) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('1. EspA?cie com pA?talas maiores: VIRGINICA \(mA?dia 5.55 cm\)'\)) Tj
+T*
+(print\('   EspA?cie mais consistente:    SETOSA   \(DP 0.17 cm\)'\)) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('2. CorrelaA?A?o mais forte: petal_length A? petal_width'\)) Tj
+T*
+(print\(f'   r = {iris["petal_length"].corr\(iris["petal_width"]\):.3f} a?? fortA?ssima) Tj
+T*
+(positiva'\)) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('3. EspA?cie mais homogA?nea: SETOSA \(CV mA?dio mais baixo\)'\)) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('4. EspA?cie mais diferente: SETOSA \(maior distA?ncia euclidiana\)'\)) Tj
+T*
+(print\('   Mais parecidas entre si: VERSICOLOR e VIRGINICA'\)) Tj
+T*
+(print\('='*60\)) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n `n0000000058 00000 n `n0000000143 00000 n `n0000000213 00000 n `n0000000339 00000 n `n0000002788 00000 n `n0000002914 00000 n `n0000005040 00000 n `n0000005166 00000 n `n0000007334 00000 n `n0000007462 00000 n `n0000009842 00000 n `n0000009970 00000 n `ntrailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+11994
+%%EOF

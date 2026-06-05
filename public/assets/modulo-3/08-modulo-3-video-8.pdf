@@ -1,0 +1,517 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R ] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2381 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# ?Y?? MA?dulo 3 a?? ExploraA?A?o de Dados e EstatA?stica) Tj
+T*
+(## VA?deo 8: Qualidade de Dados + Checklist do Analista + ConsideraA?A?es Finais) Tj
+T*
+(**ReferA?ncia:** Mendes \(2025\) a?? SeA?A?o 2.6) Tj
+T*
+(**DuraA?A?o estimada:** ~12 minutos) Tj
+T*
+(---) Tj
+T*
+(> ?YZ? **FALA a?? ABERTURA \(0:00 a?? 1:00\)**) Tj
+T*
+(> *Chegamos no A?ltimo vA?deo do mA?dulo. E eu quero comeA?ar com uma pergunta:*) Tj
+T*
+(> *Todo o que a gente calculou a?? mA?dia, correlaA?A?o, heatmap, pairplot a?? sA? faz) Tj
+T*
+(sentido se os dados de entrada forem confiA?veis.*) Tj
+T*
+(> *E se os dados tivessem erros? E se houvesse valores faltando, duplicados, ou formatados) Tj
+T*
+(de forma inconsistente?*) Tj
+T*
+(> *Hoje a gente vai fechar o mA?dulo falando sobre qualidade de dados a?? e transformar) Tj
+T*
+(tudo o que aprendemos num checklist prA?tico que vocA?s podem reusar em qualquer projeto.*) Tj
+T*
+( ) Tj
+T*
+(import pandas as pd) Tj
+T*
+(import seaborn as sns) Tj
+T*
+(import matplotlib.pyplot as plt) Tj
+T*
+(import numpy as np) Tj
+T*
+( ) Tj
+T*
+(iris = sns.load_dataset\('iris'\)) Tj
+T*
+(print\('a?? Pronto!'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? Parte 1 a?? O que A? qualidade de dados?) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? TEORIA \(1:00 a?? 2:30\)**) Tj
+T*
+(> *O livro \(seA?A?o 2.6, Tabela 11\) define qualidade de dados em quatro dimensA?es:*) Tj
+T*
+(> - ***Validade*** a?? o dado estA? no formato e range esperado? Uma idade de 200 anos nA?o) Tj
+T*
+(A? vA?lida.*) Tj
+T*
+(> - ***PrecisA?o*** a?? o dado A? correto? Um CEP errado A? impreciso.*) Tj
+T*
+(> - ***Completude*** a?? existem valores faltando? Campos nulos indicam dado incompleto.*) Tj
+T*
+(> - ***ConsistA?ncia*** a?? os dados fazem sentido entre si? Uma data de nascimento) Tj
+T*
+(posterior A? data de admissA?o numa empresa A? inconsistente.*) Tj
+T*
+(>) Tj
+T*
+(> *Um dataset com problemas em qualquer dessas dimensA?es pode gerar anA?lises) Tj
+T*
+(completamente erradas a?? e modelos de ML enviesados.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 1 a?? Checagem de completude: valores nulos) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(2:30 a?? 3:30\)**) Tj
+T*
+(> *`isnull\(\).sum\(\)` conta os valores nulos por coluna. `isnull\(\).mean\(\)` mostra a) Tj
+T*
+(porcentagem a?? A?til quando o dataset A? grande.*) Tj
+T*
+( ) Tj
+T*
+(print\('?Y?? VALORES NULOS por coluna:'\)) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 1891 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(nulos = iris.isnull\(\).sum\(\)) Tj
+T*
+(pct   = iris.isnull\(\).mean\(\).mul\(100\).round\(2\)) Tj
+T*
+( ) Tj
+T*
+(qualidade = pd.DataFrame\({'Nulos': nulos, '% Nulo': pct}\)) Tj
+T*
+(print\(qualidade\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(total_nulos = nulos.sum\(\)) Tj
+T*
+(print\(f'Total de nulos no dataset: {total_nulos}'\)) Tj
+T*
+(if total_nulos == 0:) Tj
+T*
+(    print\('a?? Dataset completo a?? nenhum valor faltando.'\)) Tj
+T*
+(else:) Tj
+T*
+(    print\('as?i??  HA? valores faltando a?? considere imputaA?A?o ou remoA?A?o.'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 2 a?? Checagem de consistA?ncia: duplicatas) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(3:30 a?? 4:30\)**) Tj
+T*
+(> *Linhas duplicadas podem inflar artificialmente a importA?ncia de determinadas) Tj
+T*
+(observaA?A?es nas anA?lises.*) Tj
+T*
+( ) Tj
+T*
+(# Verificando duplicatas) Tj
+T*
+(duplicatas = iris.duplicated\(\).sum\(\)) Tj
+T*
+(print\(f'?Y?? Linhas duplicadas: {duplicatas}'\)) Tj
+T*
+( ) Tj
+T*
+(if duplicatas > 0:) Tj
+T*
+(    print\('\\nLinhas duplicadas encontradas:'\)) Tj
+T*
+(    print\(iris[iris.duplicated\(keep=False\)]\)) Tj
+T*
+(    print\('\\nOpA?A?o para remover: iris.drop_duplicates\(inplace=True\)'\)) Tj
+T*
+(else:) Tj
+T*
+(    print\('a?? Nenhuma linha duplicada.'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 3 a?? Checagem de validade: ranges esperados) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(4:30 a?? 5:30\)**) Tj
+T*
+(> *Valores vA?lidos: medidas de flores em cm devem ser positivas e dentro de limites) Tj
+T*
+(razoA?veis. Vamos checar se existem valores negativos ou absurdos.*) Tj
+T*
+( ) Tj
+T*
+(# Checagem de validade: valores negativos) Tj
+T*
+(numericas = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']) Tj
+T*
+(print\('?Y?? CHECAGEM DE VALIDADE:'\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(for col in numericas:) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 2065 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(    negativos = \(iris[col] <= 0\).sum\(\)) Tj
+T*
+(    minval    = iris[col].min\(\)) Tj
+T*
+(    maxval    = iris[col].max\(\)) Tj
+T*
+(    status    = 'a??' if negativos == 0 else 'as?i??') Tj
+T*
+(    print\(f'  {status} {col}: range [{minval:.2f}, {maxval:.2f}] a?? valores a?? 0:) Tj
+T*
+({negativos}'\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(# Checagem de consistA?ncia das categorias) Tj
+T*
+(print\('?Y?? Valores A?nicos em species:'\)) Tj
+T*
+(print\(iris['species'].value_counts\(\)\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 4 a?? Simulando dados com problemas) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(5:30 a?? 7:30\)**) Tj
+T*
+(> *O Iris A? limpo a?? mas e se nA?o fosse? Vamos simular um dataset com problemas pra) Tj
+T*
+(mostrar como a checagem identificaria cada um.*) Tj
+T*
+( ) Tj
+T*
+(# Simulando um dataset com problemas) Tj
+T*
+(iris_sujo = iris.copy\(\)) Tj
+T*
+( ) Tj
+T*
+(# Inserindo nulos) Tj
+T*
+(iris_sujo.loc[0,  'petal_length'] = np.nan) Tj
+T*
+(iris_sujo.loc[10, 'sepal_width']  = np.nan) Tj
+T*
+( ) Tj
+T*
+(# Inserindo valor invA?lido) Tj
+T*
+(iris_sujo.loc[5, 'sepal_length'] = -1.0) Tj
+T*
+( ) Tj
+T*
+(# Inserindo duplicata) Tj
+T*
+(iris_sujo = pd.concat\([iris_sujo, iris_sujo.iloc[[20]]], ignore_index=True\)) Tj
+T*
+( ) Tj
+T*
+(print\('=== DIAGNA?STICO DO DATASET SUJO ==='\)) Tj
+T*
+(print\(f'Nulos:       {iris_sujo.isnull\(\).sum\(\).sum\(\)}'\)) Tj
+T*
+(print\(f'Duplicatas:  {iris_sujo.duplicated\(\).sum\(\)}'\)) Tj
+T*
+(print\(f'Negativos:   {\(iris_sujo[numericas] <= 0\).sum\(\).sum\(\)}'\)) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('Compare com o Iris original:'\)) Tj
+T*
+(print\(f'Nulos:       {iris.isnull\(\).sum\(\).sum\(\)}'\)) Tj
+T*
+(print\(f'Duplicatas:  {iris.duplicated\(\).sum\(\)}'\)) Tj
+T*
+(print\(f'Negativos:   {\(iris[numericas] <= 0\).sum\(\).sum\(\)}'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Com 3 linhas de cA?digo a gente detecta os 3 problemas. Em projetos reais, esse) Tj
+T*
+(diagnA?stico costuma revelar dezenas de inconsistA?ncias logo de inA?cio.*) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 2047 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 5 a?? Checklist do analista: as 6 etapas da EDA) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(8:30 a?? 10:00\)**) Tj
+T*
+(> *Agora vamos sistematizar tudo que aprendemos no mA?dulo inteiro em 6 etapas. Esse A? o) Tj
+T*
+(checklist que vocA? usa no primeiro dia com qualquer dataset.*) Tj
+T*
+( ) Tj
+T*
+(# a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??) Tj
+T*
+(a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??) Tj
+T*
+(# a??  CHECKLIST DO ANALISTA a?? 6 ETAPAS DA EDA    a??) Tj
+T*
+(# a?sa??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??) Tj
+T*
+(a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??a??) Tj
+T*
+( ) Tj
+T*
+(print\('ETAPA 1 a?? Qualidade dos dados'\)) Tj
+T*
+(print\(f'  Nulos:      {iris.isnull\(\).sum\(\).sum\(\)}'\)) Tj
+T*
+(print\(f'  Duplicatas: {iris.duplicated\(\).sum\(\)}'\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(print\('ETAPA 2 a?? Estrutura e dimensA?es'\)) Tj
+T*
+(print\(f'  Shape: {iris.shape}'\)) Tj
+T*
+(print\(f'  Tipos: {iris.dtypes.value_counts\(\).to_dict\(\)}'\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(print\('ETAPA 3 a?? Resumo estatA?stico \(describe\)'\)) Tj
+T*
+(print\(iris.describe\(\).round\(2\)\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(print\('ETAPA 4 a?? DistribuiA?A?es \(histogramas\)'\)) Tj
+T*
+(print\('  a?? Rode: sns.histplot\(kde=True\) para cada coluna'\)) Tj
+T*
+(print\('  a?? Identifique: simA?trico, assimA?trico, bimodal?'\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(print\('ETAPA 5 a?? CorrelaA?A?es \(heatmap\)'\)) Tj
+T*
+(print\(iris.corr\(numeric_only=True\).round\(3\)\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(print\('ETAPA 6 a?? VisA?o geral \(pairplot\)'\)) Tj
+T*
+(print\('  a?? Rode: sns.pairplot\(hue="target_column"\)'\)) Tj
+T*
+(print\('  a?? Identifique: grupos, padrA?es, outliers visuais'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## a?? ConsideraA?A?es Finais do MA?dulo 3) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ENCERRAMENTO \(10:00 a?? 12:00\)**) Tj
+T*
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 2340 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *E com isso a gente fecha o MA?dulo 3.*) Tj
+T*
+(>) Tj
+T*
+(> *Vamos recapitular o que vocA?s aprenderam ao longo dos 8 vA?deos:*) Tj
+T*
+(> - *VA?deo 1: EDA no pipeline, carregamento e inspeA?A?o inicial*) Tj
+T*
+(> - *VA?deo 2: MA?dia, mediana e moda a?? quando cada uma A? a certa*) Tj
+T*
+(> - *VA?deo 3: VariA?ncia, desvio padrA?o e IQR a?? medindo a dispersA?o*) Tj
+T*
+(> - *VA?deo 4: describe\(\) e histogramas a?? resumo e forma da distribuiA?A?o*) Tj
+T*
+(> - *VA?deo 5: CorrelaA?A?o e scatter a?? relaA?A?o entre variA?veis*) Tj
+T*
+(> - *VA?deo 6: Heatmap, Spearman e limites do Pearson*) Tj
+T*
+(> - *VA?deo 7: Pipeline completo a?? groupby, similaridade e pairplot*) Tj
+T*
+(> - *VA?deo 8: Qualidade dos dados e checklist do analista*) Tj
+T*
+(>) Tj
+T*
+(> *Uma coisa importante que o livro enfatiza: a EDA nA?o A? uma etapa que vocA? faz uma) Tj
+T*
+(vez. VocA? volta a ela sempre que aparecem resultados inesperados a?? A? um processo) Tj
+T*
+(iterativo.*) Tj
+T*
+(>) Tj
+T*
+(> *O MA?dulo 4 vai pegar exatamente os grA?ficos que a gente usou aqui a?? histograma,) Tj
+T*
+(scatter, heatmap a?? e vai ensinar como construir cada um com profundidade: tA?tulos,) Tj
+T*
+(eixos, paletas, boas prA?ticas de comunicaA?A?o visual.*) Tj
+T*
+(> *O que a gente fez aqui foi usar grA?ficos pra **analisar**. LA? vocA?s vA?o usar) Tj
+T*
+(grA?ficos pra **comunicar**.*) Tj
+T*
+(>) Tj
+T*
+(> *Todo o material desse mA?dulo a?? notebooks, exercA?cios com gabarito e esse vA?deo a??) Tj
+T*
+(estA? no repositA?rio GitHub do curso. Se esse conteA?do foi A?til pra vocA?, deixa um) Tj
+T*
+(comentA?rio e compartilha com quem estA? comeA?ando em CiA?ncia de Dados.*) Tj
+T*
+(> *Obrigado, e atA? o MA?dulo 4!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(| Etapa | O que faz | CA?digo |) Tj
+T*
+(|---|---|---|) Tj
+T*
+(| 1 a?? Qualidade | Detecta nulos, duplicatas, invA?lidos | `isnull\(\)`, `duplicated\(\)` |) Tj
+T*
+(| 2 a?? Estrutura | Shape, tipos, categorias | `info\(\)`, `shape`, `value_counts\(\)` |) Tj
+T*
+(| 3 a?? Resumo | 8 estatA?sticas de uma vez | `describe\(\)` |) Tj
+T*
+(| 4 a?? DistribuiA?A?o | Simetria, outliers visuais | `histplot\(kde=True\)` |) Tj
+T*
+(| 5 a?? CorrelaA?A?o | RelaA?A?o entre variA?veis | `corr\(\)` + `heatmap\(\)` |) Tj
+T*
+(| 6 a?? VisA?o geral | Tudo junto de uma vez | `pairplot\(hue=...\)` |) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n `n0000000058 00000 n `n0000000143 00000 n `n0000000213 00000 n `n0000000339 00000 n `n0000002772 00000 n `n0000002898 00000 n `n0000004841 00000 n `n0000004967 00000 n `n0000007084 00000 n `n0000007212 00000 n `n0000009312 00000 n `n0000009440 00000 n `ntrailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+11833
+%%EOF

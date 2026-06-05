@@ -1,0 +1,471 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R ] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 1899 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# ?Y?? MA?dulo 3 a?? ExploraA?A?o de Dados e EstatA?stica) Tj
+T*
+(## VA?deo 6: Heatmap + Spearman + Limites da CorrelaA?A?o Linear) Tj
+T*
+(**ReferA?ncia:** Mendes \(2025\) a?? SeA?A?es 3.2, 3.3) Tj
+T*
+(**DuraA?A?o estimada:** ~16 minutos) Tj
+T*
+(---) Tj
+T*
+(> ?YZ? **FALA a?? ABERTURA \(0:00 a?? 0:45\)**) Tj
+T*
+(> *No VA?deo 5 a gente calculou a correlaA?A?o e visualizou scatter por scatter.*) Tj
+T*
+(> *Hoje a gente vai ver a matriz inteira de uma vez com o heatmap a?? e entender por que o) Tj
+T*
+(Pearson nem sempre A? suficiente.*) Tj
+T*
+( ) Tj
+T*
+(import pandas as pd) Tj
+T*
+(import seaborn as sns) Tj
+T*
+(import matplotlib.pyplot as plt) Tj
+T*
+(import numpy as np) Tj
+T*
+( ) Tj
+T*
+(iris = sns.load_dataset\('iris'\)) Tj
+T*
+(corr_pearson = iris.corr\(numeric_only=True\)) Tj
+T*
+(print\('a?? Pronto!'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 1 a?? Heatmap bA?sico) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(0:45 a?? 2:30\)**) Tj
+T*
+(> *O heatmap transforma a matriz de nA?meros em cores: vermelho = correlaA?A?o positiva) Tj
+T*
+(forte, azul = negativa, branco = zero.*) Tj
+T*
+(> *ParA?metros importantes: `annot=True` mostra os valores, `cmap='coolwarm'` define as) Tj
+T*
+(cores, `vmin=-1 / vmax=1` fixa a escala.*) Tj
+T*
+( ) Tj
+T*
+(# Heatmap bA?sico) Tj
+T*
+(plt.figure\(figsize=\(8, 6\)\)) Tj
+T*
+(sns.heatmap\() Tj
+T*
+(    corr_pearson,) Tj
+T*
+(    annot=True,) Tj
+T*
+(    fmt='.2f',) Tj
+T*
+(    cmap='coolwarm',) Tj
+T*
+(    vmin=-1, vmax=1,) Tj
+T*
+(    linewidths=0.5) Tj
+T*
+(\)) Tj
+T*
+(plt.title\('Heatmap de CorrelaA?A?o de Pearson a?? Iris', fontsize=13, fontweight='bold'\)) Tj
+T*
+(plt.tight_layout\(\)) Tj
+T*
+(plt.savefig\('heatmap_basico.png', dpi=150\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *As cA?lulas mais vermelhas sA?o petal_length A? petal_width \(0.96\) e petal_length A?) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2022 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(sepal_length \(0.87\).*) Tj
+T*
+(> *A cA?lula azulada A? sepal_width A? petal_length \(-0.43\).*) Tj
+T*
+(> *Note que o heatmap A? simA?trico a?? os valores se repetem nos dois lados da diagonal.) Tj
+T*
+(Vamos limpar isso.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 2 a?? Heatmap profissional: triA?ngulo inferior) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(3:30 a?? 4:30\)**) Tj
+T*
+(> *Pra evitar a redundA?ncia e deixar mais limpo, usamos uma mA?scara para ocultar o) Tj
+T*
+(triA?ngulo superior. A? um detalhe profissional.*) Tj
+T*
+( ) Tj
+T*
+(# MA?scara: oculta o triA?ngulo superior \(incluindo diagonal\)) Tj
+T*
+(mask = np.triu\(np.ones_like\(corr_pearson, dtype=bool\)\)) Tj
+T*
+( ) Tj
+T*
+(plt.figure\(figsize=\(8, 6\)\)) Tj
+T*
+(sns.heatmap\() Tj
+T*
+(    corr_pearson,) Tj
+T*
+(    mask=mask,) Tj
+T*
+(    annot=True,) Tj
+T*
+(    fmt='.2f',) Tj
+T*
+(    cmap='coolwarm',) Tj
+T*
+(    vmin=-1, vmax=1,) Tj
+T*
+(    linewidths=0.5,) Tj
+T*
+(    square=True,) Tj
+T*
+(    cbar_kws={'shrink': 0.8}) Tj
+T*
+(\)) Tj
+T*
+(plt.title\('Heatmap a?? TriA?ngulo Inferior \(sem redundA?ncia\)', fontsize=12,) Tj
+T*
+(fontweight='bold'\)) Tj
+T*
+(plt.tight_layout\(\)) Tj
+T*
+(plt.savefig\('heatmap_triangulo.png', dpi=150\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Muito mais limpo! Cada par aparece uma A?nica vez. Esse A? o padrA?o que vocA?s vA?o) Tj
+T*
+(encontrar em papers e relatA?rios profissionais.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 3 a?? CorrelaA?A?o de Spearman) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(5:30 a?? 7:30\)**) Tj
+T*
+(> *O Pearson mede correlaA?A?o **linear**. Mas e quando a relaA?A?o nA?o A? uma linha reta?*) Tj
+T*
+(> *O livro \(p.82\) cita trA?s mA?todos: Pearson, Spearman e Kendall. O **Spearman** A?) Tj
+T*
+(baseado em ranks a?? posiA?A?es a?? e funciona bem quando a relaA?A?o A? monotA?nica) Tj
+T*
+(\(sempre cresce ou sempre decresce, mesmo que nA?o linearmente\) ou quando hA? outliers.*) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 1999 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *A diferenA?a A? simples de testar: `.corr\(method='spearman'\)`.*) Tj
+T*
+( ) Tj
+T*
+(# Pearson vs Spearman) Tj
+T*
+(corr_spearman = iris.corr\(numeric_only=True, method='spearman'\)) Tj
+T*
+( ) Tj
+T*
+(print\('?Y?S PEARSON:'\)) Tj
+T*
+(print\(corr_pearson.round\(3\)\)) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('?Y?S SPEARMAN:'\)) Tj
+T*
+(print\(corr_spearman.round\(3\)\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('?Y?S DIFERENA?A \(Spearman - Pearson\):'\)) Tj
+T*
+(print\(\(corr_spearman - corr_pearson\).round\(4\)\)) Tj
+T*
+( ) Tj
+T*
+(# Heatmap Pearson vs Spearman lado a lado) Tj
+T*
+(fig, axes = plt.subplots\(1, 2, figsize=\(15, 6\)\)) Tj
+T*
+(mask = np.triu\(np.ones_like\(corr_pearson, dtype=bool\)\)) Tj
+T*
+( ) Tj
+T*
+(for ax, corr, titulo in zip\() Tj
+T*
+(    axes,) Tj
+T*
+(    [corr_pearson, corr_spearman],) Tj
+T*
+(    ['Pearson \(linear\)', 'Spearman \(rank\)']) Tj
+T*
+(\):) Tj
+T*
+(    sns.heatmap\(corr, mask=mask, annot=True, fmt='.2f',) Tj
+T*
+(                cmap='coolwarm', vmin=-1, vmax=1,) Tj
+T*
+(                linewidths=0.5, square=True, ax=ax\)) Tj
+T*
+(    ax.set_title\(titulo, fontsize=12, fontweight='bold'\)) Tj
+T*
+( ) Tj
+T*
+(fig.suptitle\('Pearson vs Spearman a?? Dataset Iris', fontsize=13, fontweight='bold'\)) Tj
+T*
+(plt.tight_layout\(\)) Tj
+T*
+(plt.savefig\('pearson_vs_spearman.png', dpi=150\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO \(9:00 a?? 10:30\)**) Tj
+T*
+(> *No Iris, Pearson e Spearman sA?o muito parecidos a?? porque as relaA?A?es sA?o bem) Tj
+T*
+(lineares.*) Tj
+T*
+(> *Mas na diferenA?a vocA? vA? que Spearman A? um pouco mais alto em alguns pares. Isso A?) Tj
+T*
+(esperado: Spearman capta melhor relaA?A?es monotA?nicas que nA?o sA?o perfeitas linhas) Tj
+T*
+(retas.*) Tj
+T*
+(> *Regra prA?tica: se vocA? tem outliers ou distribuiA?A?o assimA?trica nos dados a??) Tj
+T*
+(prefira Spearman. Se os dados sA?o normais e sem outliers extremos a?? Pearson A?) Tj
+T*
+(suficiente.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 2405 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(## ?Y?? CA?lula 4 a?? O limite do heatmap: correlaA?A?o nA?o linear) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(10:30 a?? 12:30\)**) Tj
+T*
+(> *Agora o ponto mais importante do vA?deo: o heatmap tem um limite.*) Tj
+T*
+(> *O livro distingue correlaA?A?o linear \(Fig. 27\) de nA?o-linear \(Fig. 28\). O Pearson a??) Tj
+T*
+(e o heatmap a?? sA? captura relaA?A?es **lineares**.*) Tj
+T*
+(> *Se a relaA?A?o for em curva a?? tipo y = xA? a?? o r pode ser prA?ximo de zero mesmo que) Tj
+T*
+(os dados sigam um padrA?o clarissimo. Vamos demonstrar isso.*) Tj
+T*
+( ) Tj
+T*
+(# DemonstraA?A?o: correlaA?A?o nA?o-linear \(y = xA?\)) Tj
+T*
+(np.random.seed\(42\)) Tj
+T*
+(x = np.linspace\(-3, 3, 200\)) Tj
+T*
+(y = x**2 + np.random.normal\(0, 0.3, 200\)  # parA?bola com ruA?do) Tj
+T*
+( ) Tj
+T*
+(r_linear = np.corrcoef\(x, y\)[0, 1]) Tj
+T*
+(print\(f'CorrelaA?A?o de Pearson \(y = xA?\): r = {r_linear:.3f}'\)) Tj
+T*
+(print\('a?? Mesmo com padrA?o claro, r a?? 0 porque a relaA?A?o nA?o A? linear!'\)) Tj
+T*
+( ) Tj
+T*
+(fig, axes = plt.subplots\(1, 2, figsize=\(13, 5\)\)) Tj
+T*
+( ) Tj
+T*
+(# RelaA?A?o nA?o-linear) Tj
+T*
+(axes[0].scatter\(x, y, alpha=0.6, color='steelblue', s=20\)) Tj
+T*
+(axes[0].set_title\(f'y = xA?  a??  r = {r_linear:.3f} \(heatmap mostraria "sem) Tj
+T*
+(correlaA?A?o"\)',) Tj
+T*
+(                  fontsize=10, fontweight='bold'\)) Tj
+T*
+(axes[0].set_xlabel\('x'\)) Tj
+T*
+(axes[0].set_ylabel\('y'\)) Tj
+T*
+( ) Tj
+T*
+(# ComparaA?A?o com relaA?A?o linear forte \(Iris\)) Tj
+T*
+(sns.scatterplot\(data=iris, x='petal_length', y='petal_width',) Tj
+T*
+(                hue='species', palette='Set2', ax=axes[1], alpha=0.7\)) Tj
+T*
+(r_iris = iris['petal_length'].corr\(iris['petal_width']\)) Tj
+T*
+(axes[1].set_title\(f'petal_length A? petal_width  a??  r = {r_iris:.3f} \(linear forte\)',) Tj
+T*
+(                  fontsize=10, fontweight='bold'\)) Tj
+T*
+( ) Tj
+T*
+(plt.tight_layout\(\)) Tj
+T*
+(plt.savefig\('limite_pearson.png', dpi=150\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO \(13:00 a?? 14:30\)**) Tj
+T*
+(> *Olha o grA?fico da esquerda: y = xA? forma uma parA?bola clarissima a?? hA? um padrA?o) Tj
+T*
+(fortA?ssimo. Mas r = 0.002. O heatmap mostraria essa cA?lula como branca a?? 'sem) Tj
+T*
+(correlaA?A?o'.*) Tj
+T*
+(> *Isso nA?o significa que nA?o hA? relaA?A?o a?? significa que a relaA?A?o nA?o A? linear.*) Tj
+T*
+(>) Tj
+T*
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 815 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *Moral: o heatmap A? uma ferramenta poderosa, mas nA?o A? a A?ltima palavra. Sempre olhe) Tj
+T*
+(o scatter antes de concluir que duas variA?veis nA?o se relacionam.*) Tj
+T*
+(>) Tj
+T*
+(> *No prA?ximo vA?deo a gente junta tudo num pipeline completo de EDA, adiciona anA?lise) Tj
+T*
+(por grupo e o pairplot. AtA? lA?!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(| Conceito | CA?digo | Ponto-chave |) Tj
+T*
+(|---|---|---|) Tj
+T*
+(| Heatmap bA?sico | `sns.heatmap\(annot=True\)` | vermelho=positivo, azul=negativo |) Tj
+T*
+(| Heatmap limpo | `mask=np.triu\(...\)` | remove triA?ngulo redundante |) Tj
+T*
+(| Spearman | `corr\(method='spearman'\)` | robusto para relaA?A?es nA?o-lineares |) Tj
+T*
+(| Limite do Pearson | `np.corrcoef\(x, xA?\)` | ra??0 mesmo com padrA?o curvilA?neo |) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n `n0000000058 00000 n `n0000000143 00000 n `n0000000213 00000 n `n0000000339 00000 n `n0000002290 00000 n `n0000002416 00000 n `n0000004490 00000 n `n0000004616 00000 n `n0000006667 00000 n `n0000006795 00000 n `n0000009253 00000 n `n0000009381 00000 n `ntrailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+10248
+%%EOF

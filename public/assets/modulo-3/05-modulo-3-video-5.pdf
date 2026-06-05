@@ -1,0 +1,416 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R ] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2376 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# ?Y?? MA?dulo 3 a?? ExploraA?A?o de Dados e EstatA?stica) Tj
+T*
+(## VA?deo 5: CorrelaA?A?o a?? df.corr\(\) + Scatter Plot) Tj
+T*
+(**ReferA?ncia:** Mendes \(2025\) a?? SeA?A?es 3.2 e 3.3) Tj
+T*
+(**DuraA?A?o estimada:** ~14 minutos) Tj
+T*
+(---) Tj
+T*
+(> ?YZ? **FALA a?? ABERTURA \(0:00 a?? 1:00\)**) Tj
+T*
+(> *AtA? agora a gente analisou cada variA?vel separadamente a?? mA?dia, DP, histograma de) Tj
+T*
+(uma coluna por vez.*) Tj
+T*
+(> *Hoje a gente muda de perspectiva: vamos analisar a relaA?A?o entre duas variA?veis ao) Tj
+T*
+(mesmo tempo. Isso se chama correlaA?A?o.*) Tj
+T*
+(> *O livro \(p.80\) define assim: correlaA?A?o A? a medida numA?rica da direA?A?o e magnitude) Tj
+T*
+(da relaA?A?o entre duas variA?veis X e Y.*) Tj
+T*
+(> *E depois a gente vai visualizar essa relaA?A?o com scatter plots a?? pra ver com os) Tj
+T*
+(prA?prios olhos o que o nA?mero nos diz.*) Tj
+T*
+( ) Tj
+T*
+(import pandas as pd) Tj
+T*
+(import seaborn as sns) Tj
+T*
+(import matplotlib.pyplot as plt) Tj
+T*
+(import numpy as np) Tj
+T*
+( ) Tj
+T*
+(iris = sns.load_dataset\('iris'\)) Tj
+T*
+(print\('a?? Pronto!'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? Conceito a?? O coeficiente r de Pearson) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? TEORIA \(1:00 a?? 3:00\)**) Tj
+T*
+(> *O coeficiente de correlaA?A?o de Pearson, chamado de **r**, varia entre -1 e +1:*) Tj
+T*
+(> - *r = +1 a?? correlaA?A?o positiva perfeita: quando X sobe, Y sobe na mesma proporA?A?o*) Tj
+T*
+(> - *r = -1 a?? correlaA?A?o negativa perfeita: quando X sobe, Y desce*) Tj
+T*
+(> - *r = 0 a?? sem correlaA?A?o linear*) Tj
+T*
+(>) Tj
+T*
+(> *Na prA?tica: r > 0.7 A? forte, 0.4a??0.7 A? moderado, < 0.4 A? fraco.*) Tj
+T*
+(>) Tj
+T*
+(> *E um aviso importante que o livro faz \(p.79\): **correlaA?A?o nA?o implica causalidade**.*) Tj
+T*
+(> *Venda de sorvete e uso de ar-condicionado tA?m correlaA?A?o alta. Mas sorvete nA?o causa) Tj
+T*
+(uso de ar-condicionado a?? o calor causa os dois. Isso A? uma variA?vel oculta, ou) Tj
+T*
+(variA?vel confundidora.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 1 a?? Matriz de correlaA?A?o de Pearson) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(3:00 a?? 3:45\)**) Tj
+T*
+(> *`df.corr\(\)` calcula o coeficiente r entre todos os pares de colunas numA?ricas de uma) Tj
+T*
+(vez. O resultado A? uma matriz a?? linhas e colunas sA?o as variA?veis, cada cA?lula A? o r) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2193 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(entre elas.*) Tj
+T*
+( ) Tj
+T*
+(# Matriz de correlaA?A?o de Pearson \(padrA?o\)) Tj
+T*
+(corr = iris.corr\(numeric_only=True\)) Tj
+T*
+(print\('?Y?S MATRIZ DE CORRELAA?A?O DE PEARSON:'\)) Tj
+T*
+(print\(corr.round\(3\)\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('?Y?? Nota: a diagonal A? sempre 1.0 a?? qualquer variA?vel tem correlaA?A?o perfeita) Tj
+T*
+(com ela mesma.'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 2 a?? Interpretando os pares mais relevantes) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(4:30 a?? 5:30\)**) Tj
+T*
+(> *Vamos extrair os valores mais relevantes e interpretA?-los.*) Tj
+T*
+( ) Tj
+T*
+(# Ranking de correlaA?A?es \(sem a diagonal\)) Tj
+T*
+(mask = np.ones\(corr.shape, dtype=bool\)) Tj
+T*
+(np.fill_diagonal\(mask, False\)) Tj
+T*
+(corr_pares = corr.where\(mask\).stack\(\).reset_index\(\)) Tj
+T*
+(corr_pares.columns = ['VariA?vel 1', 'VariA?vel 2', 'r']) Tj
+T*
+(corr_pares = corr_pares.drop_duplicates\(\)) Tj
+T*
+(corr_pares = corr_pares.sort_values\('r', ascending=False\).reset_index\(drop=True\)) Tj
+T*
+( ) Tj
+T*
+(print\('?Y?S CORRELAA?A?ES ORDENADAS \(maior para menor\):'\)) Tj
+T*
+(print\(corr_pares.round\(3\)\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(print\(f"Maior correlaA?A?o positiva: {corr_pares.iloc[0]['VariA?vel 1']} x) Tj
+T*
+({corr_pares.iloc[0]['VariA?vel 2']} = {corr_pares.iloc[0]['r']:.3f}"\)) Tj
+T*
+(print\(f"Maior correlaA?A?o negativa: {corr_pares.iloc[-1]['VariA?vel 1']} x) Tj
+T*
+({corr_pares.iloc[-1]['VariA?vel 2']} = {corr_pares.iloc[-1]['r']:.3f}"\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *petal_length e petal_width tA?m r = 0.963 a?? correlaA?A?o fortA?ssima! Flores com) Tj
+T*
+(pA?talas mais longas tambA?m tA?m pA?talas mais largas.*) Tj
+T*
+(> *sepal_width e petal_length tA?m r = -0.428 a?? correlaA?A?o negativa moderada. Flores) Tj
+T*
+(com sA?palas mais largas tendem a ter pA?talas mais curtas.*) Tj
+T*
+(> *Agora a pergunta A?: o que esse 0.963 parece visualmente? Vamos ver no scatter.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 3 a?? Scatter plot: a prova visual da correlaA?A?o) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(6:30 a?? 7:30\)**) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 2294 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *O scatter plot a?? grA?fico de dispersA?o a?? coloca cada flor como um ponto no espaA?o:) Tj
+T*
+(eixo X A? uma variA?vel, eixo Y A? outra.*) Tj
+T*
+(> *Se os pontos formam uma linha diagonal subindo a?? correlaA?A?o positiva. Descendo a??) Tj
+T*
+(negativa. Nuvem sem padrA?o a?? correlaA?A?o prA?xima de zero.*) Tj
+T*
+(> *O livro usa exatamente esse tipo de grA?fico nas Figuras 23a??28 pra explicar o) Tj
+T*
+(conceito.*) Tj
+T*
+( ) Tj
+T*
+(# Scatter: 3 casos a?? forte positiva, fraca negativa, fraca) Tj
+T*
+(fig, axes = plt.subplots\(1, 3, figsize=\(15, 5\)\)) Tj
+T*
+( ) Tj
+T*
+(pares = [) Tj
+T*
+(    \('petal_length', 'petal_width',  f'r = {corr.loc["petal_length","petal_width"]:.3f} a??) Tj
+T*
+(Forte positiva'\),) Tj
+T*
+(    \('sepal_width',  'petal_length', f'r = {corr.loc["sepal_width","petal_length"]:.3f} a??) Tj
+T*
+(Negativa moderada'\),) Tj
+T*
+(    \('sepal_length', 'sepal_width',  f'r = {corr.loc["sepal_length","sepal_width"]:.3f} a??) Tj
+T*
+(Fraca'\),) Tj
+T*
+(]) Tj
+T*
+( ) Tj
+T*
+(for ax, \(x, y, titulo\) in zip\(axes, pares\):) Tj
+T*
+(    sns.scatterplot\(data=iris, x=x, y=y, hue='species',) Tj
+T*
+(                    palette='Set2', ax=ax, s=60, alpha=0.8\)) Tj
+T*
+(    ax.set_title\(titulo, fontsize=11, fontweight='bold'\)) Tj
+T*
+(    ax.set_xlabel\(x\)) Tj
+T*
+(    ax.set_ylabel\(y\)) Tj
+T*
+( ) Tj
+T*
+(fig.suptitle\('Scatter Plots a?? Visualizando a CorrelaA?A?o', fontsize=13,) Tj
+T*
+(fontweight='bold'\)) Tj
+T*
+(plt.tight_layout\(\)) Tj
+T*
+(plt.savefig\('scatter_correlacao.png', dpi=150\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO \(8:30 a?? 10:00\)**) Tj
+T*
+(> *GrA?fico da esquerda \(r=0.963\): os pontos formam uma linha diagonal quase perfeita) Tj
+T*
+(subindo. O nA?mero confirma o que o olho vA?.*) Tj
+T*
+(> *GrA?fico do meio \(r=-0.428\): tendA?ncia de descida a?? quando sepal_width sobe,) Tj
+T*
+(petal_length tende a cair. CorrelaA?A?o negativa.*) Tj
+T*
+(> *GrA?fico da direita \(r=-0.119\): nuvem sem padrA?o claro a?? correlaA?A?o fraca.*) Tj
+T*
+(>) Tj
+T*
+(> *E repara nas cores: dentro de cada espA?cie os pontos se agrupam. A Setosa \(verde\) fica) Tj
+T*
+(separada das outras duas.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 4 a?? CorrelaA?A?o com numpy \(como no livro\)) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 1984 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(10:00 a?? 11:00\)**) Tj
+T*
+(> *O livro \(seA?A?o 3.3\) mostra como calcular a correlaA?A?o manualmente. No Python, o) Tj
+T*
+(`np.corrcoef\(\)` faz isso. Vamos confirmar que o resultado A? igual ao do Pandas.*) Tj
+T*
+( ) Tj
+T*
+(# CorrelaA?A?o com numpy a?? confirma o resultado do Pandas) Tj
+T*
+(x = iris['petal_length'].values) Tj
+T*
+(y = iris['petal_width'].values) Tj
+T*
+( ) Tj
+T*
+(r_numpy  = np.corrcoef\(x, y\)[0, 1]) Tj
+T*
+(r_pandas = iris['petal_length'].corr\(iris['petal_width']\)) Tj
+T*
+( ) Tj
+T*
+(print\(f'r com numpy  \(np.corrcoef\): {r_numpy:.6f}'\)) Tj
+T*
+(print\(f'r com pandas \(.corr\(\)\):     {r_pandas:.6f}'\)) Tj
+T*
+(print\(f'SA?o iguais? {abs\(r_numpy - r_pandas\) < 1e-10}'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## a?? Resumo do VA?deo 5) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ENCERRAMENTO \(12:30 a?? 14:00\)**) Tj
+T*
+(> *Hoje a gente aprendeu correlaA?A?o:*) Tj
+T*
+(> - *Coeficiente r de Pearson a?? varia de -1 a +1*) Tj
+T*
+(> - *`df.corr\(\)` calcula todos os pares de uma vez*) Tj
+T*
+(> - *Scatter plot visualiza o que o nA?mero representa*) Tj
+T*
+(> - *CorrelaA?A?o a?? causalidade a?? sempre questione a variA?vel por trA?s*) Tj
+T*
+(>) Tj
+T*
+(> *No prA?ximo vA?deo a gente vai transformar essa matriz de correlaA?A?o em uma) Tj
+T*
+(visualizaA?A?o ainda mais poderosa: o heatmap. E vamos tambA?m ver os limites do Pearson e) Tj
+T*
+(conhecer o Spearman. AtA? lA?!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(| Conceito | CA?digo | Resultado no Iris |) Tj
+T*
+(|---|---|---|) Tj
+T*
+(| Matriz Pearson | `df.corr\(\)` | petal_length A? petal_width = 0.963 |) Tj
+T*
+(| Par mais forte | `.stack\(\).sort_values\(\)` | r = 0.963 \(positivo\) |) Tj
+T*
+(| Scatter 1 par | `scatterplot\(x, y\)` | linha diagonal = correlaA?A?o |) Tj
+T*
+(| Scatter por grupo | `scatterplot\(hue='species'\)` | setosa separada das demais |) Tj
+T*
+(| ConfirmaA?A?o numpy | `np.corrcoef\(\)` | mesmo resultado que pandas |) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n `n0000000058 00000 n `n0000000136 00000 n `n0000000206 00000 n `n0000000332 00000 n `n0000002760 00000 n `n0000002886 00000 n `n0000005131 00000 n `n0000005257 00000 n `n0000007603 00000 n `n0000007731 00000 n `ntrailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+9768
+%%EOF

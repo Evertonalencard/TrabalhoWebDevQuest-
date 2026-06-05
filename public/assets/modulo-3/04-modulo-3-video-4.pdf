@@ -1,0 +1,414 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R ] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2287 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# ?Y?? MA?dulo 3 a?? ExploraA?A?o de Dados e EstatA?stica) Tj
+T*
+(## VA?deo 4: describe\(\) + Histograma com Curva de Densidade) Tj
+T*
+(**ReferA?ncia:** Mendes \(2025\) a?? SeA?A?es 3.4 e 3.10) Tj
+T*
+(**DuraA?A?o estimada:** ~14 minutos) Tj
+T*
+(---) Tj
+T*
+(> ?YZ? **FALA a?? ABERTURA \(0:00 a?? 0:45\)**) Tj
+T*
+(> *Nos VA?deos 2 e 3 a gente calculou mA?dia, mediana, moda, variA?ncia, DP e IQR a?? cada) Tj
+T*
+(um separadamente.*) Tj
+T*
+(> *Hoje a gente vai ver que o Pandas tem um comando que faz tudo isso de uma vez: o) Tj
+T*
+(`describe\(\)`.*) Tj
+T*
+(> *E na segunda parte do vA?deo, a gente vai dar o primeiro passo em visualizaA?A?o) Tj
+T*
+(analA?tica: o histograma com curva de densidade a?? pra ver com os prA?prios olhos se os) Tj
+T*
+(dados sA?o simA?tricos ou assimA?tricos.*) Tj
+T*
+( ) Tj
+T*
+(import pandas as pd) Tj
+T*
+(import seaborn as sns) Tj
+T*
+(import matplotlib.pyplot as plt) Tj
+T*
+( ) Tj
+T*
+(iris = sns.load_dataset\('iris'\)) Tj
+T*
+(print\('a?? Pronto!'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 1 a?? describe\(\) bA?sico) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(0:45 a?? 2:00\)**) Tj
+T*
+(> *`describe\(\)` retorna 8 estatA?sticas de uma vez. Vamos rodar e depois mapear linha por) Tj
+T*
+(linha com o que aprendemos nos vA?deos anteriores.*) Tj
+T*
+( ) Tj
+T*
+(# describe\(\) a?? resumo estatA?stico completo) Tj
+T*
+(print\('?Y?S DESCRIBE\(\) a?? resumo estatA?stico:'\)) Tj
+T*
+(print\(iris.describe\(\).round\(3\)\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('Mapeamento de cada linha:'\)) Tj
+T*
+(print\('  count a?? nA?mero de valores nA?o-nulos \(qualidade dos dados\)'\)) Tj
+T*
+(print\('  mean  a?? mA?dia             \(VA?deo 2\)'\)) Tj
+T*
+(print\('  std   a?? desvio padrA?o     \(VA?deo 3\)'\)) Tj
+T*
+(print\('  min   a?? valor mA?nimo      \(VA?deo 3 a?? amplitude\)'\)) Tj
+T*
+(print\('  25%   a?? Q1 primeiro quartil \(VA?deo 3 a?? IQR\)'\)) Tj
+T*
+(print\('  50%   a?? mediana / Q2      \(VA?deo 2\)'\)) Tj
+T*
+(print\('  75%   a?? Q3 terceiro quartil \(VA?deo 3 a?? IQR\)'\)) Tj
+T*
+(print\('  max   a?? valor mA?ximo      \(VA?deo 3 a?? amplitude\)'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Uma A?nica linha de cA?digo entregou tudo que levamos dois vA?deos pra calcular!*) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2185 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *E repara: o `count` A? 150 pra todas as colunas a?? confirmando que nA?o hA? valores) Tj
+T*
+(nulos.*) Tj
+T*
+(> *A linha `std` mais alta A? petal_length com 1.765 a?? exatamente o que calculamos no) Tj
+T*
+(VA?deo 3.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 2 a?? describe\(\) com include='all') Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(3:00 a?? 4:00\)**) Tj
+T*
+(> *Por padrA?o o `describe\(\)` sA? mostra colunas numA?ricas. Com `include='all'` ele) Tj
+T*
+(tambA?m mostra a coluna categA?rica `species`.*) Tj
+T*
+( ) Tj
+T*
+(# include='all' mostra colunas categA?ricas tambA?m) Tj
+T*
+(print\('?Y?S DESCRIBE\(include="all"\):'\)) Tj
+T*
+(print\(iris.describe\(include='all'\).round\(3\)\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(print\('Linhas extras para colunas categA?ricas:'\)) Tj
+T*
+(print\('  unique a?? nA?mero de categorias A?nicas'\)) Tj
+T*
+(print\('  top    a?? categoria mais frequente \(moda\)'\)) Tj
+T*
+(print\('  freq   a?? frequA?ncia da moda'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 3 a?? describe\(\) por espA?cie) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(4:00 a?? 5:30\)**) Tj
+T*
+(> *Lembra que no VA?deo 2 a gente descobriu que a mA?dia geral de petal_length era) Tj
+T*
+(enganosa? Vamos usar `groupby\(\)` com `describe\(\)` pra ver cada espA?cie separadamente.*) Tj
+T*
+( ) Tj
+T*
+(# describe\(\) por espA?cie a?? transposto pra facilitar leitura) Tj
+T*
+(print\('?Y?S DESCRIBE POR ESPA?CIE \(transposto\):'\)) Tj
+T*
+(print\(iris.groupby\('species'\).describe\(\).T.round\(3\)\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Agora ficou claro: o std de petal_length da Setosa A? 0.174 a?? muito pequeno. As) Tj
+T*
+(pA?talas da Setosa sA?o muito uniformes entre si.*) Tj
+T*
+(> *JA? a Virginica tem std de 0.552 a?? mais variA?vel.*) Tj
+T*
+(> *Isso A? anA?lise exploratA?ria de qualidade: nA?o sA? calcular, mas interpretar e) Tj
+T*
+(questionar.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 4 a?? Histograma com curva de densidade) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(5:30 a?? 7:30\)**) Tj
+T*
+(> *Agora entramos na segunda parte: visualizaA?A?o analA?tica.*) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 2364 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *O histograma mostra como os dados estA?o distribuA?dos. Quando adicionamos `kde=True`,) Tj
+T*
+(ele sobrepA?e uma curva de densidade a?? que estima a forma da distribuiA?A?o.*) Tj
+T*
+(> *Isso vai responder visualmente o que os nA?meros jA? indicaram: sepal_length se aproxima) Tj
+T*
+(de uma distribuiA?A?o normal; petal_length A? bimodal a?? dois picos.*) Tj
+T*
+( ) Tj
+T*
+(# Histogramas com curva de densidade a?? comparando os 4 atributos) Tj
+T*
+(fig, axes = plt.subplots\(2, 2, figsize=\(12, 8\)\)) Tj
+T*
+(colunas = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']) Tj
+T*
+( ) Tj
+T*
+(for ax, col in zip\(axes.flatten\(\), colunas\):) Tj
+T*
+(    sns.histplot\(iris[col], kde=True, ax=ax, color='steelblue'\)) Tj
+T*
+(    ax.set_title\(f'{col}', fontsize=12, fontweight='bold'\)) Tj
+T*
+(    ax.set_xlabel\('cm'\)) Tj
+T*
+(    ax.set_ylabel\('FrequA?ncia'\)) Tj
+T*
+( ) Tj
+T*
+(fig.suptitle\('DistribuiA?A?o dos Atributos a?? Dataset Iris', fontsize=14,) Tj
+T*
+(fontweight='bold'\)) Tj
+T*
+(plt.tight_layout\(\)) Tj
+T*
+(plt.savefig\('histogramas_iris.png', dpi=150\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+(print\('a?? Salvo como histogramas_iris.png'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO \(7:30 a?? 9:00\)**) Tj
+T*
+(> *Olha a diferenA?a:*) Tj
+T*
+(> - *`sepal_length` e `sepal_width` tA?m curvas com **um sA? pico** a?? mais prA?ximas de) Tj
+T*
+(uma distribuiA?A?o normal.*) Tj
+T*
+(> - *`petal_length` e `petal_width` tA?m **dois picos** a?? distribuiA?A?o bimodal. Isso) Tj
+T*
+(acontece porque a Setosa tem pA?talas pequenas e as outras duas espA?cies tA?m pA?talas) Tj
+T*
+(maiores.*) Tj
+T*
+(>) Tj
+T*
+(> *Agora faz sentido por que a mA?dia e mediana de petal_length eram tA?o diferentes no) Tj
+T*
+(VA?deo 2: havia duas 'populaA?A?es' misturadas no mesmo histograma!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 5 a?? Histograma por espA?cie \(hue\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(9:00 a?? 10:30\)**) Tj
+T*
+(> *Vamos confirmar a intuiA?A?o separando as espA?cies por cor. O parA?metro `hue` do) Tj
+T*
+(seaborn faz isso.*) Tj
+T*
+( ) Tj
+T*
+(# Histograma de petal_length separado por espA?cie) Tj
+T*
+(fig, axes = plt.subplots\(1, 2, figsize=\(13, 5\)\)) Tj
+T*
+( ) Tj
+T*
+(# Sem separaA?A?o de espA?cie) Tj
+T*
+(sns.histplot\(iris['petal_length'], kde=True, ax=axes[0], color='steelblue'\)) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 1910 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(axes[0].set_title\('petal_length a?? Todas as espA?cies', fontweight='bold'\)) Tj
+T*
+(axes[0].set_xlabel\('cm'\)) Tj
+T*
+( ) Tj
+T*
+(# Com separaA?A?o por espA?cie) Tj
+T*
+(sns.histplot\(data=iris, x='petal_length', hue='species', kde=True,) Tj
+T*
+(             ax=axes[1], palette='Set2', alpha=0.6\)) Tj
+T*
+(axes[1].set_title\('petal_length a?? Por espA?cie', fontweight='bold'\)) Tj
+T*
+(axes[1].set_xlabel\('cm'\)) Tj
+T*
+( ) Tj
+T*
+(plt.tight_layout\(\)) Tj
+T*
+(plt.savefig\('histograma_por_especie.png', dpi=150\)) Tj
+T*
+(plt.show\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO \(10:30 a?? 12:00\)**) Tj
+T*
+(> *A? esquerda: dois picos aparentes a?? confuso.*) Tj
+T*
+(> *A? direita: trA?s distribuiA?A?es separadas a?? cada espA?cie A? praticamente normal) Tj
+T*
+(dentro do prA?prio grupo!*) Tj
+T*
+(>) Tj
+T*
+(> *Isso confirma o que o livro diz na seA?A?o 3.10: a distribuiA?A?o normal ocorre quando) Tj
+T*
+(os dados vA?m de uma A?nica populaA?A?o homogA?nea. Quando misturamos grupos distintos, o) Tj
+T*
+(histograma fica multimodal.*) Tj
+T*
+(>) Tj
+T*
+(> *ConclusA?o prA?tica: quando o histograma mostrar dois ou mais picos, investigue se hA?) Tj
+T*
+(subgrupos nos dados antes de calcular qualquer estatA?stica geral.*) Tj
+T*
+(>) Tj
+T*
+(> *No prA?ximo vA?deo a gente vai entrar em correlaA?A?o a?? como duas variA?veis se) Tj
+T*
+(relacionam entre si. AtA? lA?!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(| Conceito | CA?digo | Insight |) Tj
+T*
+(|---|---|---|) Tj
+T*
+(| Resumo estatA?stico | `describe\(\)` | 8 mA?tricas em 1 comando |) Tj
+T*
+(| CategA?ricas incluA?das | `describe\(include='all'\)` | mostra moda e frequA?ncia |) Tj
+T*
+(| Por grupo | `groupby\(\).describe\(\)` | setosa std\(petal\) = 0.17 |) Tj
+T*
+(| Histograma + KDE | `histplot\(kde=True\)` | petal_length A? bimodal |) Tj
+T*
+(| Por espA?cie | `histplot\(hue='species'\)` | 3 normais separadas |) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n `n0000000058 00000 n `n0000000136 00000 n `n0000000206 00000 n `n0000000332 00000 n `n0000002671 00000 n `n0000002797 00000 n `n0000005034 00000 n `n0000005160 00000 n `n0000007576 00000 n `n0000007704 00000 n `ntrailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+9667
+%%EOF

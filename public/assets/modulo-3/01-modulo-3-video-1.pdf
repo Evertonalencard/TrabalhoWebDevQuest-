@@ -1,0 +1,717 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R ] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2555 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# ?Y?? MA?dulo 3 a?? ExploraA?A?o de Dados e EstatA?stica) Tj
+T*
+(## VA?deo 1: IntroduA?A?o ao MA?dulo e ao Dataset Iris) Tj
+T*
+( ) Tj
+T*
+(**Disciplina:** CiA?ncia de Dados \(T326\) a?? UNIFOR) Tj
+T*
+(**ReferA?ncia:** Mendes \(2025\) *Fundamentos Essenciais para CiA?ncia de Dados*) Tj
+T*
+(**Ambiente:** VS Code + Jupyter Notebook \(.ipynb\)) Tj
+T*
+(**DuraA?A?o estimada:** ~8 minutos) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(> ?YZ? **FALA a?? ABERTURA \(0:00 a?? 1:00\)**) Tj
+T*
+(> *OlA?! Eu sou [nome], e esse A? o MA?dulo 3 do nosso curso introdutA?rio de Python para) Tj
+T*
+(CiA?ncia de Dados.*) Tj
+T*
+(> *Nossa equipe A? formada por [nome1], [nome2], [nome3], [nome4] e [nome5], e ao longo) Tj
+T*
+(desse mA?dulo a gente vai trabalhar com um dos temas mais importantes antes de qualquer) Tj
+T*
+(modelo de dados: a anA?lise exploratA?ria.*) Tj
+T*
+(> *Antes de a gente ensinar o computador a prever qualquer coisa, a gente precisa entender) Tj
+T*
+(os dados. E A? exatamente isso que a gente vai fazer aqui.*) Tj
+T*
+(> *VocA?s que estA?o assistindo jA? passaram pelos mA?dulos anteriores a?? jA? sabem) Tj
+T*
+(Python, jA? viram Pandas, jA? exploraram dados tabulares. Agora a gente vai dar um passo) Tj
+T*
+(alA?m: a gente vai aprender a fazer perguntas inteligentes sobre os dados e a encontrar) Tj
+T*
+(padrA?es que o olho humano sozinho nA?o consegue ver.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? Parte 1 a?? O que A? EDA e por que ela existe?) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? O QUE A? EDA \(1:00 a?? 3:00\)**) Tj
+T*
+(> *EDA significa Exploratory Data Analysis a?? em portuguA?s, AnA?lise ExploratA?ria de) Tj
+T*
+(Dados.*) Tj
+T*
+(> *Pensa assim: imagina que vocA? acabou de receber um dataset de milhares de linhas. VocA?) Tj
+T*
+(vai direto construir um modelo de Machine Learning? NA?o! Primeiro vocA? precisa entender o) Tj
+T*
+(que estA? dentro desse dataset.*) Tj
+T*
+(> *O livro que a gente usa como referA?ncia a?? Mendes \(2025\) a?? coloca isso de forma) Tj
+T*
+(muito direta: antes de qualquer anA?lise, a gente precisa saber onde fica o centro dos) Tj
+T*
+(dados, o quanto eles variam, e se eles tA?m alguma relaA?A?o entre si. Isso A? EDA.*) Tj
+T*
+(> *E onde a EDA entra no pipeline de ciA?ncia de dados? Olha aqui:*) Tj
+T*
+( ) Tj
+T*
+(```) Tj
+T*
+(Coleta de Dados) Tj
+T*
+(      a??) Tj
+T*
+(Qualidade / Limpeza   a?? MA?dulo anterior \(vocA?s jA? viram isso\)) Tj
+T*
+(      a??) Tj
+T*
+(EDA  a?? ESTAMOS AQUI \(MA?dulo 3\)) Tj
+T*
+(      a??) Tj
+T*
+(VisualizaA?A?o          a?? MA?dulo 4 \(vem depois\)) Tj
+T*
+(      a??) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2363 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(Modelagem / ML        a?? MA?dulo 5 \(fim do curso\)) Tj
+T*
+(```) Tj
+T*
+( ) Tj
+T*
+(> *A EDA A? a etapa em que a gente olha os dados com cuidado antes de tomar qualquer) Tj
+T*
+(decisA?o. A? aqui que a gente descobre se a mA?dia representa bem os dados, se existem) Tj
+T*
+(valores estranhos, e se duas variA?veis caminham juntas ou nA?o.*) Tj
+T*
+(> *E hoje, no VA?deo 1, a gente vai sA? preparar o terreno: carregar o dataset, entender) Tj
+T*
+(sua estrutura, e jA? tirar as primeiras conclusA?es. Bora lA?!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? Parte 2 a?? O Dataset Iris) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APRESENTANDO O IRIS \(3:00 a?? 4:30\)**) Tj
+T*
+(> *O dataset que a gente vai usar em todos os vA?deos desse mA?dulo se chama Iris.*) Tj
+T*
+(> *Ele A? um dos datasets mais famosos da histA?ria da ciA?ncia de dados a?? criado pelo) Tj
+T*
+(estatA?stico Ronald Fisher em 1936.*) Tj
+T*
+(> *O Iris contA?m medidas de 150 flores de trA?s espA?cies diferentes: Setosa, Versicolor e) Tj
+T*
+(Virginica.*) Tj
+T*
+(> *Para cada flor, foram medidas quatro coisas:*) Tj
+T*
+(> - *sepal_length a?? comprimento da sA?pala \(em cm\)*) Tj
+T*
+(> - *sepal_width a?? largura da sA?pala \(em cm\)*) Tj
+T*
+(> - *petal_length a?? comprimento da pA?tala \(em cm\)*) Tj
+T*
+(> - *petal_width a?? largura da pA?tala \(em cm\)*) Tj
+T*
+(> - *species a?? a espA?cie da flor*) Tj
+T*
+(>) Tj
+T*
+(> *Por que a gente usa o Iris? Porque ele A? pequeno o suficiente pra ser didA?tico, mas) Tj
+T*
+(rico o suficiente pra mostrar todos os conceitos que a gente vai aprender. Vamos carregar) Tj
+T*
+(ele agora.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 1 a?? InstalaA?A?o e ImportaA?A?o de Bibliotecas) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(4:30 a?? 5:00\)**) Tj
+T*
+(> *Primeiro passo: importar as bibliotecas. A gente vai usar trA?s no MA?dulo 3 inteiro:) Tj
+T*
+(Pandas para manipular dados, Seaborn para carregar o Iris e mais pra frente nos grA?ficos) Tj
+T*
+(de anA?lise, e Matplotlib para exibir os grA?ficos.*) Tj
+T*
+(> *Se vocA? estiver rodando pela primeira vez e der erro no import do seaborn, descomenta a) Tj
+T*
+(linha de instalaA?A?o.*) Tj
+T*
+( ) Tj
+T*
+(# Se necessA?rio, instale o seaborn:) Tj
+T*
+(# !pip install seaborn) Tj
+T*
+( ) Tj
+T*
+(import pandas as pd) Tj
+T*
+(import seaborn as sns) Tj
+T*
+(import matplotlib.pyplot as plt) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 2186 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+( ) Tj
+T*
+(print\('a?? Bibliotecas importadas com sucesso!'\)) Tj
+T*
+(print\(f'   pandas  versA?o: {pd.__version__}'\)) Tj
+T*
+(print\(f'   seaborn versA?o: {sns.__version__}'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S RODAR A CA?LULA 1**) Tj
+T*
+(> *Perfeito. Pandas vocA?s jA? conhecem do MA?dulo 2. Seaborn A? uma biblioteca de) Tj
+T*
+(visualizaA?A?o construA?da em cima do Matplotlib a?? a gente vai usar ela bastante aqui no) Tj
+T*
+(MA?dulo 3.*) Tj
+T*
+(> *Viu o checkzinho verde? Tudo certo, vamos em frente.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 2 a?? Carregando o Dataset Iris) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *Agora sim: vamos carregar o Iris. O Seaborn tem uma funA?A?o chamada `load_dataset` que) Tj
+T*
+(baixa datasets famosos direto da internet. A gente passa o nome `'iris'` e pronto a?? ele) Tj
+T*
+(jA? vem formatado como um DataFrame do Pandas, sem precisar fazer download manual de nenhum) Tj
+T*
+(arquivo.*) Tj
+T*
+( ) Tj
+T*
+(# Carregando o dataset Iris) Tj
+T*
+(iris = sns.load_dataset\('iris'\)) Tj
+T*
+( ) Tj
+T*
+(print\('a?? Dataset Iris carregado!'\)) Tj
+T*
+(print\(f'   Tipo do objeto: {type\(iris\)}'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S RODAR A CA?LULA 2**) Tj
+T*
+(> *O resultado mostra que o `iris` A? um DataFrame a?? exatamente o tipo de dado que vocA?s) Tj
+T*
+(jA? aprenderam no MA?dulo 2. A?timo, a gente jA? estA? em terreno familiar.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 3 a?? Primeiras linhas com head\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *Primeiro instinto de qualquer analista ao receber um dataset: olhar as primeiras linhas.) Tj
+T*
+(A gente usa o `head\(\)` pra isso.*) Tj
+T*
+( ) Tj
+T*
+(# Visualizando as primeiras 5 linhas) Tj
+T*
+(iris.head\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S RODAR A CA?LULA 3**) Tj
+T*
+(> *Aqui a gente jA? vA? a estrutura: 5 colunas a?? quatro numA?ricas e uma categA?rica que) Tj
+T*
+(A? a espA?cie.*) Tj
+T*
+(> *Repara que os valores jA? vA?m com casas decimais em centA?metros. Isso A? importante:) Tj
+T*
+(todos os atributos numA?ricos estA?o na mesma unidade, o que facilita muito a comparaA?A?o) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 2200 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(entre eles.*) Tj
+T*
+(> *E a A?ltima coluna, `species`, A? o que a gente chama de variA?vel alvo a?? A? o que a) Tj
+T*
+(gente vai querer prever num modelo de Machine Learning lA? no MA?dulo 5.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 4 a?? Tamanho e estrutura com shape e info\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *Agora a gente quer saber: quantas linhas e colunas tem? Que tipo de dado A? cada coluna?) Tj
+T*
+(Tem valor faltando em algum lugar?*) Tj
+T*
+(> *O `shape` responde a primeira pergunta, e o `info\(\)` responde as outras duas de uma vez.*) Tj
+T*
+( ) Tj
+T*
+(# Tamanho do dataset) Tj
+T*
+(linhas, colunas = iris.shape) Tj
+T*
+(print\(f'?Y?? Tamanho do dataset: {linhas} linhas A? {colunas} colunas'\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(# Estrutura e tipos de dados) Tj
+T*
+(print\('?Y?? InformaA?A?es gerais:'\)) Tj
+T*
+(iris.info\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S RODAR A CA?LULA 4**) Tj
+T*
+(> *150 linhas, 5 colunas.*) Tj
+T*
+(> *O `info\(\)` mostra trA?s coisas importantes:*) Tj
+T*
+(> - *Primeiro: todas as 150 linhas tA?m 150 valores nA?o-nulos em cada coluna a?? ou seja,) Tj
+T*
+(nA?o tem nenhum dado faltando. O Iris A? um dataset jA? limpo.*) Tj
+T*
+(> - *Segundo: as quatro colunas de medidas sA?o do tipo `float64` a?? nA?meros com casas) Tj
+T*
+(decimais.*) Tj
+T*
+(> - *Terceiro: a coluna `species` A? do tipo `object` a?? que A? como o Pandas representa) Tj
+T*
+(texto e categorias.*) Tj
+T*
+(> *Isso A? exatamente o ponto 2.6 do livro: dado completo A? aquele onde todas as) Tj
+T*
+(observaA?A?es foram registradas. Aqui a gente confirma que o Iris A? completo.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 5 a?? Checando valores nulos e duplicados) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *Mesmo sabendo pelo `info\(\)` que nA?o tem nulo, um bom analista confirma explicitamente.) Tj
+T*
+(A? um hA?bito que a gente vai reforA?ar no VA?deo 8 a?? a checagem de qualidade antes de) Tj
+T*
+(qualquer anA?lise.*) Tj
+T*
+( ) Tj
+T*
+(# Verificando valores nulos por coluna) Tj
+T*
+(print\('?Y?? Valores nulos por coluna:'\)) Tj
+T*
+(print\(iris.isnull\(\).sum\(\)\)) Tj
+T*
+(print\(\)) Tj
+T*
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 2219 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+( ) Tj
+T*
+(# Verificando linhas duplicadas) Tj
+T*
+(duplicados = iris.duplicated\(\).sum\(\)) Tj
+T*
+(print\(f'?Y?? Linhas duplicadas: {duplicados}'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S RODAR A CA?LULA 5**) Tj
+T*
+(> *Zero nulos, zero duplicados. O dataset Iris A? limpo.*) Tj
+T*
+(> *Mas atenA?A?o: em projetos reais, esse passo A? onde a maior parte dos problemas) Tj
+T*
+(aparece. Quando vocA? tiver trabalhando com dados do mundo real a?? planilhas de vendas,) Tj
+T*
+(registros de pacientes, dados de sensores a?? sempre comece com essa checagem. Se tiver) Tj
+T*
+(nulo ou duplicado, vocA? trata antes de qualquer anA?lise estatA?stica.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 6 a?? EspA?cies: quantas e quais?) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *A gente jA? sabe que a coluna `species` tem trA?s categorias. Mas quantas flores de cada) Tj
+T*
+(espA?cie existem no dataset? Elas estA?o balanceadas?*) Tj
+T*
+( ) Tj
+T*
+(# Quais espA?cies existem?) Tj
+T*
+(print\('?Y?? EspA?cies no dataset:'\)) Tj
+T*
+(print\(iris['species'].unique\(\)\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(# Quantas flores de cada espA?cie?) Tj
+T*
+(print\('?Y?S Contagem por espA?cie:'\)) Tj
+T*
+(print\(iris['species'].value_counts\(\)\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(# Em porcentagem) Tj
+T*
+(print\('?Y?S Porcentagem por espA?cie:'\)) Tj
+T*
+(print\(iris['species'].value_counts\(normalize=True\).mul\(100\).round\(1\).astype\(str\) + '%'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S RODAR A CA?LULA 6**) Tj
+T*
+(> *Perfeito: 50 flores de cada espA?cie a?? exatamente 33.3% do total cada uma.*) Tj
+T*
+(> *Isso A? o que a gente chama de dataset balanceado: as trA?s classes tA?m a mesma) Tj
+T*
+(quantidade de amostras. Em Machine Learning, isso A? um ponto importante a?? um dataset) Tj
+T*
+(muito desbalanceado pode fazer o modelo ser tendencioso.*) Tj
+T*
+(> *Mas isso A? assunto do MA?dulo 5. Por agora, o importante A?: a gente tem 150 flores, 50) Tj
+T*
+(de cada espA?cie, e 4 atributos numA?ricos pra analisar.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 7 a?? Primeiros valores estatA?sticos: min, max e range) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
+endobj
+15 0 obj
+<< /Length 2507 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *Antes de entrar nos conceitos estatA?sticos de fundo a?? mA?dia, desvio padrA?o e) Tj
+T*
+(correlaA?A?o a?? a gente pode jA? dar uma espiadinha nos valores. Qual A? o menor valor?) Tj
+T*
+(Qual A? o maior? Qual A? o alcance de cada atributo?*) Tj
+T*
+(> *Isso dA? uma noA?A?o de escala que vai ajudar muito quando a gente for interpretar os) Tj
+T*
+(resultados dos prA?ximos vA?deos.*) Tj
+T*
+( ) Tj
+T*
+(# MA?nimo, mA?ximo e amplitude de cada coluna) Tj
+T*
+(numericas = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']) Tj
+T*
+( ) Tj
+T*
+(resumo_inicial = pd.DataFrame\({) Tj
+T*
+(    'MA?nimo'   : iris[numericas].min\(\),) Tj
+T*
+(    'MA?ximo'   : iris[numericas].max\(\),) Tj
+T*
+(    'Amplitude': iris[numericas].max\(\) - iris[numericas].min\(\)) Tj
+T*
+(}\)) Tj
+T*
+( ) Tj
+T*
+(print\('?Y?? Valores mA?nimos, mA?ximos e amplitude \(em cm\):'\)) Tj
+T*
+(print\(resumo_inicial.round\(2\)\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S RODAR A CA?LULA 7**) Tj
+T*
+(> *Olha que interessante jA? nessa tabela simples:*) Tj
+T*
+(> - *`petal_length` vai de 1.0 a 6.9 centA?metros a?? uma amplitude de quase 6 cm.*) Tj
+T*
+(> - *`sepal_width` vai de 2.0 a 4.4 a?? amplitude de apenas 2.4 cm.*) Tj
+T*
+(> *SA? com min e max a gente jA? consegue perceber que o comprimento da pA?tala varia muito) Tj
+T*
+(mais do que a largura da sA?pala.*) Tj
+T*
+(> *No VA?deo 3 a gente vai quantificar isso com precisA?o usando variA?ncia e desvio) Tj
+T*
+(padrA?o. Mas esse primeiro olhar jA? coloca a pergunta certa: por que a pA?tala varia) Tj
+T*
+(tanto?*) Tj
+T*
+(> *A resposta tem a ver com as espA?cies a?? cada uma tem um tamanho de pA?tala bem) Tj
+T*
+(diferente. Isso vai aparecer claramente na nossa anA?lise.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 8 a?? Primeiros valores por espA?cie) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *A A?ltima coisa que a gente vai fazer nesse vA?deo A? olhar as mA?dias por espA?cie.) Tj
+T*
+(Isso jA? A? um aperitivo do que vem nos prA?ximos vA?deos a?? A? a primeira vez que a gente) Tj
+T*
+(vai separar os dados por grupo e comparar.*) Tj
+T*
+( ) Tj
+T*
+(# MA?dia por espA?cie a?? primeiro olhar) Tj
+T*
+(print\('?Y?? MA?dia de cada atributo por espA?cie:'\)) Tj
+T*
+(print\(iris.groupby\('species'\).mean\(\).round\(2\)\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S RODAR A CA?LULA 8**) Tj
+T*
+(> *Repare: a Setosa tem `petal_length` mA?dio de 1.46 cm. A Virginica tem 5.55 cm. SA?o) Tj
+T*
+(quase 4 centA?metros de diferenA?a!*) Tj
+T*
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 17 0 R >>
+endobj
+17 0 obj
+<< /Length 2079 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *Isso explica por que a pA?tala varia tanto quando a gente olha o dataset inteiro a?? A?) Tj
+T*
+(porque estamos misturando trA?s populaA?A?es muito diferentes.*) Tj
+T*
+(> *Esse A? um ponto fundamental da CiA?ncia de Dados: nunca olhe sA? o agregado sem olhar) Tj
+T*
+(os grupos. Uma mA?dia que inclui grupos muito diferentes pode ser completamente enganosa.*) Tj
+T*
+(> *Isso tem atA? um nome famoso: Paradoxo de Simpson. Mas o detalhe fica pro MA?dulo 4.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## a?? Resumo do VA?deo 1) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ENCERRAMENTO \(7:00 a?? 8:00\)**) Tj
+T*
+(> *EntA?o, o que a gente fez hoje?*) Tj
+T*
+(> - *Entendemos o que A? EDA e onde ela se encaixa no pipeline de ciA?ncia de dados*) Tj
+T*
+(> - *Carregamos o dataset Iris a?? 150 flores, 4 atributos numA?ricos, 3 espA?cies) Tj
+T*
+(balanceadas*) Tj
+T*
+(> - *Confirmamos que o dataset estA? limpo: zero nulos, zero duplicados*) Tj
+T*
+(> - *Fizemos um primeiro olhar nos dados: min, max, amplitude, e mA?dias por espA?cie*) Tj
+T*
+(> - *JA? temos uma intuiA?A?o: `petal_length` A? o atributo que mais varia a?? e a razA?o) Tj
+T*
+(A? que as trA?s espA?cies sA?o muito diferentes entre si*) Tj
+T*
+(>) Tj
+T*
+(> *No prA?ximo vA?deo a?? VA?deo 2 a?? a gente vai entrar fundo nas medidas de tendA?ncia) Tj
+T*
+(central: mA?dia, mediana e moda. A gente vai calcular cada uma, comparar, e aprender quando) Tj
+T*
+(cada uma A? a escolha certa.*) Tj
+T*
+(> *Todo o cA?digo desse vA?deo estA? no repositA?rio do GitHub do curso. Qualquer dA?vida,) Tj
+T*
+(deixa nos comentA?rios. AtA? o prA?ximo!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+( ) Tj
+T*
+(| Conceito visto | CA?digo usado | PrA?ximo vA?deo |) Tj
+T*
+(|---|---|---|) Tj
+T*
+(| O que A? EDA | `sns.load_dataset\(\)` | MA?dia, mediana, moda |) Tj
+T*
+(| Estrutura do Iris | `head\(\)`, `info\(\)`, `shape` | `mean\(\)`, `median\(\)`, `mode\(\)` |) Tj
+T*
+(| Qualidade bA?sica | `isnull\(\)`, `duplicated\(\)` | `describe\(\)` completo |) Tj
+T*
+(| Primeiro olhar | `min\(\)`, `max\(\)`, `groupby\(\)` | VariA?ncia e DP |) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000009 00000 n `n0000000058 00000 n `n0000000157 00000 n `n0000000227 00000 n `n0000000353 00000 n `n0000002960 00000 n `n0000003086 00000 n `n0000005501 00000 n `n0000005627 00000 n `n0000007865 00000 n `n0000007993 00000 n `n0000010246 00000 n `n0000010374 00000 n `n0000012646 00000 n `n0000012774 00000 n `n0000015334 00000 n `n0000015462 00000 n `ntrailer
+<< /Size 18 /Root 1 0 R >>
+startxref
+17594
+%%EOF
