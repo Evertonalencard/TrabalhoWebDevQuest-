@@ -63,8 +63,40 @@ function Pandas() {
         ],
         videos: [
           {
-            videoId: "vmEHCJofvqE",
-            title: "Aula: Python para Ciencia de Dados com Pandas",
+            videoId: "https://www.youtube.com/watch?v=XBxXgJcd5nU&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr",
+            title: "aula_01 - Introducao ao Pandas e Dados Tabulares",
+          },
+          {
+            videoId: "https://youtu.be/i4CsKbhW12k?si=weUYN1-mtJ7A3xNC",
+            title: "aula_02 - Estruturas Fundamentais: Series",
+          },
+          {
+            videoId: "https://www.youtube.com/watch?v=1K6ZNYpIMZED8vWr7YsphGopY8yisdmLo&list=PLGTqm-GzPhSHQxLOYmtxeEfMhnQvwOvdr",
+            title: "Aula_03 - Estrutura Principal: DataFrame",
+          },
+          {
+            videoId: "https://youtu.be/ft5XwV2zkUo",
+            title: "Aula_04 - Leitura de Arquivos (CSV e Excel)",
+          },
+          {
+            videoId: "https://youtu.be/ft5XwV2zkUo",
+            title: "Aula_05 - Tipos de Dados no Pandas",
+          },
+          {
+            videoId: "https://studio.youtube.com/video/7srOGuyglAg/edit",
+            title: "Aula_06 - Selecao de Linhas e Colunas",
+          },
+          {
+            videoId: "https://youtu.be/RPkUx27KAiM?si=lJD5MLSetCEaynDL",
+            title: "Aula_07 - Filtros e Consultas",
+          },
+          {
+            videoId: "https://youtu.be/BytfizH37TA?si=5OsTNlY-dewG1ZpV",
+            title: "Aula_08 - Operacao de Agregacao",
+          },
+          {
+            videoId: "https://youtu.be/NF0Jh1wHkOU?si=hsic82ZmGCefJ8xz",
+            title: "Aula_09 - Renomeacao e Organizacao de Dados",
           },
         ],
         pdfs: PDFS,

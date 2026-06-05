@@ -82,8 +82,8 @@ function Fundamentos() {
         ],
         videos: [
           {
-            videoId: "yhp6rgrCjQ0",
-            title: "Aula: Fundamentos de Ciencia de Dados e Python",
+            videoId: "drive:1x3I3U8t0PV_rd-uAT2PDlGc-biU1dla6",
+            title: "aula_01 - Variaveis e operadores",
           },
         ],
         pdfs: PDFS,

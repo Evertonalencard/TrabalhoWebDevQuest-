@@ -4,6 +4,7 @@ import VideoPlayer from "./VideoPlayer";
 import PDFModule from "./PDFModule";
 import QuestionsModule from "./QuestionsModule";
 import RatingModule from "./RatingModule";
+import "../css/VideoModulo.css";
 
 function ModuleContent({ slug, fallback }) {
   const [moduleData, setModuleData] = useState(null);
@@ -69,14 +70,18 @@ function ModuleContent({ slug, fallback }) {
         </div>
       )}
 
-      {videos.map((video) => (
-        <VideoPlayer
-          key={video.id ?? video.videoId ?? video.driveFileId}
-          driveFileId={video.driveFileId}
-          videoId={video.videoId}
-          title={video.title}
-        />
-      ))}
+      {videos.length > 0 && (
+        <div className={`video-grid ${videos.length === 1 ? "video-grid--1" : "video-grid--4"}`}>
+          {videos.map((video) => (
+            <VideoPlayer
+              key={video.id ?? video.videoId ?? video.driveFileId}
+              driveFileId={video.driveFileId}
+              videoId={video.videoId}
+              title={video.title}
+            />
+          ))}
+        </div>
+      )}
 
       <PDFModule pdfs={pdfs} />
       <QuestionsModule questions={questions} moduleKey={slug} />

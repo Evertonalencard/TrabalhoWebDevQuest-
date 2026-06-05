@@ -49,6 +49,52 @@ function Visualizacao() {
           "Escolha de cores e legendas",
           "Interpretando visualizacoes com proposito",
         ],
+        videos: [
+          {
+            videoId: "drive:1eF-HIBbwo9DB0n0dhMZ9SD1f95R332Ns",
+            title: "aula_01",
+          },
+          {
+            videoId: "drive:16a-0reUPxvwoIpMF5sFc3_Zoq5-svIf_",
+            title: "aula_02",
+          },
+          {
+            videoId: "drive:1Ue49T8yIuN6RHraR0bIKb2j55qJKUCEp",
+            title: "Aula_03",
+          },
+          {
+            videoId: "drive:12xoMJ7JxRki5lNwfCgHVA8dsc9T64P3s",
+            title: "Aula_04",
+          },
+          {
+            videoId: "drive:1tKAvyg2awwF-eyztO2y34sasPA2ioQQm",
+            title: "Aula_05",
+          },
+          {
+            videoId: "drive:159P41UdNqGnVPM_fdMDxDzBJo9qez1OQ",
+            title: "Aula_06",
+          },
+          {
+            videoId: "drive:13-AvlMjB4NOl0IUD6I_XuoDba-2A0vpz",
+            title: "Aula_07",
+          },
+          {
+            videoId: "drive:1FKf96qP8NOv2jEr8qcEPcWBgM0APL1Sn",
+            title: "Aula_08",
+          },
+          {
+            videoId: "drive:17jAnDDcrcyZiaiC5gvmM5drEBdKL3orF",
+            title: "Aula_09",
+          },
+          {
+            videoId: "drive:1j2rD_4V8KOLL-LWJTwtvZKywaflCZNDx",
+            title: "Aula_10",
+          },
+          {
+            videoId: "drive:1qzHB63G_htrFooIV_5UC3A2Oe2E2B29E",
+            title: "Aula_11",
+          },
+        ],
         pdfs: PDFS,
         questions: QUESTIONS,
       }}
