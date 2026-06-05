@@ -41,10 +41,10 @@ const QUESTIONS = [
 const PDFS = [
   {
     id: "pandas-1",
-    name: "Cheatsheet: Pandas",
-    description: "Principais metodos e funcoes do Pandas em uma pagina",
-    url: "/assets/pandas-cheatsheet.pdf",
-    filename: "pandas-cheatsheet.pdf",
+    name: "Aula 1",
+    description: "PDF unico informado para o modulo 2",
+    url: "/assets/modulo-2/01-aula-1.pdf",
+    filename: "01-aula-1.pdf",
   },
 ];
 

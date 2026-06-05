@@ -48,11 +48,20 @@
   align-items: center;
   gap: 0.75rem;
   min-width: 0;
+  flex: 1;
 }
 
 .pdf-module__item-icon {
   font-size: 1.4rem;
   flex-shrink: 0;
+}
+
+.pdf-module__item-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  line-height: 1.25;
 }
 
 .pdf-module__item-name {
@@ -69,7 +78,7 @@
   display: block;
   font-size: 0.75rem;
   color: #7a7974;
-  margin-top: 1px;
+  margin-top: 0.15rem;
 }
 
 .pdf-module__download-btn {
@@ -110,4 +119,16 @@
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+@media (max-width: 560px) {
+  .pdf-module__item {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pdf-module__download-btn {
+    justify-content: center;
+    width: 100%;
+  }
 }

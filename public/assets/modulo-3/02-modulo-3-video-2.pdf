@@ -1,0 +1,469 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R ] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2565 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# ?Y?? MA?dulo 3 a?? ExploraA?A?o de Dados e EstatA?stica) Tj
+T*
+(## VA?deo 2: TendA?ncia Central a?? MA?dia, Mediana e Moda) Tj
+T*
+(**ReferA?ncia:** Mendes \(2025\) *Fundamentos Essenciais para CiA?ncia de Dados* a?? SeA?A?o) Tj
+T*
+(3.4.1) Tj
+T*
+(**DuraA?A?o estimada:** ~12 minutos) Tj
+T*
+(---) Tj
+T*
+(> ?YZ? **FALA a?? ABERTURA \(0:00 a?? 1:00\)**) Tj
+T*
+(> *No vA?deo anterior a gente carregou o Iris e fez um primeiro olhar. Hoje a gente comeA?a) Tj
+T*
+(de verdade a EstatA?stica Descritiva.*) Tj
+T*
+(> *A primeira pergunta que qualquer analista faz sobre um conjunto de dados A?: qual A? o) Tj
+T*
+(valor tA?pico? Qual nA?mero representa bem esse conjunto?*) Tj
+T*
+(> *Para responder isso, a gente tem trA?s ferramentas: mA?dia, mediana e moda. E a escolha) Tj
+T*
+(certa entre as trA?s faz toda a diferenA?a na anA?lise.*) Tj
+T*
+(> *O livro que a gente usa a?? Mendes \(2025\), seA?A?o 3.4.1 a?? chama essas trA?s de) Tj
+T*
+(**medidas de localizaA?A?o**, ou medidas de tendA?ncia central. Vamos ver cada uma.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? Parte 1 a?? Conceitos teA?ricos) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? TEORIA \(1:00 a?? 3:30\)**) Tj
+T*
+(> ***MA?dia*** *a?? A? a soma de todos os valores dividida pela quantidade. A? a medida) Tj
+T*
+(mais intuitiva, mas tem um problema: ela A? sensA?vel a valores extremos. Um bilionA?rio) Tj
+T*
+(numa sala de pessoas comuns eleva a mA?dia salarial da sala inteira, mesmo que todo mundo) Tj
+T*
+(ganhe pouco.*) Tj
+T*
+(> ***Mediana*** *a?? A? o valor do meio quando os dados estA?o ordenados. Se vocA? tem 150) Tj
+T*
+(valores, a mediana A? a mA?dia dos valores nas posiA?A?es 75 e 76. Ela nA?o A? afetada por) Tj
+T*
+(extremos a?? por isso A? mais robusta que a mA?dia.*) Tj
+T*
+(> ***Moda*** *a?? A? o valor que aparece com mais frequA?ncia. A? a A?nica das trA?s que) Tj
+T*
+(funciona com dados categA?ricos tambA?m.*) Tj
+T*
+(>) Tj
+T*
+(> *O livro traz um exemplo muito bom: as idades dos presidentes brasileiros ao tomar posse) Tj
+T*
+(\(Tabela 16/17, p.86-88\). A mA?dia A? ~57 anos, a mediana A? 57 anos de Washington LuA?s, e) Tj
+T*
+(a moda A? 63 anos a?? aparece 4 vezes. Quando mA?dia e mediana sA?o prA?ximas, a) Tj
+T*
+(distribuiA?A?o A? simA?trica. Quando sA?o distantes, hA? assimetria.*) Tj
+T*
+(>) Tj
+T*
+(> *Agora vamos calcular as trA?s no Iris.*) Tj
+T*
+( ) Tj
+T*
+(import pandas as pd) Tj
+T*
+(import seaborn as sns) Tj
+T*
+( ) Tj
+T*
+(iris = sns.load_dataset\('iris'\)) Tj
+T*
+(print\('a?? Dataset carregado!'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 1 a?? MA?dia) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 1685 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *`mean\(\)` a?? calcula a mA?dia de cada coluna numA?rica. Vamos ver os valores e jA?) Tj
+T*
+(comeA?ar a comparar.*) Tj
+T*
+( ) Tj
+T*
+(# MA?dia de cada atributo) Tj
+T*
+(media = iris.mean\(numeric_only=True\).round\(3\)) Tj
+T*
+(print\('?Y?S MA?DIA:'\)) Tj
+T*
+(print\(media\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *A mA?dia de petal_length A? 3.76 cm. Parece um valor razoA?vel a?? mas serA? que) Tj
+T*
+(representa bem o dataset? Vamos ver a mediana.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 2 a?? Mediana) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *`median\(\)` a?? valor do meio quando os dados estA?o ordenados.*) Tj
+T*
+( ) Tj
+T*
+(# Mediana de cada atributo) Tj
+T*
+(mediana = iris.median\(numeric_only=True\).round\(3\)) Tj
+T*
+(print\('?Y?S MEDIANA:'\)) Tj
+T*
+(print\(mediana\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *A mediana de petal_length A? 4.35 a?? bem diferente da mA?dia de 3.76! Essa diferenA?a) Tj
+T*
+(de quase 0.6 cm A? um sinal de assimetria. JA? vamos entender por quA?.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 3 a?? Moda) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *`mode\(\)` a?? valor mais frequente. O `.iloc[0]` pega a primeira moda, pois pode haver) Tj
+T*
+(mais de uma.*) Tj
+T*
+( ) Tj
+T*
+(# Moda de cada atributo) Tj
+T*
+(moda = iris.mode\(numeric_only=True\).iloc[0].round\(3\)) Tj
+T*
+(print\('?Y?S MODA:'\)) Tj
+T*
+(print\(moda\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 4 a?? ComparaA?A?o lado a lado) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 2375 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *Agora a gente coloca as trA?s juntas num DataFrame para comparar de forma direta. Olha) Tj
+T*
+(especialmente a coluna `DiferenA?a` a?? ela vai mostrar onde hA? assimetria.*) Tj
+T*
+( ) Tj
+T*
+(# ComparaA?A?o das trA?s medidas) Tj
+T*
+(comparacao = pd.DataFrame\({) Tj
+T*
+(    'MA?dia'   : iris.mean\(numeric_only=True\),) Tj
+T*
+(    'Mediana' : iris.median\(numeric_only=True\),) Tj
+T*
+(    'Moda'    : iris.mode\(numeric_only=True\).iloc[0]) Tj
+T*
+(}\).round\(3\)) Tj
+T*
+( ) Tj
+T*
+(comparacao['MA?dia - Mediana'] = \(comparacao['MA?dia'] - comparacao['Mediana']\).round\(3\)) Tj
+T*
+(print\(comparacao\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Repara: `sepal_length` e `sepal_width` tA?m diferenA?a pequena entre mA?dia e mediana) Tj
+T*
+(a?? distribuiA?A?o prA?xima de simA?trica.*) Tj
+T*
+(> *JA? `petal_length` tem diferenA?a de -0.59 a?? a mA?dia estA? abaixo da mediana. Isso A?) Tj
+T*
+(assimetria A? esquerda.*) Tj
+T*
+(> *Por que isso acontece? Porque a Setosa tem pA?talas muito pequenas \(~1.46 cm\) e puxa a) Tj
+T*
+(mA?dia para baixo, enquanto Versicolor e Virginica tA?m pA?talas maiores. Quando misturamos) Tj
+T*
+(trA?s populaA?A?es diferentes, a mA?dia deixa de ser representativa do conjunto todo.*) Tj
+T*
+(> *Esse A? um dos ensinamentos centrais do livro: sempre compare mA?dia e mediana antes de) Tj
+T*
+(concluir qualquer coisa.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 5 a?? MA?dia e mediana por espA?cie) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *Se a mA?dia geral engana, o que acontece quando calculamos por espA?cie separadamente?) Tj
+T*
+(Vamos ver.*) Tj
+T*
+( ) Tj
+T*
+(# MA?dia por espA?cie) Tj
+T*
+(print\('?Y?S MA?DIA POR ESPA?CIE:'\)) Tj
+T*
+(print\(iris.groupby\('species'\).mean\(\).round\(2\)\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(# Mediana por espA?cie) Tj
+T*
+(print\('?Y?S MEDIANA POR ESPA?CIE:'\)) Tj
+T*
+(print\(iris.groupby\('species'\).median\(\).round\(2\)\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Dentro de cada espA?cie, mA?dia e mediana sA?o bem prA?ximas! Setosa: mA?dia 1.46,) Tj
+T*
+(mediana 1.50. Virginica: mA?dia 5.55, mediana 5.55.*) Tj
+T*
+(> *Isso confirma: a assimetria que vimos antes nA?o era dos dados em si a?? era resultado) Tj
+T*
+(de misturar trA?s grupos distintos. Separando por grupo, cada distribuiA?A?o A?) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 1934 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(razoavelmente simA?trica.*) Tj
+T*
+(> *Moral da histA?ria: **nunca olhe sA? o agregado**. Sempre questione se existe um) Tj
+T*
+(agrupamento nos dados.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 6 a?? Quando usar cada medida?) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO**) Tj
+T*
+(> *Vamos resumir a regra prA?tica num dicionA?rio Python a?? didA?tico e reutilizA?vel.*) Tj
+T*
+( ) Tj
+T*
+(# Guia de uso das medidas de tendA?ncia central) Tj
+T*
+(guia = {) Tj
+T*
+(    'MA?dia': {) Tj
+T*
+(        'use quando': 'distribuiA?A?o simA?trica, sem outliers',) Tj
+T*
+(        'cuidado'   : 'muito sensA?vel a valores extremos',) Tj
+T*
+(        'exemplo'   : 'temperatura mA?dia diA?ria') Tj
+T*
+(    },) Tj
+T*
+(    'Mediana': {) Tj
+T*
+(        'use quando': 'distribuiA?A?o assimA?trica ou com outliers',) Tj
+T*
+(        'cuidado'   : 'ignora a magnitude dos valores extremos',) Tj
+T*
+(        'exemplo'   : 'renda mediana de uma populaA?A?o') Tj
+T*
+(    },) Tj
+T*
+(    'Moda': {) Tj
+T*
+(        'use quando': 'dados categA?ricos ou para identificar o valor mais comum',) Tj
+T*
+(        'cuidado'   : 'pode nA?o existir ou haver mais de uma',) Tj
+T*
+(        'exemplo'   : 'produto mais vendido, espA?cie mais frequente') Tj
+T*
+(    }) Tj
+T*
+(}) Tj
+T*
+( ) Tj
+T*
+(for medida, info in guia.items\(\):) Tj
+T*
+(    print\(f'{'='*45}'\)) Tj
+T*
+(    print\(f'  {medida}'\)) Tj
+T*
+(    for k, v in info.items\(\):) Tj
+T*
+(        print\(f'  {k:12}: {v}'\)) Tj
+T*
+(print\('='*45\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## a?? Resumo do VA?deo 2) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ENCERRAMENTO \(11:00 a?? 12:00\)**) Tj
+T*
+(> *Hoje a gente viu as trA?s medidas de tendA?ncia central:*) Tj
+T*
+(> - *MA?dia a?? representativa quando a distribuiA?A?o A? simA?trica*) Tj
+T*
+(> - *Mediana a?? mais robusta quando hA? assimetria ou outliers*) Tj
+T*
+(> - *Moda a?? A?nica que funciona com dados categA?ricos*) Tj
+T*
+(>) Tj
+T*
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 757 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *E aprendemos que a diferenA?a entre mA?dia e mediana A? um sinal de assimetria a?? um) Tj
+T*
+(alerta de que vale a pena olhar os dados com mais cuidado.*) Tj
+T*
+(> *No prA?ximo vA?deo a gente vai um passo alA?m: nA?o sA? o centro, mas o quanto os dados) Tj
+T*
+(se espalham a?? variA?ncia, desvio padrA?o e IQR. AtA? lA?!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(| Conceito | FunA?A?o Pandas | Insight no Iris |) Tj
+T*
+(|---|---|---|) Tj
+T*
+(| MA?dia | `mean\(\)` | petal_length mA?dia = 3.76 |) Tj
+T*
+(| Mediana | `median\(\)` | petal_length mediana = 4.35 |) Tj
+T*
+(| Moda | `mode\(\)` | valor mais frequente por coluna |) Tj
+T*
+(| ComparaA?A?o | `groupby\(\).mean\(\)` | assimetria some ao separar por espA?cie |) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n `n0000000058 00000 n `n0000000143 00000 n `n0000000213 00000 n `n0000000339 00000 n `n0000002956 00000 n `n0000003082 00000 n `n0000004819 00000 n `n0000004945 00000 n `n0000007372 00000 n `n0000007500 00000 n `n0000009487 00000 n `n0000009615 00000 n `ntrailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+10424
+%%EOF

@@ -1,0 +1,509 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R ] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2113 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(# ?Y?? MA?dulo 3 a?? ExploraA?A?o de Dados e EstatA?stica) Tj
+T*
+(## VA?deo 3: DispersA?o a?? VariA?ncia, Desvio PadrA?o e IQR) Tj
+T*
+(**ReferA?ncia:** Mendes \(2025\) a?? SeA?A?o 3.4.2) Tj
+T*
+(**DuraA?A?o estimada:** ~12 minutos) Tj
+T*
+(---) Tj
+T*
+(> ?YZ? **FALA a?? ABERTURA \(0:00 a?? 1:00\)**) Tj
+T*
+(> *No VA?deo 2 a gente encontrou o centro dos dados. Mas o centro sozinho nA?o conta a) Tj
+T*
+(histA?ria completa.*) Tj
+T*
+(> *Imagina dois times de futebol: ambos marcam em mA?dia 2 gols por jogo. Mas um time A?) Tj
+T*
+(consistente a?? sempre marca 2 a?? e o outro ora marca 0, ora marca 4. A mA?dia A? igual,) Tj
+T*
+(mas os times sA?o completamente diferentes.*) Tj
+T*
+(> *A? aA? que entram as medidas de dispersA?o, que o livro chama de **medidas de) Tj
+T*
+(variabilidade** \(seA?A?o 3.4.2\). Elas medem o quanto os dados se afastam do centro.*) Tj
+T*
+( ) Tj
+T*
+(import pandas as pd) Tj
+T*
+(import seaborn as sns) Tj
+T*
+(import numpy as np) Tj
+T*
+( ) Tj
+T*
+(iris = sns.load_dataset\('iris'\)) Tj
+T*
+(print\('a?? Dataset carregado!'\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 1 a?? Amplitude) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(1:00 a?? 2:30\)**) Tj
+T*
+(> *A mais simples das medidas de dispersA?o: diferenA?a entre o maior e o menor valor. O) Tj
+T*
+(livro \(p.90\) chama de amplitude ou intervalo.*) Tj
+T*
+(> *A? fA?cil de entender, mas tem um problema sA?rio: depende sA? dos dois extremos. Um) Tj
+T*
+(A?nico valor fora do padrA?o distorce tudo.*) Tj
+T*
+( ) Tj
+T*
+(# Amplitude = mA?ximo - mA?nimo) Tj
+T*
+(amplitude = iris.max\(numeric_only=True\) - iris.min\(numeric_only=True\)) Tj
+T*
+( ) Tj
+T*
+(resumo = pd.DataFrame\({) Tj
+T*
+(    'MA?nimo'   : iris.min\(numeric_only=True\),) Tj
+T*
+(    'MA?ximo'   : iris.max\(numeric_only=True\),) Tj
+T*
+(    'Amplitude': amplitude) Tj
+T*
+(}\).round\(2\)) Tj
+T*
+( ) Tj
+T*
+(print\('?Y?? AMPLITUDE \(max - min\):'\)) Tj
+T*
+(print\(resumo\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *petal_length tem amplitude de 5.9 cm a?? enorme comparado com sepal_width que tem 2.4) Tj
+T*
+(cm.*) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2368 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *Mas lembrem: a amplitude depende sA? de dois pontos. Se tivermos um outlier, ela) Tj
+T*
+(distorce. Por isso precisamos de medidas mais robustas.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 2 a?? VariA?ncia) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(2:30 a?? 4:30\)**) Tj
+T*
+(> *A variA?ncia resolve o problema de depender sA? dos extremos: ela considera TODOS os) Tj
+T*
+(valores.*) Tj
+T*
+(> *O livro \(p.95\) explica: pegamos cada valor, calculamos a diferenA?a pra mA?dia, elevamos) Tj
+T*
+(ao quadrado, somamos tudo e dividimos por N-1. O quadrado serve pra evitar que diferenA?as) Tj
+T*
+(positivas e negativas se cancelem.*) Tj
+T*
+(> *O problema: a unidade fica ao quadrado a?? cmA? no caso do Iris. DifA?cil de interpretar) Tj
+T*
+(diretamente.*) Tj
+T*
+( ) Tj
+T*
+(# VariA?ncia amostral \(ddof=1 por padrA?o no Pandas\)) Tj
+T*
+(variancia = iris.var\(numeric_only=True\).round\(4\)) Tj
+T*
+(print\('?Y?S VARIA?NCIA \(unidadeA?\):'\)) Tj
+T*
+(print\(variancia\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(# DemonstraA?A?o manual para petal_length) Tj
+T*
+(col = iris['petal_length']) Tj
+T*
+(media = col.mean\(\)) Tj
+T*
+(diferencas_quad = \(col - media\) ** 2) Tj
+T*
+(variancia_manual = diferencas_quad.sum\(\) / \(len\(col\) - 1\)) Tj
+T*
+(print\(f'a?? VariA?ncia manual de petal_length: {variancia_manual:.4f}'\)) Tj
+T*
+(print\(f'a?? VariA?ncia via Pandas:             {col.var\(\):.4f}'\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *Perfeito a?? os dois resultados sA?o iguais. Mostramos a conta manual para ficar claro o) Tj
+T*
+(que o `.var\(\)` faz por baixo dos panos.*) Tj
+T*
+(> *VariA?ncia de petal_length: 3.116 cmA?. A? o maior do dataset a?? mais uma confirmaA?A?o) Tj
+T*
+(de que as pA?talas variam muito.*) Tj
+T*
+(> *Mas 3.116 cmA?... o que isso significa na prA?tica? A? aA? que entra o desvio padrA?o.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 3 a?? Desvio PadrA?o) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(4:30 a?? 6:00\)**) Tj
+T*
+(> *O desvio padrA?o A? simplesmente a raiz quadrada da variA?ncia a?? e isso resolve o) Tj
+T*
+(problema da unidade ao quadrado.*) Tj
+T*
+(> *O livro \(p.96\) usa um exemplo de pizzaria: 'tempo mA?dio de entrega 20 min, desvio) Tj
+T*
+(padrA?o 5 min'. FA?cil de entender a?? os pedidos variam cerca de 5 minutos em torno da) Tj
+T*
+(mA?dia.*) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 2052 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+( ) Tj
+T*
+(# Desvio PadrA?o) Tj
+T*
+(dp = iris.std\(numeric_only=True\).round\(4\)) Tj
+T*
+(print\('?Y?S DESVIO PADRA?O \(mesma unidade dos dados a?? cm\):'\)) Tj
+T*
+(print\(dp\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(# Confirmando: DP = raiz da variA?ncia) Tj
+T*
+(print\('a?? ConfirmaA?A?o: raiz\(variA?ncia\) = DP'\)) Tj
+T*
+(print\(\(iris.var\(numeric_only=True\) ** 0.5\).round\(4\)\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *petal_length tem desvio padrA?o de 1.765 cm a?? os valores se afastam em mA?dia 1.76 cm) Tj
+T*
+(da mA?dia de 3.76 cm.*) Tj
+T*
+(> *JA? sepal_width tem DP de apenas 0.43 cm a?? muito mais consistente.*) Tj
+T*
+(> *E os dois resultados sA?o idA?nticos a?? confirmando que DP A? exatamente raiz da) Tj
+T*
+(variA?ncia.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 4 a?? Quartis e IQR) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(6:00 a?? 8:30\)**) Tj
+T*
+(> *A variA?ncia e o DP tA?m o mesmo problema da mA?dia: sA?o sensA?veis a outliers.*) Tj
+T*
+(> *O livro \(p.92\) apresenta uma alternativa robusta: o **Intervalo Interquartil**, o IQR.*) Tj
+T*
+(> *Primeiro, dividimos os dados em quatro partes iguais a?? os quartis: Q1 = 25%, Q2 = 50%) Tj
+T*
+(= mediana, Q3 = 75%.*) Tj
+T*
+(> *O IQR = Q3 - Q1. Ele cobre os 50% centrais dos dados, ignorando os extremos.*) Tj
+T*
+( ) Tj
+T*
+(# Quartis Q1, Q2, Q3) Tj
+T*
+(quartis = iris.quantile\([0.25, 0.50, 0.75], numeric_only=True\).round\(2\)) Tj
+T*
+(quartis.index = ['Q1 \(25%\)', 'Q2 / Mediana \(50%\)', 'Q3 \(75%\)']) Tj
+T*
+(print\('?Y?S QUARTIS:'\)) Tj
+T*
+(print\(quartis\)) Tj
+T*
+( ) Tj
+T*
+(print\(\)) Tj
+T*
+(# IQR = Q3 - Q1) Tj
+T*
+(Q1 = iris.quantile\(0.25, numeric_only=True\)) Tj
+T*
+(Q3 = iris.quantile\(0.75, numeric_only=True\)) Tj
+T*
+(IQR = Q3 - Q1) Tj
+T*
+(print\('?Y?S IQR \(Q3 - Q1\):'\)) Tj
+T*
+(print\(IQR.round\(2\)\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *petal_length: IQR = 3.5 cm a?? os 50% centrais das flores tA?m comprimentos de pA?tala) Tj
+T*
+(que variam 3.5 cm. Enorme.*) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 2163 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(> *sepal_width: IQR = 0.5 cm a?? muito compacto. As sA?palas sA?o consistentes entre as) Tj
+T*
+(flores.*) Tj
+T*
+(> *O IQR conta a mesma histA?ria que o DP, mas sem ser afetado por outliers.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 5 a?? DetecA?A?o de outliers com a regra 1.5A?IQR) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(8:30 a?? 10:30\)**) Tj
+T*
+(> *O IQR tem uma aplicaA?A?o poderosa: detectar outliers. A regra clA?ssica de Tukey diz:) Tj
+T*
+(qualquer valor abaixo de Q1 - 1.5A?IQR ou acima de Q3 + 1.5A?IQR A? um candidato a outlier.*) Tj
+T*
+(> *Vamos aplicar isso em todas as colunas do Iris.*) Tj
+T*
+( ) Tj
+T*
+(# DetecA?A?o de outliers pela regra 1.5 A? IQR em todas as colunas) Tj
+T*
+(numericas = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']) Tj
+T*
+( ) Tj
+T*
+(print\('?Y?? DETECA?A?O DE OUTLIERS \(regra 1.5 A? IQR\):'\)) Tj
+T*
+(print\(\)) Tj
+T*
+( ) Tj
+T*
+(for col in numericas:) Tj
+T*
+(    Q1 = iris[col].quantile\(0.25\)) Tj
+T*
+(    Q3 = iris[col].quantile\(0.75\)) Tj
+T*
+(    IQR = Q3 - Q1) Tj
+T*
+(    lim_inf = Q1 - 1.5 * IQR) Tj
+T*
+(    lim_sup = Q3 + 1.5 * IQR) Tj
+T*
+(    outliers = iris[\(iris[col] < lim_inf\) | \(iris[col] > lim_sup\)]) Tj
+T*
+(    print\(f'{col}:'\)) Tj
+T*
+(    print\(f'  Limites: [{lim_inf:.2f}, {lim_sup:.2f}]   Outliers encontrados:) Tj
+T*
+({len\(outliers\)}'\)) Tj
+T*
+(    if len\(outliers\) > 0:) Tj
+T*
+(        print\(outliers[['species', col]].to_string\(index=False\)\)) Tj
+T*
+(    print\(\)) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? APA?S O CA?DIGO**) Tj
+T*
+(> *sepal_width tem alguns outliers a?? flores com sA?palas bem mais largas que o padrA?o.*) Tj
+T*
+(> *As outras colunas estA?o limpas. Isso A? importante antes de qualquer modelagem a??) Tj
+T*
+(outliers podem distorcer completamente os resultados.*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## ?Y?? CA?lula 6 a?? Resumo comparativo: DP vs IQR) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ANTES DO CA?DIGO \(10:30 a?? 11:30\)**) Tj
+T*
+(> *Vamos montar um resumo final comparando DP e IQR a?? as duas principais medidas de) Tj
+T*
+(dispersA?o que usaremos daqui pra frente.*) Tj
+T*
+( ) Tj
+T*
+(# Resumo DP vs IQR) Tj
+T*
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 1451 >>
+stream
+BT
+/F1 11 Tf
+50 780 Td
+14 TL
+(Q1  = iris.quantile\(0.25, numeric_only=True\)) Tj
+T*
+(Q3  = iris.quantile\(0.75, numeric_only=True\)) Tj
+T*
+( ) Tj
+T*
+(resumo_dispersao = pd.DataFrame\({) Tj
+T*
+(    'Desvio PadrA?o': iris.std\(numeric_only=True\),) Tj
+T*
+(    'IQR'          : Q3 - Q1,) Tj
+T*
+(    'SensA?vel a outliers?': ['DP: sim | IQR: nA?o'] * 4) Tj
+T*
+(}\).round\(3\)) Tj
+T*
+( ) Tj
+T*
+(print\('?Y?S RESUMO a?? DispersA?o:'\)) Tj
+T*
+(print\(resumo_dispersao\)) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(## a?? Resumo do VA?deo 3) Tj
+T*
+( ) Tj
+T*
+(> ?YZ? **FALA a?? ENCERRAMENTO \(11:30 a?? 12:00\)**) Tj
+T*
+(> *Hoje a gente aprendeu quatro medidas de dispersA?o:*) Tj
+T*
+(> - *Amplitude a?? simples, mas sensA?vel a extremos*) Tj
+T*
+(> - *VariA?ncia a?? usa todos os valores, mas fica em unidadeA?*) Tj
+T*
+(> - *Desvio PadrA?o a?? raiz da variA?ncia, mesma unidade dos dados, mais usado na prA?tica*) Tj
+T*
+(> - *IQR a?? robusto, ignora extremos, ideal para assimetrias e detecA?A?o de outliers*) Tj
+T*
+(>) Tj
+T*
+(> *No prA?ximo vA?deo a gente vai juntar tudo isso num A?nico comando poderoso: o) Tj
+T*
+(`describe\(\)` do Pandas. AtA? lA?!*) Tj
+T*
+( ) Tj
+T*
+(---) Tj
+T*
+(| Medida | FunA?A?o | Robusto a outliers? |) Tj
+T*
+(|---|---|---|) Tj
+T*
+(| Amplitude | `max\(\) - min\(\)` | NA?o |) Tj
+T*
+(| VariA?ncia | `var\(\)` | NA?o |) Tj
+T*
+(| Desvio PadrA?o | `std\(\)` | NA?o |) Tj
+T*
+(| IQR | `quantile\(0.75\) - quantile\(0.25\)` | **Sim** |) Tj
+T*
+( ) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n `n0000000058 00000 n `n0000000143 00000 n `n0000000213 00000 n `n0000000339 00000 n `n0000002504 00000 n `n0000002630 00000 n `n0000005050 00000 n `n0000005176 00000 n `n0000007280 00000 n `n0000007408 00000 n `n0000009624 00000 n `n0000009752 00000 n `ntrailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+11256
+%%EOF

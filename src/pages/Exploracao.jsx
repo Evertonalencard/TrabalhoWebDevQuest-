@@ -34,10 +34,59 @@ const QUESTIONS = [
 const PDFS = [
   {
     id: "eda-1",
-    name: "Guia: Analise Exploratoria de Dados",
-    description: "Passo a passo para uma EDA completa",
-    url: "/assets/eda-guide.pdf",
-    filename: "eda-guide.pdf",
+    name: "Modulo 3 - Video 1",
+    description: "PDF gerado a partir do notebook do video 1",
+    url: "/assets/modulo-3/01-modulo-3-video-1.pdf",
+    filename: "01-modulo-3-video-1.pdf",
+  },
+  {
+    id: "eda-2",
+    name: "Modulo 3 - Video 2",
+    description: "PDF gerado a partir do notebook do video 2",
+    url: "/assets/modulo-3/02-modulo-3-video-2.pdf",
+    filename: "02-modulo-3-video-2.pdf",
+  },
+  {
+    id: "eda-3",
+    name: "Modulo 3 - Video 3",
+    description: "PDF gerado a partir do notebook do video 3",
+    url: "/assets/modulo-3/03-modulo-3-video-3.pdf",
+    filename: "03-modulo-3-video-3.pdf",
+  },
+  {
+    id: "eda-4",
+    name: "Modulo 3 - Video 4",
+    description: "PDF gerado a partir do notebook do video 4",
+    url: "/assets/modulo-3/04-modulo-3-video-4.pdf",
+    filename: "04-modulo-3-video-4.pdf",
+  },
+  {
+    id: "eda-5",
+    name: "Modulo 3 - Video 5",
+    description: "PDF gerado a partir do notebook do video 5",
+    url: "/assets/modulo-3/05-modulo-3-video-5.pdf",
+    filename: "05-modulo-3-video-5.pdf",
+  },
+  {
+    id: "eda-6",
+    name: "Modulo 3 - Video 6",
+    description: "PDF gerado a partir do notebook do video 6",
+    url: "/assets/modulo-3/06-modulo-3-video-6.pdf",
+    filename: "06-modulo-3-video-6.pdf",
+  },
+  {
+    id: "eda-7",
+    name: "Modulo 3 - Video 7",
+    description: "PDF gerado a partir do notebook do video 7",
+    url: "/assets/modulo-3/07-modulo-3-video-7.pdf",
+    filename: "07-modulo-3-video-7.pdf",
+  },
+  {
+    id: "eda-8",
+    name: "Modulo 3 - Video 8",
+    description: "PDF gerado a partir do notebook do video 8",
+    url: "/assets/modulo-3/08-modulo-3-video-8.pdf",
+    filename: "08-modulo-3-video-8.pdf",
   },
 ];
 

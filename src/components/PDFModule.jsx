@@ -41,7 +41,7 @@ function PDFModule({ pdfs = [] }) {
           <li key={pdf.id} className="pdf-module__item">
             <div className="pdf-module__item-info">
               <span className="pdf-module__item-icon">📄</span>
-              <div>
+              <div className="pdf-module__item-text">
                 <span className="pdf-module__item-name">{pdf.name}</span>
                 {pdf.description && <span className="pdf-module__item-desc">{pdf.description}</span>}
               </div>

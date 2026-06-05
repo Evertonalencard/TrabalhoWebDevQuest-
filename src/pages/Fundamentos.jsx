@@ -32,10 +32,38 @@ const QUESTIONS = [
 const PDFS = [
   {
     id: "fund-1",
-    name: "Slides: Fundamentos de Ciencia de Dados",
-    description: "PDF com todos os slides da aula",
-    url: "/assets/fundamentos-slides.pdf",
-    filename: "fundamentos-slides.pdf",
+    name: "Projeto de Aulas Ciencia de Dados",
+    description: "PDF geral do modulo 1",
+    url: "/assets/modulo-1/01-projeto-aulas-ciencia-de-dados.pdf",
+    filename: "01-projeto-aulas-ciencia-de-dados.pdf",
+  },
+  {
+    id: "fund-2",
+    name: "Aula 01 - Introducao a Ciencia de Dados",
+    description: "Slides da aula 01",
+    url: "/assets/modulo-1/02-aula-01-introducao-ciencia-de-dados.pdf",
+    filename: "02-aula-01-introducao-ciencia-de-dados.pdf",
+  },
+  {
+    id: "fund-3",
+    name: "Aula 02 - Ciclo do Projeto",
+    description: "Slides da aula 02",
+    url: "/assets/modulo-1/03-aula-02-ciclo-do-projeto.pdf",
+    filename: "03-aula-02-ciclo-do-projeto.pdf",
+  },
+  {
+    id: "fund-4",
+    name: "Aula 03 - Python e Config",
+    description: "Slides da aula 03",
+    url: "/assets/modulo-1/04-aula-03-python-e-config.pdf",
+    filename: "04-aula-03-python-e-config.pdf",
+  },
+  {
+    id: "fund-5",
+    name: "Aula 04 - Tipos Basicos e Variaveis",
+    description: "Slides da aula 04",
+    url: "/assets/modulo-1/05-aula-04-tipos-basicos-e-variaveis.pdf",
+    filename: "05-aula-04-tipos-basicos-e-variaveis.pdf",
   },
 ];
 
