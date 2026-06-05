@@ -52,7 +52,9 @@ function ModuleContent({ slug, fallback }) {
   const questions = moduleData?.questions ?? fallback.questions ?? [];
   const topics = fallback.topics ?? [];
   const hasHiddenVideos = videos.length > VIDEO_PREVIEW_LIMIT;
-  const visibleVideos = showAllVideos ? videos : videos.slice(0, VIDEO_PREVIEW_LIMIT);
+  const visibleVideos = showAllVideos
+    ? videos
+    : videos.slice(0, VIDEO_PREVIEW_LIMIT);
 
   return (
     <section className="page-content module-page">
@@ -76,7 +78,8 @@ function ModuleContent({ slug, fallback }) {
 
       {error && (
         <div className="alert alert-warning" role="alert">
-          Não foi possível carregar os dados do servidor. Exibindo conteúdo local.
+          Não foi possível carregar os dados do servidor. Exibindo conteúdo
+          local.
         </div>
       )}
 
@@ -86,7 +89,8 @@ function ModuleContent({ slug, fallback }) {
             <div>
               <h4 className="video-module__title">Aulas em vídeo</h4>
               <p className="video-module__subtitle">
-                Assista aos conteúdos do módulo sem perder a organização da página.
+                Assista aos conteúdos do módulo sem perder a organização da
+                página.
               </p>
             </div>
             <span className="video-module__count">
@@ -126,8 +130,18 @@ function ModuleContent({ slug, fallback }) {
       )}
 
       <PDFModule pdfs={pdfs} />
-      <QuestionsModule questions={questions} moduleKey={slug} />
-      <RatingModule pageKey={slug} pageTitle={content.title} />
+
+      {moduleData?.locked ? (
+        <div className="alert alert-warning mt-3" role="alert">
+          Módulo bloqueado — conclua o módulo anterior para desbloquear o acesso
+          às questões e avaliação.
+        </div>
+      ) : (
+        <>
+          <QuestionsModule questions={questions} moduleKey={slug} />
+          <RatingModule pageKey={slug} pageTitle={content.title} />
+        </>
+      )}
     </section>
   );
 }

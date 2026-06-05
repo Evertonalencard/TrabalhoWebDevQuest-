@@ -3,7 +3,11 @@ import { useXP } from "../Context/XPContext";
 import { answerQuestion } from "../services/questionService";
 import "../css/QuestionsModule.css";
 
-function QuestionsModule({ questions = [], moduleKey }) {
+function QuestionsModule({
+  questions = [],
+  moduleKey,
+  locked: propLocked = false,
+}) {
   const { modules, completeModule } = useXP();
   const [answers, setAnswers] = useState({});
   const [checked, setChecked] = useState(false);
@@ -14,7 +18,17 @@ function QuestionsModule({ questions = [], moduleKey }) {
   const [results, setResults] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
+  const locked = propLocked || modules[moduleKey]?.locked;
+
   if (!questions.length) return null;
+
+  if (locked) {
+    return (
+      <div className="alert alert-warning" role="alert">
+        Módulo bloqueado — conclua o módulo anterior para liberar as questões.
+      </div>
+    );
+  }
 
   function selectAnswer(qIndex, optIndex) {
     if (checked || submitting) return;
@@ -56,7 +70,9 @@ function QuestionsModule({ questions = [], moduleKey }) {
         return acc;
       }, {});
 
-      const correct = resolvedResults.filter((result) => result.isCorrect).length;
+      const correct = resolvedResults.filter(
+        (result) => result.isCorrect,
+      ).length;
       const progressResult = await completeModule(
         moduleKey,
         correct,
@@ -231,8 +247,7 @@ function QuestionsModule({ questions = [], moduleKey }) {
             className="questions-module__check-btn"
             onClick={handleCheck}
             disabled={
-              submitting ||
-              Object.keys(answers).length < questions.length
+              submitting || Object.keys(answers).length < questions.length
             }
           >
             {submitting ? "Corrigindo..." : "Corrigir Questoes"}

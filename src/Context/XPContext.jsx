@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { useAuth } from "./AuthContext";
 import { getProgress } from "../services/userService";
@@ -23,6 +18,7 @@ function toModuleItem(item) {
     score: item.score ?? 0,
     gainedXP: item.gainedXP ?? 0,
     attempts: item.attempts ?? 0,
+    locked: item.locked ?? false,
   };
 }
 
