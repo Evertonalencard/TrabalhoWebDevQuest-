@@ -2,32 +2,38 @@ import ModuleContent from "../components/ModuleContent";
 
 const QUESTIONS = [
   {
-    text: "O que e IQR (Intervalo Interquartil)?",
+    text: "Qual espécie tem as maiores pétalas e as mais consistentes?",
     options: [
-      "A media dos dados",
-      "A diferenca entre Q3 e Q1",
-      "O desvio padrao da amostra",
-      "A diferenca entre maximo e minimo",
+      “Iris Virginica”,
+      "Iris Versicolor",
+      "Iris Setosa",
+      “Todas as espécies tem tamanho e consistência iguais”,
     ],
     correct: 1,
-    explanation: "O IQR mede a dispersao central dos dados.",
+    explanation: "A espécie Iris Virginica possui as maiores pétalas (média de 5,55 cm). A Iris Setosa possui as menores (1,46 cm), mas é, de longe, a mais consistente, com um
+desvio padrão de apenas 0,17.",
   },
   {
-    text: "Qual funcao do Pandas retorna a correlacao entre colunas numericas?",
-    options: ["df.describe()", "df.info()", "df.corr()", "df.cov()"],
+    text: "Qual espécie é mais homegênea internamente?",
+    options: [
+	"Iris Versicolor",
+	“Iris Virginica”,
+        "Iris Setosa",
+      “Todas as espécies tem a mesma homogeneidade interna”,
+	],
     correct: 2,
-    explanation: "df.corr() retorna a matriz de correlacao.",
+    explanation: "A Iris Virginica é a espécie mais homogênea, especialmente no comprimento das pétalas.",
   },
   {
-    text: "Para que serve o parametro bins em value_counts(bins=5)?",
+    text: "Qual espécie é mais diferente das outras duas?",
     options: [
-      "Limita o resultado a 5 valores",
-      "Agrupa os dados em 5 intervalos continuos",
-      "Arredonda valores",
-      "Filtra os 5 valores mais frequentes",
+      "Iris Versicolor",
+	“Iris Virginica”,
+        "Iris Setosa",
+      “Não há diferença entre as espécies”,
     ],
-    correct: 1,
-    explanation: "bins divide o intervalo dos dados em faixas.",
+    correct: 3,
+    explanation: "A Iris Setosa é a espécie mais distinta do conjunto de dados.",
   },
 ];
 
