@@ -2,40 +2,32 @@ import ModuleContent from "../components/ModuleContent";
 import "../css/VideoModulo.css";
 
 const QUESTIONS = [
-{
-  text: "Qual método do Pandas é utilizado para remover linhas duplicadas de um DataFrame?",
-  options: [
-    ".dropna()",
-    ".drop_duplicates()",
-    ".remove_duplicates()",
-    ".duplicated()"
-  ],
-  correct: 2,
-  explanation: "O método .drop_duplicates() é a função nativa do Pandas para identificar e remover registros duplicados de um DataFrame."
-}
-,
- {
-  text: "Qual função do Pandas é utilizada para converter a coluna 'Data_Checkin' para o formato datetime?",
-  options: [
-    "pd.convert_to_datetime()",
-    "pd.to_datetime()",
-    "df_ex['Data_Checkin'].astype('datetime')",
-    "pd.to_date()"
-  ],
-  correct: 2,
-  explanation: "A função pd.to_datetime() é a ferramenta padrão do Pandas para converter dados textuais ou numéricos em objetos de data e tempo válidos."
-},
   {
-  text: "Qual método do Pandas é utilizado para substituir valores ausentes (NaN) pela mediana de uma coluna?",
-  options: [
-    ".fillna()",
-    ".dropna()",
-    ".replace_na()",
-    ".median_fill()"
-  ],
-  correct: 1,
-  explanation: "O método .fillna() é utilizado para preencher valores ausentes ou nulos em um DataFrame ou Series com um valor específico, como a mediana calculada."
-},
+    text: "Qual método do Pandas é utilizado para remover linhas duplicadas de um DataFrame?",
+    options: [".dropna()", ".drop_duplicates()", ".remove_duplicates()", ".duplicated()"],
+    correct: 1,
+    explanation:
+      "O método .drop_duplicates() é a função nativa do Pandas para identificar e remover registros duplicados de um DataFrame.",
+  },
+  {
+    text: "Qual função do Pandas é utilizada para converter a coluna 'Data_Checkin' para o formato datetime?",
+    options: [
+      "pd.convert_to_datetime()",
+      "pd.to_datetime()",
+      "df_ex['Data_Checkin'].astype('datetime')",
+      "pd.to_date()",
+    ],
+    correct: 1,
+    explanation:
+      "A função pd.to_datetime() é a ferramenta padrão do Pandas para converter dados textuais ou numéricos em objetos de data e tempo válidos.",
+  },
+  {
+    text: "Qual método do Pandas é utilizado para substituir valores ausentes (NaN) pela mediana de uma coluna?",
+    options: [".fillna()", ".dropna()", ".replace_na()", ".median_fill()"],
+    correct: 0,
+    explanation:
+      "O método .fillna() é utilizado para preencher valores ausentes ou nulos em um DataFrame ou Series com um valor específico, como a mediana calculada.",
+  },
 ];
 
 const PDFS = [
