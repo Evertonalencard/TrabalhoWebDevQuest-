@@ -2,16 +2,16 @@ import ModuleContent from "../components/ModuleContent";
 
 const QUESTIONS = [
   {
-    text: "Como filtrar registros em um DataFrame onde a coluna idade seja maior que 30?",
+    text: “Dado o DataFrame df com as colunas ‘idade’ e ‘cidade’, qual código retorna corretamente os registros com idade maior que 25 e cidade igual a ‘Fortaleza’?”,
     options: [
-      "df.filter(df['idade'] > 30)",
-      "df[df['idade'] > 30]",
-      "df.where(idade > 30)",
-      "df.select(age > 30)",
+      "df[df['idade'] > 25, df[‘cidade’] == ‘Fortaleza’]”,
+      "df[(df['idade'] > 25) & (df[‘cidade’] == ‘Fortaleza’)]”,
+      "df[df['idade'] > 25 and df[‘cidade’] == ‘Fortaleza’]",
+      "df[df['idade'] > 25 | df[‘cidade’] == ‘Fortaleza’]",
     ],
-    correct: 1,
+    correct: 2,
     explanation:
-      "A filtragem booleana df[condicao] e a forma idiomatica no Pandas.",
+      "Em Pandas, múltiplas condições usam & (AND) e cada condição deve estar entre parênteses.”,
   },
   {
     text: "O que groupby('cidade')['salario'].mean() faz?",
@@ -26,15 +26,15 @@ const QUESTIONS = [
       "groupby agrupa linhas por valor de coluna e mean calcula a media por grupo.",
   },
   {
-    text: "Qual metodo exporta um DataFrame para CSV?",
+    text: "Qual código renomeia corretamente a coluna ’salario’ para ’Salario’ em um DataFrame df, modificando-o diretamente?”,
     options: [
-      "df.export_csv()",
-      "df.save('file.csv')",
-      "df.to_csv('file.csv')",
-      "df.write_csv('file.csv')",
+      "df.columns[’salario’] = ’Salario’”,
+      "df.rename(‘salario’, ’Salario’, inplace=True)”,
+      "df.rename(columns={’salario’: ’Salario’}, inplace=True)”,
+      "df[‘salario’].rename(’Salario’)“,
     ],
-    correct: 2,
-    explanation: "df.to_csv('nome.csv') salva um DataFrame em arquivo CSV.",
+    correct: 3,
+    explanation: “.rename() exige o argumento columns={} com o mapeamento, e inplace=True para modificar direto.”,
   },
 ];
 
