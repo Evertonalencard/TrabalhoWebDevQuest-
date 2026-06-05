@@ -2,30 +2,32 @@ import ModuleContent from "../components/ModuleContent";
 
 const QUESTIONS = [
   {
-    text: "Qual biblioteca Python e mais usada para manipulacao de dados tabulares?",
-    options: ["NumPy", "Matplotlib", "Pandas", "Scikit-learn"],
+    text: “O que é uma variável em Python?” ,
+    options: [“Um comando usado apenas para imprimir textos na tela”, 
+"Um espaço utilizado para armazenar um valor durante a execução do programa”, 
+“Um tipo de dado usado somente para números inteiros”, 
+“Uma função obrigatória em todos os programas Python”],
     correct: 2,
     explanation:
-      "Pandas e a biblioteca padrao para manipulacao de DataFrames e Series.",
+      “Uma variável é um espaço usado para armazenar valores de diferentes tipos.”,
   },
   {
-    text: "Qual das opcoes nao e uma etapa do ciclo de vida dos dados?",
-    options: ["Coleta", "Limpeza", "Compilacao", "Modelagem"],
-    correct: 2,
+    text: "Qual dos valores abaixo é do tipo float?”,
+    options: [“10”, “ ”10” ”, “10.5”, “True”],
+    correct: 3,
     explanation:
-      "Compilacao e um processo de programacao, nao uma etapa do pipeline de dados.",
+      “Float é o tipo de variável usado para armazenar valores decimais.”,
   },
   {
-    text: "O que a funcao describe() do Pandas retorna?",
+    text: “Qual será o resultado da expressão ? 10 + 5 * 2 ”,
     options: [
-      "O tipo de cada coluna",
-      "Estatisticas descritivas",
-      "Os primeiros registros do DataFrame",
-      "O numero de valores nulos",
-    ],
-    correct: 1,
+      “30”,
+      "20”,
+      "25”,
+      "15”,],
+    correct: 2,
     explanation:
-      "df.describe() retorna um resumo estatistico para colunas numericas.",
+      “A ordem de precedência também esta presente no Python, primeiro a multiplicação depois a adição.”,
   },
 ];
 
