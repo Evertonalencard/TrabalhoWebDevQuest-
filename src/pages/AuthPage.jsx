@@ -100,7 +100,7 @@ export default function AuthPage() {
         {/* Logo / Branding */}
         <div className="auth-brand">
           <span className="auth-brand-emoji">📊</span>
-          <span className="auth-brand-name">DataSci Academy</span>
+          <span className="auth-brand-name">DevQuest</span>
         </div>
 
         {/* Título dinâmico */}

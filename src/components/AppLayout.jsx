@@ -41,7 +41,7 @@ export default function AppLayout() {
       <header className="app-header">
         <Hamburger open={menuOpen} onClick={() => setMenuOpen(!menuOpen)} />
         <span className="app-header__title">
-          <span className="app-header__emoji">📊</span> DataSci Academy
+          <span className="app-header__emoji">📊</span> DevQuest
         </span>
         <UserMenu />
       </header>
